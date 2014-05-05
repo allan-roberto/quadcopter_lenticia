@@ -25,6 +25,10 @@ int main(void)
 		if(value < 17700){
 
 			set_pwm(MOTOR_D5,value);
+			set_pwm(MOTOR_D5,value);
+			set_pwm(MOTOR_D5,value);
+			set_pwm(MOTOR_D5,value);
+
 			value++;
 			_delay_ms(1);
 		}
