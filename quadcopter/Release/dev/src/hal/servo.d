@@ -1,4 +1,4 @@
 dev/src/hal/servo.d: ../dev/src/hal/servo.c \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/servo.h
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/servo.h
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/servo.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/servo.h:

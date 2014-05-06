@@ -1,0 +1,58 @@
+/*
+ * motor.c
+ *
+ *  Created on: 04/05/2014
+ *      Author: allan_amorim
+ */
+#include <motor.h>
+#include <pwm.h>
+#include <util/delay.h>
+#include <types.h>
+
+bool init_motor(uint8_t index){
+
+	if((index < MOTOR_D8) || (index > MOTOR_D5)){
+		return 1;
+	}
+	set_pwm(index,MOTOR_MAX_VALUE);
+	_delay_ms(2000);
+	set_pwm(index,MOTOR_MIN_VALUE);
+	_delay_ms(2000);
+	return 0;
+}
+
+void set_throtle(uint8_t motor_id,uint16_t value){
+
+
+	uint16_t value;
+	bool ret_err = 0;
+	if((output < SERVO_D10) || (output > D46)){
+		ret_err = 1;
+		return ret_err;
+	}
+	if(period != 0){
+
+			if((output == SERVO_D10) || (output == SERVO_D9)){
+				//this is due a low resolution timer
+				if((period < 30) || (period > 60)){
+					ret_err = 1;
+					return ret_err;
+				}
+
+				value = period;
+
+			}else { //Other outputs
+				if((period < 1000) || (period > 2000)){
+					ret_err = 1;
+					return ret_err;
+				}
+				value = period * 8;
+			}
+
+		}else{
+
+			value = period;
+		}
+	set_pwm(index,value);
+
+}

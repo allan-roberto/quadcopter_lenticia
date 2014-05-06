@@ -1,10 +1,10 @@
 dev/src/motor/motor.d: ../dev/src/motor/motor.c \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/motor.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/pwm.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/motor.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/pwm.h
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/motor.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/motor.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/pwm.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/pwm.h:

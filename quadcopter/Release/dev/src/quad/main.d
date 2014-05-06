@@ -1,43 +1,43 @@
 dev/src/quad/main.d: ../dev/src/quad/main.c \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/lib_xcopter.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/input.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/time.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/uart.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/gyro.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/binary.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/def.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/i2c.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/wiring.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/binary.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/pwm.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/accelerometer.h
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/lib_xcopter.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/input.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/time.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/uart.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/gyro.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/binary.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/def.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/i2c.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/wiring.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/binary.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/pwm.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/accelerometer.h
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/lib_xcopter.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/lib_xcopter.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/input.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/input.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/time.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/time.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/uart.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/uart.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/gyro.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/gyro.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/binary.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/binary.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/def.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/def.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/i2c.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/i2c.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/wiring.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/wiring.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/binary.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/binary.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/pwm.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/pwm.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/accelerometer.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/accelerometer.h:

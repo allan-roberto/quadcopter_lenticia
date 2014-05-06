@@ -1,4 +1,4 @@
 dev/src/hal/timer.d: ../dev/src/hal/timer.c \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/timer.h
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/timer.h
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/timer.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/timer.h:

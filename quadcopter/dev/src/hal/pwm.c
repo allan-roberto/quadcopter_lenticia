@@ -6,7 +6,6 @@
 #include <avr/io.h>
 #include <pwm.h>
 
-uint_fast16_t value;
 
 void init_pwm(void)
 {
@@ -31,9 +30,9 @@ void init_pwm(void)
 	TCCR4A = ((1<<WGM41) | (1<<COM4A1) | (1<<COM4B1) | (1<<COM4C1));
 	TCCR4B = ((1<<WGM43) | (1<<CS40)); //No pre-scaler
 	ICR4 = 17776;
-	//OCR4A = 0xFFFF;
-	//OCR4B = 0xFFFF;
-	//OCR4C = 0xFFFF;
+	OCR4A = 0;
+	OCR4B = 0;
+	OCR4C = 0;
 
 	/*
 	 * THis value will  generate a 450Hz pwm frequency
@@ -45,9 +44,9 @@ void init_pwm(void)
 	TCCR3A = ((1<<WGM31) | (1<<COM3A1) | (1<<COM3B1) | (1<<COM3C1));
 	TCCR3B = ((1<<WGM33) | (1<<CS30)); //No pre-scaler
 	ICR3 = 17777;
-	//OCR3A = 0xFFFF;
-	//OCR3B = 0xFFFF;
-	//OCR3C = 0xFFFF;
+	OCR3A = 0;
+	OCR3B = 0;
+	OCR3C = 0;
 
 	/*
 	 * THis value will  generate a 450Hz pwm frequency
@@ -59,25 +58,24 @@ void init_pwm(void)
 	TCCR5A = ((1<<WGM51) | (1<<COM5A1) | (1<<COM5B1) | (1<<COM5C1));
 	TCCR5B = ((1<<WGM53) | (1<<CS50)); //No pre-scaler
 	ICR5 = 17777; //
-	//OCR5A = 0xFFFF;
-	//OCR5B = 0xFFFF;
-	//OCR5C = 0xFFFF;
+	OCR5A = 0;
+	OCR5B = 0;
+	OCR5C = 0;
 
 }
 
 
-inline bool set_pwm(uint8_t output,uint16_t period)
-{
-
-	//bool ret_err = 0;
-	//if((output < SERVO_D10) || (output > D46)){
-	//	ret_err = 1;
-	//	return ret_err;
-	//}
+bool set_pwm(uint8_t output,uint16_t period){
+	uint16_t value;
+	bool ret_err = 0;
+	if((output < SERVO_D10) || (output > D46)){
+		ret_err = 1;
+		return ret_err;
+	}
 	/*
 	 * period is only allowed to be zero or inside an specific range
 	 */
-/*	if(period != 0){
+	if(period != 0){
 
 		if((output == SERVO_D10) || (output == SERVO_D9)){
 			//this is due a low resolution timer
@@ -93,15 +91,14 @@ inline bool set_pwm(uint8_t output,uint16_t period)
 				ret_err = 1;
 				return ret_err;
 			}
-			//value = (period << 3);
-			value = period;
+			value = period * 8;
 		}
 
 	}else{
 
 		value = period;
-	}*/
-	value = period;
+	}
+
 	switch(output)
 	{
 	//D10 --> PB4 - OC2A (PWM Output A for Timer2)

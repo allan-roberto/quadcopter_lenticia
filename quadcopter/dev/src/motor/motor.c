@@ -18,10 +18,31 @@ bool init_motor(uint8_t index){
 	_delay_ms(2000);
 	set_pwm(index,MOTOR_MIN_VALUE);
 	_delay_ms(2000);
-
 	return 0;
 }
 
-void set_throtle(uint8_t value){
+bool set_throtle(uint8_t motor_id,uint16_t value){
 
+	bool ret_err = 0;
+	if((motor_id < SERVO_D10) || (motor_id > D46)){
+		ret_err = 1;
+		return ret_err;
+	}
+	if((value < 1000) || (value > 2000)){
+		ret_err = 1;
+		return ret_err;
+	}
+	set_pwm(motor_id,(value << 3));
+	return ret_err;
+}
+
+bool disable_motor(uint8_t motor_id){
+
+	bool ret_err = 0;
+	if((motor_id < SERVO_D10) || (motor_id > D46)){
+		ret_err = 1;
+		return ret_err;
+	}
+	set_pwm(motor_id,MOTOR_DISABLED);
+	return ret_err;
 }

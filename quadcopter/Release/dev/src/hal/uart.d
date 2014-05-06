@@ -1,4 +1,4 @@
 dev/src/hal/uart.d: ../dev/src/hal/uart.c \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/uart.h
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/uart.h
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/uart.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/uart.h:

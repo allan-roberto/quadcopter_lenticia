@@ -13,7 +13,7 @@
 
 
 char buffer[40] =  "some characters";
-uint16_t value = 0;
+uint16_t value = 1000;
 int main(void)
 {
 	uartInit(UBRR_VAL);
@@ -22,7 +22,7 @@ int main(void)
 
 	while(1)
 	{
-		if(value < 17700){
+		if(value < 2000){
 
 			set_pwm(MOTOR_D5,value);
 			set_pwm(MOTOR_D5,value);
@@ -33,7 +33,7 @@ int main(void)
 			_delay_ms(1);
 		}
 		else{
-			value = 0;
+			value =1000;
 		}
 
 	}

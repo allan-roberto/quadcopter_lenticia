@@ -1,10 +1,10 @@
 dev/src/hal/accelerometer.d: ../dev/src/hal/accelerometer.c \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/accelerometer.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h \
- /media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/i2c.h
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/accelerometer.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h \
+ /home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/i2c.h
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/accelerometer.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/accelerometer.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/types.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/types.h:
 
-/media/tpv/KINGSTON/quadcopter_repository/quadcopter/dev/include/i2c.h:
+/home/allan_amorim/workspace_lenticia/quadcopter_lenticia/quadcopter/dev/include/i2c.h:
