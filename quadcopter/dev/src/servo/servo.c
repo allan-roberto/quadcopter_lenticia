@@ -9,19 +9,6 @@
 #include <util/delay.h>
 #include <types.h>
 
-bool init_servo(uint8_t index){
-
-	if((index < MOTOR_D8) || (index > MOTOR_D5)){
-		return 1;
-	}
-	//set_pwm(index,MOTOR_MAX_VALUE);
-	//_delay_ms(2000);
-	//set_pwm(index,MOTOR_MIN_VALUE);
-	//_delay_ms(2000);
-
-	return 0;
-}
-
 bool set_servo_pos(uint8_t servo_id, uint8_t pos){
 
 	bool ret_err = 0;
@@ -31,7 +18,6 @@ bool set_servo_pos(uint8_t servo_id, uint8_t pos){
 				ret_err = 1;
 				return ret_err;
 			}
-
 		}else {
 				ret_err = 1;
 				return ret_err;

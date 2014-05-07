@@ -13,28 +13,34 @@
 
 
 char buffer[40] =  "some characters";
-uint16_t value = 1000;
+int16_t giro_data[3];
 int main(void)
 {
 	uartInit(UBRR_VAL);
-	init_pwm();
+	init_gyro();
 	sei();
 
 	while(1)
 	{
-		if(value < 2000){
+		sprintf(buffer, "Gyroscope");
+		uart_puts (buffer);
+		uart_puts ("\n\r");
 
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
+		sprintf(buffer, "data[0]: %d",giro_data[0]);
+		uart_puts (buffer);
+		uart_puts ("\n\r");
 
-			value++;
-			_delay_ms(1);
-		}
-		else{
-			value =1000;
-		}
+		sprintf(buffer, "data[1]: %d",giro_data[1]);
+		uart_puts (buffer);
+		uart_puts ("\n\r");
+
+		sprintf(buffer, "data[2]: %d",giro_data[2]);
+		uart_puts (buffer);
+		uart_puts ("\n\r");
+
+		gyro_get_data(&giro_data[0],&giro_data[1],&giro_data[2]);
+		_delay_ms(50);
+		uart_putc(12);
 
 	}
 	return 0;

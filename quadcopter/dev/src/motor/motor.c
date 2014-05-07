@@ -24,7 +24,7 @@ bool init_motor(uint8_t index){
 bool set_throtle(uint8_t motor_id,uint16_t value){
 
 	bool ret_err = 0;
-	if((motor_id < SERVO_D10) || (motor_id > D46)){
+	if((motor_id < MOTOR_D8) || (motor_id > D46)){
 		ret_err = 1;
 		return ret_err;
 	}
@@ -39,7 +39,7 @@ bool set_throtle(uint8_t motor_id,uint16_t value){
 bool disable_motor(uint8_t motor_id){
 
 	bool ret_err = 0;
-	if((motor_id < SERVO_D10) || (motor_id > D46)){
+	if((motor_id < MOTOR_D8) || (motor_id > D46)){
 		ret_err = 1;
 		return ret_err;
 	}
