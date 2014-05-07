@@ -38,7 +38,7 @@ int main(void)
 		uart_puts (UART_NUM, buffer);
 		//uart_puts (UART_NUM, "\n\r");
 
-		_delay_ms(20);
+		_delay_ms(50);
 		uart_putc (UART_NUM, 12);
 		accelerometer_get_data(&data[0],&data[1],&data[2]);
 	}

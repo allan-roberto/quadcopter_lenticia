@@ -34,7 +34,7 @@ global_conf_t global_conf;
 #define _8G			(float)(0.00099 * 9.8)
 #define _16G		(float)(0.00198 * 9.8)
 
-#define GRAV_FACTOR _2G
+#define GRAV_FACTOR _8G
 
 
 
@@ -47,7 +47,7 @@ void init_accelerometer(void) {
   uint8_t control = i2c_readReg(BMA180_ADDRESS, 0x20);
   control = control & 0x0F;        // save tcs register
   // register: bw_tcs reg: bits 4-7 to set bw -- value: set low pass filter to 20Hz
-  control = control | (0x01 << 4);
+  control = control | (0x04 << 4);
   //control = control | (0x00 << 4); // set low pass filter to 10Hz (bits value = 0000xxxx)
   i2c_writeReg(BMA180_ADDRESS, 0x20, control);
   _delay_ms(10);
@@ -56,11 +56,11 @@ void init_accelerometer(void) {
   control = control | 0x00;        // set mode_config to 0
   i2c_writeReg(BMA180_ADDRESS, 0x30, control);
   _delay_ms(10);
-  //control = i2c_readReg(BMA180_ADDRESS, 0x35);
-  //control = control & 0xF1;        // save offset_x and smp_skip register
-  //control = control | (0x05 << 1); // set range to 8G
-  //i2c_writeReg(BMA180_ADDRESS, 0x35, control);
-  //_delay_ms(10);
+  control = i2c_readReg(BMA180_ADDRESS, 0x35);
+  control = control & 0xF1;        // save offset_x and smp_skip register
+  control = control | (0x01 << 1); // set range to 8G
+  i2c_writeReg(BMA180_ADDRESS, 0x35, control);
+  _delay_ms(10);
 }
 
 void accelerometer_get_data(float *X, float *Y, float *Z ) {
@@ -71,9 +71,9 @@ void accelerometer_get_data(float *X, float *Y, float *Z ) {
                    ((rawADC[5] << 8) | rawADC[4])>>2);
   ACC_Common();
 
-  //imu.accADC[ROLL] = ~(imu.accADC[ROLL]-1);
-  //imu.accADC[PITCH] = ~(imu.accADC[PITCH]-1);
-  //imu.accADC[YAW] = ~(imu.accADC[YAW]-1);
+  imu.accADC[ROLL] = ~(imu.accADC[ROLL])-1;
+  imu.accADC[PITCH] = ~(imu.accADC[PITCH])-1;
+  imu.accADC[YAW] = ~(imu.accADC[YAW])-1;
 
   *X = (imu.accADC[ROLL]) * GRAV_FACTOR;
   *Y = (imu.accADC[PITCH]) * GRAV_FACTOR;
