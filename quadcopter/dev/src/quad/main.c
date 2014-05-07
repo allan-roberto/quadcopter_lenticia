@@ -13,29 +13,35 @@
 
 
 char buffer[40] =  "some characters";
+int16_t data[3];
 uint16_t value = 1000;
 int main(void)
 {
 	uartInit(UBRR_VAL);
-	init_pwm();
+	init_accelerometer();
 	sei();
 
 	while(1)
 	{
-		if(value < 2000){
+		sprintf(buffer, "Accelerometer");
+		uart_puts (buffer);
+		uart_puts ("\n\r");
 
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
+		sprintf(buffer, "data[0]: %d",data[0]);
+		uart_puts (buffer);
+		uart_puts ("\n\r");
 
-			value++;
-			_delay_ms(1);
-		}
-		else{
-			value =1000;
-		}
+		sprintf(buffer, "data[0]: %d",data[1]);
+		uart_puts (buffer);
+		uart_puts ("\n\r");
 
+		sprintf(buffer, "data[0]: %d",data[2]);
+		uart_puts (buffer);
+		uart_puts ("\n\r");
+
+		_delay_ms(2);
+		uart_putc (12);
+		accelerometer_get_data(&data[0],&data[1],&data[2]);
 	}
 	return 0;
 }

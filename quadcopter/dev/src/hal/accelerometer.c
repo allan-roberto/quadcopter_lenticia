@@ -21,21 +21,34 @@ int16_t  errorAltitudeI = 0;
 
 conf_t conf;
 imu_t imu;
-uint16_t calibratingA ;  // the calibration is done in the main loop. Calibrating decreases at each cycle down to 0, then we enter in a normal mode.
+uint16_t calibratingA = 1;  // the calibration is done in the main loop. Calibrating decreases at each cycle down to 0, then we enter in a normal mode.
 uint32_t currentTime;
 uint16_t previousTime;
 global_conf_t global_conf;
+
+#define _1G 		(float)(0.00013)
+#define _1_5G		(float)(0.00019)
+#define _2G			(float)(0.00025)
+#define _3G			(float)(0.00038)
+#define _4G			(float)(0.00050)
+#define _8G			(float)(0.00099)
+#define _16G		(float)(0.00198)
+
+#define GRAV_FACTOR _2G
+
 
 
 void init_accelerometer(void) {
   _delay_ms(10);
   //default range 2G: 1G = 4096 unit.
-  i2c_writeReg(BMA180_ADDRESS,0x0D,1<<4); // register: ctrl_reg0  -- value: set bit ee_w to 1 to enable writing
+  // register: ctrl_reg0  -- value: set bit ee_w to 1 to enable writing
+  i2c_writeReg(BMA180_ADDRESS,0x0D,1<<4);
   _delay_ms(5);
   uint8_t control = i2c_readReg(BMA180_ADDRESS, 0x20);
   control = control & 0x0F;        // save tcs register
-  //control = control | (0x01 << 4); // register: bw_tcs reg: bits 4-7 to set bw -- value: set low pass filter to 20Hz
-  control = control | (0x00 << 4); // set low pass filter to 10Hz (bits value = 0000xxxx)
+  // register: bw_tcs reg: bits 4-7 to set bw -- value: set low pass filter to 20Hz
+  control = control | (0x01 << 4);
+  //control = control | (0x00 << 4); // set low pass filter to 10Hz (bits value = 0000xxxx)
   i2c_writeReg(BMA180_ADDRESS, 0x20, control);
   _delay_ms(5);
   control = i2c_readReg(BMA180_ADDRESS, 0x30);
@@ -53,14 +66,18 @@ void init_accelerometer(void) {
 void accelerometer_get_data(int16_t *X, int16_t *Y, int16_t *Z ) {
   TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   i2c_getSixRawADC(BMA180_ADDRESS,0x02);
-  ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0]) ,
-                   ((rawADC[3] << 8) | rawADC[2]) ,
-                   ((rawADC[5] << 8) | rawADC[4]));
+  ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>1,
+                   ((rawADC[3] << 8) | rawADC[2])>>1 ,
+                   ((rawADC[5] << 8) | rawADC[4])>>1);
   ACC_Common();
 
-  *X = imu.accADC[ROLL];
-  *Y = imu.accADC[PITCH];
-  *Z = imu.accADC[YAW];
+  //imu.accADC[ROLL] = ~(imu.accADC[ROLL]-1);
+  //imu.accADC[PITCH] = ~(imu.accADC[PITCH]-1);
+  //imu.accADC[YAW] = ~(imu.accADC[YAW]-1);
+
+  *X = (imu.accADC[ROLL]) * GRAV_FACTOR;
+  *Y = (imu.accADC[PITCH]) * GRAV_FACTOR;
+  *Z = (imu.accADC[YAW]) * GRAV_FACTOR;
 
 }
 
@@ -72,7 +89,7 @@ void ACC_Common() {
   if (calibratingA>0) {
     for (uint8_t axis = 0; axis < 3; axis++) {
       // Reset a[axis] at start of calibration
-      if (calibratingA == 512) a[axis]=0;
+      if (calibratingA == 100) a[axis]=0;
       // Sum up 512 readings
       a[axis] +=imu.accADC[axis];
       // Clear global variables for next reading
