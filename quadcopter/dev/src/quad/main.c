@@ -15,14 +15,14 @@
 char buffer[40] =  "some characters";
 float data[3];
 uint16_t value = 1000;
-#define UART_NUM 2
+#define UART_NUM 0
 int main(void)
 {
 	uartInit(UART_NUM, UBRR_VAL);
 	init_accelerometer();
 	sei();
 
-	while(1)
+	while(0)
 	{
 
 		sprintf(buffer, "[0]: %3.2f \n\r",data[0]);
@@ -41,6 +41,10 @@ int main(void)
 		_delay_ms(50);
 		uart_putc (UART_NUM, 12);
 		accelerometer_get_data(&data[0],&data[1],&data[2]);
+	}
+	while(1)
+	{
+
 	}
 	return 0;
 }
