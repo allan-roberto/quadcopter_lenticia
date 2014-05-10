@@ -53,7 +53,7 @@ all: quadcopter.elf secondary-outputs
 quadcopter.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,quadcopter.map -mmcu=atmega2560 -o "quadcopter.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	avr-gcc -Wl,-Map,quadcopter.map -uvfprintf -mmcu=atmega2560 -o "quadcopter.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

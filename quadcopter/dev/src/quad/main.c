@@ -16,25 +16,29 @@ char buffer[40] =  "some characters";
 uint16_t value = 1000;
 int main(void)
 {
-	uartInit(UBRR_VAL);
+	uartInit(0,UBRR_VAL);
 	init_pwm();
+	_delay_ms(2000);
+	init_motor(MOTOR_D8);
+
+	set_throtle(MOTOR_D8,0);
+	_delay_ms(2000);
+	set_throtle(MOTOR_D8,100);
+	_delay_ms(2000);
+	set_throtle(MOTOR_D8,200);
+	_delay_ms(2000);
+	set_throtle(MOTOR_D8,400);
+	_delay_ms(2000);
+	set_throtle(MOTOR_D8,600);
+	_delay_ms(2000);
+	set_throtle(MOTOR_D8,800);
+	_delay_ms(2000);
+
+	disable_motor(MOTOR_D8);
 	sei();
 
 	while(1)
 	{
-		if(value < 2000){
-
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-
-			value++;
-			_delay_ms(1);
-		}
-		else{
-			value =1000;
-		}
 
 	}
 	return 0;
