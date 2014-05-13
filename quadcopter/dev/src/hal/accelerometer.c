@@ -26,7 +26,6 @@ uint16_t calibratingA = 1;  // the calibration is done in the main loop. Calibra
 uint32_t currentTime;
 uint16_t previousTime;
 global_conf_t global_conf;
-char buffer[40];
 
 #define _1G 		(float)(0.00013 * 9.8)
 #define _1_5G		(float)(0.00019 * 9.8)
@@ -36,76 +35,33 @@ char buffer[40];
 #define _8G			(float)(0.00099 * 9.8)
 #define _16G		(float)(0.00198 * 9.8)
 
-#define GRAV_FACTOR _2G
+#define GRAV_FACTOR _4G
 
 
 
 void init_accelerometer(void) {
 
-  _delay_ms(500);
   uint8_t control;
-	control = i2c_readReg(BMA180_ADDRESS, 0x20);
-	sprintf(buffer, "R 0x20--> %X \n\r",control);
-	uart_puts (0, buffer);
-	_delay_ms(10);
-	control = i2c_readReg(BMA180_ADDRESS, 0x30);
-	sprintf(buffer, "R 0x30--> %X \n\r",control);
-	uart_puts (0, buffer);
-	_delay_ms(10);
-	control = i2c_readReg(BMA180_ADDRESS, 0x35);
-	sprintf(buffer, "R 0x35--> %X \n\r",control);
-	uart_puts (0, buffer);
-	_delay_ms(10);
+  TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   //default range 2G: 1G = 4096 unit.
   // register: ctrl_reg0  -- value: set bit ee_w to 1 to enable writing
   i2c_writeReg(BMA180_ADDRESS,0x0D,0x10);
   _delay_ms(10);
   control = i2c_readReg(BMA180_ADDRESS, 0x20);
-	sprintf(buffer, "R 0x20--> %X \n\r",control);
-	uart_puts (0, buffer);
   control = control & 0x0F;        // save tcs register
   // register: bw_tcs reg: bits 4-7 to set bw -- value: set low pass filter to 20Hz
   control = control | (0x01 << 4);
-  //control = control | (0x00 << 4); // set low pass filter to 10Hz (bits value = 0000xxxx)
-	sprintf(buffer, "W 0x20--> %X \n\r",control);
-	uart_puts (0, buffer);
   i2c_writeReg(BMA180_ADDRESS, 0x20, control);
   _delay_ms(10);
   control = i2c_readReg(BMA180_ADDRESS, 0x30);
-	sprintf(buffer, "R 0x30--> %X \n\r",control);
-	uart_puts (0, buffer);
   control = control & 0xFC;        // save tco_z register
   control = control | 0x00;        // set mode_config to 0
-	sprintf(buffer, "W 0x30--> %X \n\r",control);
-	uart_puts (0, buffer);
   i2c_writeReg(BMA180_ADDRESS, 0x30, control);
   _delay_ms(10);
   control = i2c_readReg(BMA180_ADDRESS, 0x35);
-	sprintf(buffer, "R 0x35--> %X \n\r",control);
-	uart_puts (0, buffer);
   control = control & 0xF1;        // save offset_x and smp_skip register
-  control = control | (0x07 << 1); // set range to 8G
-	sprintf(buffer, "W 0x35--> %X \n\r",control);
-	uart_puts (0, buffer);
+  control = control | (0x04 << 1); // set range to 8G
   i2c_writeReg(BMA180_ADDRESS, 0x35, control);
-
-  _delay_ms(10);
-  //i2c_writeReg(BMA180_ADDRESS,0x0D,0x30);
-  _delay_ms(10);
-
-	control = i2c_readReg(BMA180_ADDRESS, 0x20);
-	sprintf(buffer, "R 0x20--> %X \n\r",control);
-	uart_puts (0, buffer);
-	_delay_ms(10);
-	control = i2c_readReg(BMA180_ADDRESS, 0x30);
-	sprintf(buffer, "R 0x30--> %X \n\r",control);
-	uart_puts (0, buffer);
-	_delay_ms(10);
-	control = i2c_readReg(BMA180_ADDRESS, 0x35);
-	sprintf(buffer, "R 0x35--> %X \n\r",control);
-	uart_puts (0, buffer);
-	_delay_ms(10);
-
 }
 
 void accelerometer_get_data(float *X, float *Y, float *Z ) {
@@ -114,7 +70,7 @@ void accelerometer_get_data(float *X, float *Y, float *Z ) {
   ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
                    ((rawADC[3] << 8) | rawADC[2])>>2,
                    ((rawADC[5] << 8) | rawADC[4])>>2);
- // ACC_Common();
+  //ACC_Common();
 
 
   *X = (imu.accADC[ROLL]) * GRAV_FACTOR;
