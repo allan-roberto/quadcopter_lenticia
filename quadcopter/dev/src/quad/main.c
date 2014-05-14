@@ -13,6 +13,7 @@
 
 
 char buffer[40] =  "some characters";
+<<<<<<< HEAD
 int16_t giro_data[3];
 uint16_t i = 0;
 int main(void)
@@ -30,6 +31,36 @@ int main(void)
 		uart_puts (buffer);
 		_delay_ms(55);
 		_delay_us(290);
+=======
+double data[3];
+uint16_t value = 1000;
+#define UART_NUM 2
+int main(void)
+{
+	uartInit(UART_NUM, UBRR_VAL);
+	init_accelerometer();
+	sei();
+	while(1)
+	{
+
+		sprintf(buffer, "[0]: %f \n\r",data[0]);
+		uart_puts (UART_NUM, buffer);
+
+		sprintf(buffer, "[1]: %f \n\r",data[1]);
+		uart_puts (UART_NUM, buffer);
+
+		sprintf(buffer, "[2]: %f \n\r",data[2]);
+		uart_puts (UART_NUM, buffer);
+
+
+		_delay_ms(10);
+		//uart_putc (UART_NUM, 12);
+		accelerometer_get_data(&data[0],&data[1],&data[2]);
+	}
+	while(1)
+	{
+
+>>>>>>> 519b813e85efe2fb9e21637c2ff3e762afd3d219
 	}
 	return 0;
 }
