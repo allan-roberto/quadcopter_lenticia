@@ -1,62 +1,52 @@
-Membro arquivo incluído por causa de arquivo (símbolo)
+Archive member included because of file (symbol)
 
-/usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
                               ./dev/src/hal/gyro.o (__udivmodhi4)
-/usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o (exit)
-/usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o (exit)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
                               ./dev/src/hal/pwm.o (__tablejump2__)
-/usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
                               ./dev/src/quad/main.o (__do_copy_data)
-/usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
                               ./dev/src/quad/main.o (__do_clear_bss)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o)
-                              ./dev/src/hal/kalman.o (__subsf3)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o) (__addsf3x)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o)
-                              ./dev/src/hal/kalman.o (__divsf3)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3x.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o) (__divsf3x)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_inf.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o) (__fp_inf)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_nan.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o) (__fp_nan)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscA.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o) (__fp_pscA)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscB.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o) (__fp_pscB)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_round.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o) (__fp_round)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_split3.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o) (__fp_split3)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_zero.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o) (__fp_zero)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o)
+                              ./dev/src/hal/kalman.o (__addsf3)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_mul_sf.o)
                               ./dev/src/hal/kalman.o (__mulsf3)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3x.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o) (__mulsf3x)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strcpy.o)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_div_sf.o)
+                              ./dev/src/hal/kalman.o (__divsf3)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_thenan_sf.o)
+                              /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o) (__thenan_sf)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+                              /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o) (__prologue_saves__)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+                              /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o) (__epilogue_restores__)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_pack_sf.o)
+                              /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o) (__pack_f)
+/usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_unpack_sf.o)
+                              /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o) (__unpack_f)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strcpy.o)
                               ./dev/src/quad/main.o (strcpy)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o)
                               ./dev/src/hal/uart.o (itoa)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
                               ./dev/src/quad/main.o (sprintf)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o) (vfprintf)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen_P.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen_P)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strrev.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o) (strrev)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (fputc)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (__ultoa_invert)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o) (vfprintf)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen_P.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen_P)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strrev.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o) (strrev)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (fputc)
+/usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                              /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o) (__ultoa_invert)
 
-Alocando simbolos comuns
-Tamanho comum do arquivo de símbolos
+Allocating common symbols
+Common symbol       size              file
 
 gyroZero            0x8               ./dev/src/hal/gyro.o
 rate                0x4               ./dev/src/hal/kalman.o
@@ -79,22 +69,21 @@ ms_timer            0x4               ./dev/src/hal/timer.o
 global_conf         0x10              ./dev/src/hal/accelerometer.o
 currentTime         0x4               ./dev/src/hal/accelerometer.o
 
-Configuração de Memória
+Memory Configuration
 
-Nome             Origem             Tamanho            Atributos
-text             0x00000000         0x00100000         xr
-data             0x00800200         0x0000fe00         rw !x
-eeprom           0x00810000         0x00010000         rw !x
-fuse             0x00820000         0x00000400         rw !x
-lock             0x00830000         0x00000400         rw !x
-signature        0x00840000         0x00000400         rw !x
-user_signatures  0x00850000         0x00000400         rw !x
-*default*        0x00000000         0xffffffff
+Name             Origin             Length             Attributes
+text             0x0000000000000000 0x0000000000100000 xr
+data             0x0000000000800200 0x000000000000fe00 rw !x
+eeprom           0x0000000000810000 0x0000000000010000 rw !x
+fuse             0x0000000000820000 0x0000000000000400 rw !x
+lock             0x0000000000830000 0x0000000000000400 rw !x
+signature        0x0000000000840000 0x0000000000000400 rw !x
+*default*        0x0000000000000000 0xffffffffffffffff
 
-Script do link-editor e mapa de memória
+Linker script and memory map
 
-Endereço da seção .data ajustado para 0x800200
-LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
+Address of section .data set to 0x800200
+LOAD /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
 LOAD ./dev/src/servo/servo.o
 LOAD ./dev/src/quad/main.o
 LOAD ./dev/src/motor/motor.o
@@ -108,11 +97,9 @@ LOAD ./dev/src/hal/time.o
 LOAD ./dev/src/hal/timer.o
 LOAD ./dev/src/hal/uart.o
 LOAD ./dev/src/hal/wiring.o
-START GROUP
-LOAD /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a
-LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a
-LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a
-END GROUP
+LOAD /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a
+LOAD /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a
+LOAD /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a
 
 .hash
  *(.hash)
@@ -204,50 +191,50 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1df8
+.text           0x0000000000000000     0x23f6
  *(.vectors)
- .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
-                0x00000000                __vectors
-                0x00000000                __vector_default
+ .vectors       0x0000000000000000       0xe4 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
+                0x0000000000000000                __vectors
+                0x0000000000000000                __vector_default
  *(.vectors)
  *(.progmem.gcc*)
  .progmem.gcc_sw_table.set_pwm
-                0x000000e4       0x14 ./dev/src/hal/pwm.o
+                0x00000000000000e4       0x14 ./dev/src/hal/pwm.o
  *(.progmem*)
-                0x000000f8                . = ALIGN (0x2)
-                0x000000f8                __trampolines_start = .
+                0x00000000000000f8                . = ALIGN (0x2)
+                0x00000000000000f8                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x000000f8       0x28 linker stubs
+ .trampolines   0x00000000000000f8        0x0 linker stubs
  *(.trampolines*)
-                0x00000120                __trampolines_end = .
+                0x00000000000000f8                __trampolines_end = .
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000120                __ctors_start = .
+                0x00000000000000f8                __ctors_start = .
  *(.ctors)
-                0x00000120                __ctors_end = .
-                0x00000120                __dtors_start = .
+                0x00000000000000f8                __ctors_end = .
+                0x00000000000000f8                __dtors_start = .
  *(.dtors)
-                0x00000120                __dtors_end = .
+                0x00000000000000f8                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000120        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
-                0x00000120                __init
+ .init0         0x00000000000000f8        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
+                0x00000000000000f8                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000120       0x10 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
+ .init2         0x00000000000000f8       0x10 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000130       0x1a /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
-                0x00000130                __do_copy_data
- .init4         0x0000014a       0x10 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
-                0x0000014a                __do_clear_bss
+ .init4         0x0000000000000108       0x1a /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
+                0x0000000000000108                __do_copy_data
+ .init4         0x0000000000000122       0x10 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
+                0x0000000000000122                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -258,408 +245,379 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000015a        0x8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
+ .init9         0x0000000000000132        0x8 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
  *(.init9)
  *(.text)
- .text          0x00000162        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
-                0x00000162                __vector_38
-                0x00000162                __vector_22
-                0x00000162                __vector_28
-                0x00000162                __vector_1
-                0x00000162                __vector_32
-                0x00000162                __vector_34
-                0x00000162                __vector_24
-                0x00000162                __vector_12
-                0x00000162                __vector_55
-                0x00000162                __vector_46
-                0x00000162                __bad_interrupt
-                0x00000162                __vector_6
-                0x00000162                __vector_31
-                0x00000162                __vector_35
-                0x00000162                __vector_39
-                0x00000162                __vector_3
-                0x00000162                __vector_30
-                0x00000162                __vector_45
-                0x00000162                __vector_54
-                0x00000162                __vector_17
-                0x00000162                __vector_19
-                0x00000162                __vector_56
-                0x00000162                __vector_7
-                0x00000162                __vector_49
-                0x00000162                __vector_41
-                0x00000162                __vector_43
-                0x00000162                __vector_5
-                0x00000162                __vector_33
-                0x00000162                __vector_47
-                0x00000162                __vector_52
-                0x00000162                __vector_37
-                0x00000162                __vector_4
-                0x00000162                __vector_44
-                0x00000162                __vector_51
-                0x00000162                __vector_9
-                0x00000162                __vector_2
-                0x00000162                __vector_21
-                0x00000162                __vector_15
-                0x00000162                __vector_36
-                0x00000162                __vector_29
-                0x00000162                __vector_40
-                0x00000162                __vector_8
-                0x00000162                __vector_26
-                0x00000162                __vector_48
-                0x00000162                __vector_14
-                0x00000162                __vector_53
-                0x00000162                __vector_10
-                0x00000162                __vector_50
-                0x00000162                __vector_16
-                0x00000162                __vector_18
-                0x00000162                __vector_20
-                0x00000162                __vector_42
- .text          0x00000166        0x0 ./dev/src/servo/servo.o
- .text          0x00000166        0x0 ./dev/src/quad/main.o
- .text          0x00000166        0x0 ./dev/src/motor/motor.o
- .text          0x00000166        0x0 ./dev/src/hal/accelerometer.o
- .text          0x00000166        0x0 ./dev/src/hal/gyro.o
- .text          0x00000166        0x0 ./dev/src/hal/i2c.o
- .text          0x00000166        0x0 ./dev/src/hal/input.o
- .text          0x00000166        0x0 ./dev/src/hal/kalman.o
- .text          0x00000166        0x0 ./dev/src/hal/pwm.o
- .text          0x00000166        0x0 ./dev/src/hal/time.o
- .text          0x00000166        0x0 ./dev/src/hal/timer.o
- .text          0x00000166        0x0 ./dev/src/hal/uart.o
- .text          0x00000166        0x0 ./dev/src/hal/wiring.o
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3x.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_inf.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_nan.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscA.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscB.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_round.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_split3.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_zero.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3x.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strcpy.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen_P.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strrev.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
- .text          0x00000166        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                0x00000166                . = ALIGN (0x2)
+ .text          0x000000000000013a        0x4 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
+                0x000000000000013a                __vector_38
+                0x000000000000013a                __vector_22
+                0x000000000000013a                __vector_28
+                0x000000000000013a                __vector_1
+                0x000000000000013a                __vector_32
+                0x000000000000013a                __vector_34
+                0x000000000000013a                __vector_24
+                0x000000000000013a                __vector_12
+                0x000000000000013a                __vector_55
+                0x000000000000013a                __vector_46
+                0x000000000000013a                __bad_interrupt
+                0x000000000000013a                __vector_6
+                0x000000000000013a                __vector_31
+                0x000000000000013a                __vector_35
+                0x000000000000013a                __vector_39
+                0x000000000000013a                __vector_3
+                0x000000000000013a                __vector_30
+                0x000000000000013a                __vector_45
+                0x000000000000013a                __vector_54
+                0x000000000000013a                __vector_17
+                0x000000000000013a                __vector_19
+                0x000000000000013a                __vector_56
+                0x000000000000013a                __vector_7
+                0x000000000000013a                __vector_49
+                0x000000000000013a                __vector_41
+                0x000000000000013a                __vector_43
+                0x000000000000013a                __vector_5
+                0x000000000000013a                __vector_33
+                0x000000000000013a                __vector_47
+                0x000000000000013a                __vector_52
+                0x000000000000013a                __vector_37
+                0x000000000000013a                __vector_4
+                0x000000000000013a                __vector_44
+                0x000000000000013a                __vector_51
+                0x000000000000013a                __vector_9
+                0x000000000000013a                __vector_2
+                0x000000000000013a                __vector_21
+                0x000000000000013a                __vector_15
+                0x000000000000013a                __vector_36
+                0x000000000000013a                __vector_29
+                0x000000000000013a                __vector_40
+                0x000000000000013a                __vector_8
+                0x000000000000013a                __vector_26
+                0x000000000000013a                __vector_48
+                0x000000000000013a                __vector_14
+                0x000000000000013a                __vector_53
+                0x000000000000013a                __vector_10
+                0x000000000000013a                __vector_50
+                0x000000000000013a                __vector_16
+                0x000000000000013a                __vector_18
+                0x000000000000013a                __vector_20
+                0x000000000000013a                __vector_42
+ .text          0x000000000000013e        0x0 ./dev/src/servo/servo.o
+ .text          0x000000000000013e        0x0 ./dev/src/quad/main.o
+ .text          0x000000000000013e        0x0 ./dev/src/motor/motor.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/accelerometer.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/gyro.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/i2c.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/input.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/kalman.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/pwm.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/time.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/timer.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/uart.o
+ .text          0x000000000000013e        0x0 ./dev/src/hal/wiring.o
+ .text          0x000000000000013e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
+ .text          0x000000000000013e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
+ .text          0x000000000000013e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
+ .text          0x000000000000013e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
+ .text          0x000000000000013e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
+ .text          0x000000000000013e      0x35c /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o)
+                0x00000000000003e2                __addsf3
+                0x000000000000043a                __subsf3
+ .text          0x000000000000049a      0x1ca /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_mul_sf.o)
+                0x000000000000049a                __mulsf3
+ .text          0x0000000000000664      0x146 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_div_sf.o)
+                0x0000000000000664                __divsf3
+ .text          0x00000000000007aa        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_thenan_sf.o)
+ .text          0x00000000000007aa        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .text          0x00000000000007aa        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .text          0x00000000000007aa      0x182 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_pack_sf.o)
+                0x00000000000007aa                __pack_f
+ .text          0x000000000000092c       0xde /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_unpack_sf.o)
+                0x000000000000092c                __unpack_f
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strcpy.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen_P.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strrev.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
+ .text          0x0000000000000a0a        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                0x0000000000000a0a                . = ALIGN (0x2)
  *(.text.*)
  .text.set_servo_pos
-                0x00000166        0x6 ./dev/src/servo/servo.o
-                0x00000166                set_servo_pos
+                0x0000000000000a0a        0x6 ./dev/src/servo/servo.o
+                0x0000000000000a0a                set_servo_pos
  .text.startup.main
-                0x0000016c       0xee ./dev/src/quad/main.o
-                0x0000016c                main
+                0x0000000000000a10       0xde ./dev/src/quad/main.o
+                0x0000000000000a10                main
  .text.init_motor
-                0x0000025a       0x52 ./dev/src/motor/motor.o
-                0x0000025a                init_motor
+                0x0000000000000aee       0x52 ./dev/src/motor/motor.o
+                0x0000000000000aee                init_motor
  .text.set_throtle
-                0x000002ac       0x2e ./dev/src/motor/motor.o
-                0x000002ac                set_throtle
+                0x0000000000000b40       0x30 ./dev/src/motor/motor.o
+                0x0000000000000b40                set_throtle
  .text.disable_motor
-                0x000002da       0x1c ./dev/src/motor/motor.o
-                0x000002da                disable_motor
+                0x0000000000000b70       0x1e ./dev/src/motor/motor.o
+                0x0000000000000b70                disable_motor
  .text.init_accelerometer
-                0x000002f6       0x86 ./dev/src/hal/accelerometer.o
-                0x000002f6                init_accelerometer
+                0x0000000000000b8e       0x86 ./dev/src/hal/accelerometer.o
+                0x0000000000000b8e                init_accelerometer
  .text.ACC_Common
-                0x0000037c      0x17c ./dev/src/hal/accelerometer.o
-                0x0000037c                ACC_Common
+                0x0000000000000c14      0x17c ./dev/src/hal/accelerometer.o
+                0x0000000000000c14                ACC_Common
  .text.accelerometer_get_data
-                0x000004f8       0xd2 ./dev/src/hal/accelerometer.o
-                0x000004f8                accelerometer_get_data
+                0x0000000000000d90       0xbc ./dev/src/hal/accelerometer.o
+                0x0000000000000d90                accelerometer_get_data
  .text.init_gyro
-                0x000005ca       0x5c ./dev/src/hal/gyro.o
-                0x000005ca                init_gyro
+                0x0000000000000e4c       0x5c ./dev/src/hal/gyro.o
+                0x0000000000000e4c                init_gyro
  .text.gyro_get_temp
-                0x00000626       0x52 ./dev/src/hal/gyro.o
-                0x00000626                gyro_get_temp
+                0x0000000000000ea8       0x52 ./dev/src/hal/gyro.o
+                0x0000000000000ea8                gyro_get_temp
  .text.GYRO_Common
-                0x00000678      0x13c ./dev/src/hal/gyro.o
-                0x00000678                GYRO_Common
+                0x0000000000000efa      0x13c ./dev/src/hal/gyro.o
+                0x0000000000000efa                GYRO_Common
  .text.gyro_get_data
-                0x000007b4       0xde ./dev/src/hal/gyro.o
-                0x000007b4                gyro_get_data
+                0x0000000000001036       0xde ./dev/src/hal/gyro.o
+                0x0000000000001036                gyro_get_data
  .text.constrain
-                0x00000892       0x14 ./dev/src/hal/gyro.o
-                0x00000892                constrain
+                0x0000000000001114       0x14 ./dev/src/hal/gyro.o
+                0x0000000000001114                constrain
  .text.i2c_init
-                0x000008a6       0x16 ./dev/src/hal/i2c.o
-                0x000008a6                i2c_init
+                0x0000000000001128       0x16 ./dev/src/hal/i2c.o
+                0x0000000000001128                i2c_init
  .text.i2c_stop
-                0x000008bc        0x8 ./dev/src/hal/i2c.o
-                0x000008bc                i2c_stop
+                0x000000000000113e        0x8 ./dev/src/hal/i2c.o
+                0x000000000000113e                i2c_stop
  .text.waitTransmissionI2C
-                0x000008c4       0x2c ./dev/src/hal/i2c.o
-                0x000008c4                waitTransmissionI2C
+                0x0000000000001146       0x2c ./dev/src/hal/i2c.o
+                0x0000000000001146                waitTransmissionI2C
  .text.i2c_rep_start
-                0x000008f0       0x38 ./dev/src/hal/i2c.o
-                0x000008f0                i2c_rep_start
+                0x0000000000001172       0x38 ./dev/src/hal/i2c.o
+                0x0000000000001172                i2c_rep_start
  .text.i2c_write
-                0x00000928        0xe ./dev/src/hal/i2c.o
-                0x00000928                i2c_write
+                0x00000000000011aa        0xe ./dev/src/hal/i2c.o
+                0x00000000000011aa                i2c_write
  .text.i2c_read
-                0x00000936       0x28 ./dev/src/hal/i2c.o
-                0x00000936                i2c_read
+                0x00000000000011b8       0x28 ./dev/src/hal/i2c.o
+                0x00000000000011b8                i2c_read
  .text.i2c_readNak
-                0x0000095e        0x6 ./dev/src/hal/i2c.o
-                0x0000095e                i2c_readNak
+                0x00000000000011e0        0x6 ./dev/src/hal/i2c.o
+                0x00000000000011e0                i2c_readNak
  .text.i2c_readAck
-                0x00000964       0x10 ./dev/src/hal/i2c.o
-                0x00000964                i2c_readAck
+                0x00000000000011e6       0x10 ./dev/src/hal/i2c.o
+                0x00000000000011e6                i2c_readAck
  .text.i2c_read_to_buf
-                0x00000974       0x6e ./dev/src/hal/i2c.o
-                0x00000974                i2c_read_to_buf
+                0x00000000000011f6       0x6e ./dev/src/hal/i2c.o
+                0x00000000000011f6                i2c_read_to_buf
  .text.i2c_read_reg_to_buf
-                0x000009e2       0x44 ./dev/src/hal/i2c.o
-                0x000009e2                i2c_read_reg_to_buf
+                0x0000000000001264       0x44 ./dev/src/hal/i2c.o
+                0x0000000000001264                i2c_read_reg_to_buf
  .text.swap_endianness
-                0x00000a26       0x22 ./dev/src/hal/i2c.o
-                0x00000a26                swap_endianness
+                0x00000000000012a8       0x22 ./dev/src/hal/i2c.o
+                0x00000000000012a8                swap_endianness
  .text.i2c_getSixRawADC
-                0x00000a48        0xc ./dev/src/hal/i2c.o
-                0x00000a48                i2c_getSixRawADC
+                0x00000000000012ca        0xc ./dev/src/hal/i2c.o
+                0x00000000000012ca                i2c_getSixRawADC
  .text.i2c_writeReg
-                0x00000a54       0x36 ./dev/src/hal/i2c.o
-                0x00000a54                i2c_writeReg
+                0x00000000000012d6       0x36 ./dev/src/hal/i2c.o
+                0x00000000000012d6                i2c_writeReg
  .text.i2c_readReg
-                0x00000a8a       0x22 ./dev/src/hal/i2c.o
-                0x00000a8a                i2c_readReg
+                0x000000000000130c       0x22 ./dev/src/hal/i2c.o
+                0x000000000000130c                i2c_readReg
  .text.init_input
-                0x00000aac       0x1c ./dev/src/hal/input.o
-                0x00000aac                init_input
+                0x000000000000132e       0x1c ./dev/src/hal/input.o
+                0x000000000000132e                init_input
  .text.get_interrupt_pin_status
-                0x00000ac8       0x18 ./dev/src/hal/input.o
-                0x00000ac8                get_interrupt_pin_status
+                0x000000000000134a       0x18 ./dev/src/hal/input.o
+                0x000000000000134a                get_interrupt_pin_status
  .text.__vector_11
-                0x00000ae0      0x120 ./dev/src/hal/input.o
-                0x00000ae0                __vector_11
+                0x0000000000001362      0x120 ./dev/src/hal/input.o
+                0x0000000000001362                __vector_11
  .text.set_monitored_pin
-                0x00000c00        0xa ./dev/src/hal/input.o
-                0x00000c00                set_monitored_pin
+                0x0000000000001482        0xa ./dev/src/hal/input.o
+                0x0000000000001482                set_monitored_pin
  .text.stateUpdate
-                0x00000c0a      0x194 ./dev/src/hal/kalman.o
-                0x00000c0a                stateUpdate
+                0x000000000000148c      0x194 ./dev/src/hal/kalman.o
+                0x000000000000148c                stateUpdate
  .text.kalmanUpdate
-                0x00000d9e      0x20c ./dev/src/hal/kalman.o
-                0x00000d9e                kalmanUpdate
+                0x0000000000001620      0x20c ./dev/src/hal/kalman.o
+                0x0000000000001620                kalmanUpdate
  .text.init_pwm
-                0x00000faa       0xb2 ./dev/src/hal/pwm.o
-                0x00000faa                init_pwm
- .text.set_pwm  0x0000105c       0xb8 ./dev/src/hal/pwm.o
-                0x0000105c                set_pwm
+                0x000000000000182c       0xb2 ./dev/src/hal/pwm.o
+                0x000000000000182c                init_pwm
+ .text.set_pwm  0x00000000000018de       0xb8 ./dev/src/hal/pwm.o
+                0x00000000000018de                set_pwm
  .text.enable_pwm
-                0x00001114        0x4 ./dev/src/hal/pwm.o
-                0x00001114                enable_pwm
+                0x0000000000001996        0x4 ./dev/src/hal/pwm.o
+                0x0000000000001996                enable_pwm
  .text.init_timer
-                0x00001118        0xc ./dev/src/hal/time.o
-                0x00001118                init_timer
+                0x000000000000199a        0xc ./dev/src/hal/time.o
+                0x000000000000199a                init_timer
  .text.read_timer
-                0x00001124        0xa ./dev/src/hal/time.o
-                0x00001124                read_timer
+                0x00000000000019a6        0xa ./dev/src/hal/time.o
+                0x00000000000019a6                read_timer
  .text.timerInit
-                0x0000112e       0x24 ./dev/src/hal/timer.o
-                0x0000112e                timerInit
+                0x00000000000019b0       0x24 ./dev/src/hal/timer.o
+                0x00000000000019b0                timerInit
  .text.__vector_13
-                0x00001152       0x4a ./dev/src/hal/timer.o
-                0x00001152                __vector_13
+                0x00000000000019d4       0x4a ./dev/src/hal/timer.o
+                0x00000000000019d4                __vector_13
  .text.getMsTimer
-                0x0000119c       0x16 ./dev/src/hal/timer.o
-                0x0000119c                getMsTimer
+                0x0000000000001a1e       0x16 ./dev/src/hal/timer.o
+                0x0000000000001a1e                getMsTimer
  .text.uartInit
-                0x000011b2       0x16 ./dev/src/hal/uart.o
-                0x000011b2                uartInit
+                0x0000000000001a34       0x16 ./dev/src/hal/uart.o
+                0x0000000000001a34                uartInit
  .text.uart_putc
-                0x000011c8       0x12 ./dev/src/hal/uart.o
-                0x000011c8                uart_putc
+                0x0000000000001a4a       0x12 ./dev/src/hal/uart.o
+                0x0000000000001a4a                uart_putc
  .text.uart_puts
-                0x000011da       0x18 ./dev/src/hal/uart.o
-                0x000011da                uart_puts
+                0x0000000000001a5c       0x18 ./dev/src/hal/uart.o
+                0x0000000000001a5c                uart_puts
  .text.uart_puts_pgm
-                0x000011f2       0x22 ./dev/src/hal/uart.o
-                0x000011f2                uart_puts_pgm
+                0x0000000000001a74       0x22 ./dev/src/hal/uart.o
+                0x0000000000001a74                uart_puts_pgm
  .text.uart_puti
-                0x00001214       0x3c ./dev/src/hal/uart.o
-                0x00001214                uart_puti
+                0x0000000000001a96       0x3c ./dev/src/hal/uart.o
+                0x0000000000001a96                uart_puti
  .text.uart_getc
-                0x00001250        0xe ./dev/src/hal/uart.o
-                0x00001250                uart_getc
+                0x0000000000001ad2        0xe ./dev/src/hal/uart.o
+                0x0000000000001ad2                uart_getc
  .text.__vector_25
-                0x0000125e       0x20 ./dev/src/hal/uart.o
-                0x0000125e                __vector_25
+                0x0000000000001ae0       0x20 ./dev/src/hal/uart.o
+                0x0000000000001ae0                __vector_25
  .text.__vector_27
-                0x0000127e       0x54 ./dev/src/hal/uart.o
-                0x0000127e                __vector_27
+                0x0000000000001b00       0x56 ./dev/src/hal/uart.o
+                0x0000000000001b00                __vector_27
  .text.__vector_23
-                0x000012d2       0x94 ./dev/src/hal/wiring.o
-                0x000012d2                __vector_23
- .text.millis   0x00001366       0x18 ./dev/src/hal/wiring.o
-                0x00001366                millis
- .text.micros   0x0000137e       0x5c ./dev/src/hal/wiring.o
-                0x0000137e                micros
- .text.delay    0x000013da       0x44 ./dev/src/hal/wiring.o
-                0x000013da                delay
+                0x0000000000001b56       0x94 ./dev/src/hal/wiring.o
+                0x0000000000001b56                __vector_23
+ .text.millis   0x0000000000001bea       0x18 ./dev/src/hal/wiring.o
+                0x0000000000001bea                millis
+ .text.micros   0x0000000000001c02       0x5c ./dev/src/hal/wiring.o
+                0x0000000000001c02                micros
+ .text.delay    0x0000000000001c5e       0x44 ./dev/src/hal/wiring.o
+                0x0000000000001c5e                delay
  .text.delayMicroseconds
-                0x0000141e       0x1c ./dev/src/hal/wiring.o
-                0x0000141e                delayMicroseconds
- .text.init     0x0000143a       0x74 ./dev/src/hal/wiring.o
-                0x0000143a                init
+                0x0000000000001ca2       0x1c ./dev/src/hal/wiring.o
+                0x0000000000001ca2                delayMicroseconds
+ .text.init     0x0000000000001cbe       0x74 ./dev/src/hal/wiring.o
+                0x0000000000001cbe                init
  .text.libgcc.mul
-                0x000014ae        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000000000001d32        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
  .text.libgcc.div
-                0x000014ae       0x28 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
-                0x000014ae                __udivmodhi4
- .text.libgcc   0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000000000001d32       0x28 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000000000001d32                __udivmodhi4
+ .text.libgcc   0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
  .text.libgcc.prologue
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
  .text.libgcc.builtins
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
  .text.libgcc.fmul
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
- .text.libgcc.fixed
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
  .text.libgcc.mul
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
- .text.libgcc   0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
- .text.libgcc.fixed
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
  .text.libgcc.div
-                0x000014d6        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
- .text.libgcc   0x000014d6        0xc /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
-                0x000014d6                __tablejump2__
-                0x000014da                __tablejump__
+                0x0000000000001d5a        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
+ .text.libgcc   0x0000000000001d5a        0xc /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
+                0x0000000000001d5a                __tablejump2__
+                0x0000000000001d5e                __tablejump__
  .text.libgcc.prologue
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
  .text.libgcc.builtins
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
  .text.libgcc.fmul
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
- .text.libgcc.fixed
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
  .text.libgcc.mul
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
- .text.libgcc   0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
- .text.libgcc.fixed
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
  .text.libgcc.mul
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
- .text.libgcc   0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
- .text.libgcc.fixed
-                0x000014e2        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
- .text.avr-libc.fplib
-                0x000014e2        0xa /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o)
-                0x000014e2                __subsf3
-                0x000014e4                __addsf3
- .text.avr-libc.fplib
-                0x000014ec       0xc0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o)
-                0x00001506                __addsf3x
- .text.avr-libc.fplib
-                0x000015ac        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o)
-                0x000015ac                __divsf3
- .text.avr-libc.fplib
-                0x000015b0       0xcc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3x.o)
-                0x000015c6                __divsf3x
-                0x000015ca                __divsf3_pse
- .text.avr-libc.fplib
-                0x0000167c        0xc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_inf.o)
-                0x0000167c                __fp_inf
- .text.avr-libc.fplib
-                0x00001688        0x6 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_nan.o)
-                0x00001688                __fp_nan
- .text.avr-libc.fplib
-                0x0000168e        0xe /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscA.o)
-                0x0000168e                __fp_pscA
- .text.avr-libc.fplib
-                0x0000169c        0xe /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscB.o)
-                0x0000169c                __fp_pscB
- .text.avr-libc.fplib
-                0x000016aa       0x22 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_round.o)
-                0x000016aa                __fp_round
- .text.avr-libc.fplib
-                0x000016cc       0x44 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_split3.o)
-                0x000016cc                __fp_split3
-                0x000016dc                __fp_splitA
- .text.avr-libc.fplib
-                0x00001710        0xe /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_zero.o)
-                0x00001710                __fp_zero
-                0x00001712                __fp_szero
- .text.avr-libc.fplib
-                0x0000171e        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o)
-                0x0000171e                __mulsf3
- .text.avr-libc.fplib
-                0x00001722       0xc2 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3x.o)
-                0x00001736                __mulsf3x
-                0x0000173a                __mulsf3_pse
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .text.libgcc.div
+                0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .text.libgcc   0x0000000000001d66        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .text.libgcc.prologue
+                0x0000000000001d66       0x38 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+                0x0000000000001d66                __prologue_saves__
+ .text.libgcc.builtins
+                0x0000000000001d9e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .text.libgcc.fmul
+                0x0000000000001d9e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .text.libgcc.mul
+                0x0000000000001d9e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .text.libgcc.div
+                0x0000000000001d9e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .text.libgcc   0x0000000000001d9e        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .text.libgcc.prologue
+                0x0000000000001d9e       0x36 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+                0x0000000000001d9e                __epilogue_restores__
+ .text.libgcc.builtins
+                0x0000000000001dd4        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .text.libgcc.fmul
+                0x0000000000001dd4        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
  .text.avr-libc
-                0x000017e4        0xe /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strcpy.o)
-                0x000017e4                strcpy
+                0x0000000000001dd4        0xe /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strcpy.o)
+                0x0000000000001dd4                strcpy
  .text.avr-libc
-                0x000017f2       0x42 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o)
-                0x000017f2                itoa
+                0x0000000000001de2       0x42 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o)
+                0x0000000000001de2                itoa
  .text.avr-libc
-                0x00001834       0x5e /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
-                0x00001834                sprintf
+                0x0000000000001e24       0x62 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
+                0x0000000000001e24                sprintf
  .text.avr-libc
-                0x00001892      0x3f6 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
-                0x00001892                vfprintf
+                0x0000000000001e86      0x40c /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+                0x0000000000001e86                vfprintf
  .text.avr-libc
-                0x00001c88       0x16 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen_P.o)
-                0x00001c88                strnlen_P
+                0x0000000000002292       0x16 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen_P.o)
+                0x0000000000002292                strnlen_P
  .text.avr-libc
-                0x00001c9e       0x16 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen.o)
-                0x00001c9e                strnlen
+                0x00000000000022a8       0x16 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen.o)
+                0x00000000000022a8                strnlen
  .text.avr-libc
-                0x00001cb4       0x20 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strrev.o)
-                0x00001cb4                strrev
+                0x00000000000022be       0x20 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strrev.o)
+                0x00000000000022be                strrev
  .text.avr-libc
-                0x00001cd4       0x64 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
-                0x00001cd4                fputc
+                0x00000000000022de       0x58 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
+                0x00000000000022de                fputc
  .text.avr-libc
-                0x00001d38       0xbc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                0x00001d38                __ultoa_invert
-                0x00001df4                . = ALIGN (0x2)
+                0x0000000000002336       0xbc /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                0x0000000000002336                __ultoa_invert
+                0x00000000000023f2                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001df4        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
-                0x00001df4                exit
-                0x00001df4                _exit
+ .fini9         0x00000000000023f2        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
+                0x00000000000023f2                exit
+                0x00000000000023f2                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -678,200 +636,193 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001df4        0x4 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
+ .fini0         0x00000000000023f2        0x4 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
  *(.fini0)
-                0x00001df8                _etext = .
+                0x00000000000023f6                _etext = .
 
-.data           0x00800200       0x76 carregando endereço 0x00001df8
-                0x00800200                PROVIDE (__data_start, .)
+.data           0x0000000000800200       0x62 load address 0x00000000000023f6
+                0x0000000000800200                PROVIDE (__data_start, .)
  *(.data)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
- .data          0x00800200        0x0 ./dev/src/servo/servo.o
- .data          0x00800200        0x0 ./dev/src/quad/main.o
- .data          0x00800200        0x0 ./dev/src/motor/motor.o
- .data          0x00800200        0x0 ./dev/src/hal/accelerometer.o
- .data          0x00800200        0x0 ./dev/src/hal/gyro.o
- .data          0x00800200        0x0 ./dev/src/hal/i2c.o
- .data          0x00800200        0x0 ./dev/src/hal/input.o
- .data          0x00800200        0x0 ./dev/src/hal/kalman.o
- .data          0x00800200        0x0 ./dev/src/hal/pwm.o
- .data          0x00800200        0x0 ./dev/src/hal/time.o
- .data          0x00800200        0x0 ./dev/src/hal/timer.o
- .data          0x00800200        0x0 ./dev/src/hal/uart.o
- .data          0x00800200        0x0 ./dev/src/hal/wiring.o
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3x.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_inf.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_nan.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscA.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscB.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_round.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_split3.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_zero.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3x.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strcpy.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen_P.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strrev.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
+ .data          0x0000000000800200        0x0 ./dev/src/servo/servo.o
+ .data          0x0000000000800200        0x0 ./dev/src/quad/main.o
+ .data          0x0000000000800200        0x0 ./dev/src/motor/motor.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/accelerometer.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/gyro.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/i2c.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/input.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/kalman.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/pwm.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/time.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/timer.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/uart.o
+ .data          0x0000000000800200        0x0 ./dev/src/hal/wiring.o
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_mul_sf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_div_sf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_thenan_sf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_pack_sf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_unpack_sf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strcpy.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen_P.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strrev.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
+ .data          0x0000000000800200        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
  *(.data*)
- .data.buffer   0x00800200       0x28 ./dev/src/quad/main.o
-                0x00800200                buffer
- .data.P        0x00800228       0x10 ./dev/src/hal/kalman.o
+ .data.buffer   0x0000000000800200       0x28 ./dev/src/quad/main.o
+                0x0000000000800200                buffer
+ .data.P        0x0000000000800228       0x10 ./dev/src/hal/kalman.o
  *(.rodata)
+ .rodata        0x0000000000800238        0x8 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_thenan_sf.o)
+                0x0000000000800238                __thenan_sf
  *(.rodata*)
  .rodata.str1.1
-                0x00800238       0x2e ./dev/src/quad/main.o
-                                 0x31 (tamanho de relaxar)
+                0x0000000000800240       0x13 ./dev/src/quad/main.o
+                                         0x16 (size before relaxing)
  .rodata.str1.1
-                0x00800266        0xf ./dev/src/hal/uart.o
+                0x0000000000800253        0xf ./dev/src/hal/uart.o
  *(.gnu.linkonce.d*)
-                0x00800276                . = ALIGN (0x2)
- *fill*         0x00800275        0x1 
-                0x00800276                _edata = .
-                0x00800276                PROVIDE (__data_end, .)
+                0x0000000000800262                . = ALIGN (0x2)
+                0x0000000000800262                _edata = .
+                0x0000000000800262                PROVIDE (__data_end, .)
 
-.bss            0x00800276      0x13d
-                0x00800276                PROVIDE (__bss_start, .)
+.bss            0x0000000000800262      0x13f
+                0x0000000000800262                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
- .bss           0x00800276        0x0 ./dev/src/servo/servo.o
- .bss           0x00800276        0x0 ./dev/src/quad/main.o
- .bss           0x00800276        0x0 ./dev/src/motor/motor.o
- .bss           0x00800276        0x0 ./dev/src/hal/accelerometer.o
- .bss           0x00800276        0x0 ./dev/src/hal/gyro.o
- .bss           0x00800276        0x0 ./dev/src/hal/i2c.o
- .bss           0x00800276        0x0 ./dev/src/hal/input.o
- .bss           0x00800276        0x0 ./dev/src/hal/kalman.o
- .bss           0x00800276        0x0 ./dev/src/hal/pwm.o
- .bss           0x00800276        0x0 ./dev/src/hal/time.o
- .bss           0x00800276        0x0 ./dev/src/hal/timer.o
- .bss           0x00800276        0x0 ./dev/src/hal/uart.o
- .bss           0x00800276        0x0 ./dev/src/hal/wiring.o
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_udivmodhi4.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_exit.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_tablejump.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_copy_data.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/avr6/libgcc.a(_clear_bss.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3x.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_inf.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_nan.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscA.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscB.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_round.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_split3.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_zero.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3x.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strcpy.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen_P.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strrev.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
- .bss           0x00800276        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
+ .bss           0x0000000000800262        0x0 ./dev/src/servo/servo.o
+ .bss           0x0000000000800262        0x0 ./dev/src/quad/main.o
+ .bss           0x0000000000800262        0x0 ./dev/src/motor/motor.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/accelerometer.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/gyro.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/i2c.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/input.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/kalman.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/pwm.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/time.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/timer.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/uart.o
+ .bss           0x0000000000800262        0x0 ./dev/src/hal/wiring.o
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_udivmodhi4.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_exit.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_tablejump.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_copy_data.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_clear_bss.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_mul_sf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_div_sf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_thenan_sf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_prologue.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_epilogue.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_pack_sf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_unpack_sf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strcpy.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen_P.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strrev.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
+ .bss           0x0000000000800262        0x0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
  *(.bss*)
- .bss.a.1873    0x00800276        0xc ./dev/src/hal/accelerometer.o
+ .bss.i         0x0000000000800262        0x2 ./dev/src/quad/main.o
+                0x0000000000800262                i
  .bss.errorAltitudeI
-                0x00800282        0x2 ./dev/src/hal/accelerometer.o
-                0x00800282                errorAltitudeI
- .bss.BaroPID   0x00800284        0x2 ./dev/src/hal/accelerometer.o
-                0x00800284                BaroPID
+                0x0000000000800264        0x2 ./dev/src/hal/accelerometer.o
+                0x0000000000800264                errorAltitudeI
+ .bss.BaroPID   0x0000000000800266        0x2 ./dev/src/hal/accelerometer.o
+                0x0000000000800266                BaroPID
  .bss.cycleTime
-                0x00800286        0x2 ./dev/src/hal/accelerometer.o
-                0x00800286                cycleTime
+                0x0000000000800268        0x2 ./dev/src/hal/accelerometer.o
+                0x0000000000800268                cycleTime
+ .bss.a.1792    0x000000000080026a        0xc ./dev/src/hal/accelerometer.o
  .bss.previousGyroADC.1873
-                0x00800288        0x6 ./dev/src/hal/gyro.o
- .bss.g.1874    0x0080028e        0xc ./dev/src/hal/gyro.o
+                0x0000000000800276        0x6 ./dev/src/hal/gyro.o
+ .bss.g.1874    0x000000000080027c        0xc ./dev/src/hal/gyro.o
  .bss.i2c_errors_count
-                0x0080029a        0x2 ./dev/src/hal/i2c.o
-                0x0080029a                i2c_errors_count
+                0x0000000000800288        0x2 ./dev/src/hal/i2c.o
+                0x0000000000800288                i2c_errors_count
  .bss.last_input_state.1492
-                0x0080029c        0x1 ./dev/src/hal/input.o
- .bss.started   0x0080029d        0x1 ./dev/src/hal/input.o
-                0x0080029d                started
+                0x000000000080028a        0x1 ./dev/src/hal/input.o
+ .bss.started   0x000000000080028b        0x1 ./dev/src/hal/input.o
+                0x000000000080028b                started
  .bss.receiver_mask
-                0x0080029e        0x1 ./dev/src/hal/input.o
-                0x0080029e                receiver_mask
- .bss.pin_pos   0x0080029f        0x1 ./dev/src/hal/input.o
-                0x0080029f                pin_pos
- .bss.positive  0x008002a0       0x10 ./dev/src/hal/input.o
-                0x008002a0                positive
- .bss.end_pos   0x008002b0       0x10 ./dev/src/hal/input.o
-                0x008002b0                end_pos
+                0x000000000080028c        0x1 ./dev/src/hal/input.o
+                0x000000000080028c                receiver_mask
+ .bss.pin_pos   0x000000000080028d        0x1 ./dev/src/hal/input.o
+                0x000000000080028d                pin_pos
+ .bss.positive  0x000000000080028e       0x10 ./dev/src/hal/input.o
+                0x000000000080028e                positive
+ .bss.end_pos   0x000000000080029e       0x10 ./dev/src/hal/input.o
+                0x000000000080029e                end_pos
  .bss.start_pos
-                0x008002c0       0x10 ./dev/src/hal/input.o
-                0x008002c0                start_pos
- .bss.delta     0x008002d0        0x2 ./dev/src/hal/input.o
-                0x008002d0                delta
+                0x00000000008002ae       0x10 ./dev/src/hal/input.o
+                0x00000000008002ae                start_pos
+ .bss.delta     0x00000000008002be        0x2 ./dev/src/hal/input.o
+                0x00000000008002be                delta
  .bss.input_uart
-                0x008002d2        0x1 ./dev/src/hal/uart.o
-                0x008002d2                input_uart
+                0x00000000008002c0        0x1 ./dev/src/hal/uart.o
+                0x00000000008002c0                input_uart
  .bss.timer0_fract
-                0x008002d3        0x1 ./dev/src/hal/wiring.o
+                0x00000000008002c1        0x1 ./dev/src/hal/wiring.o
  .bss.timer0_millis
-                0x008002d4        0x4 ./dev/src/hal/wiring.o
-                0x008002d4                timer0_millis
+                0x00000000008002c2        0x4 ./dev/src/hal/wiring.o
+                0x00000000008002c2                timer0_millis
  .bss.timer0_overflow_count
-                0x008002d8        0x4 ./dev/src/hal/wiring.o
-                0x008002d8                timer0_overflow_count
+                0x00000000008002c6        0x4 ./dev/src/hal/wiring.o
+                0x00000000008002c6                timer0_overflow_count
  *(COMMON)
- COMMON         0x008002dc        0x6 ./dev/src/quad/main.o
-                0x008002dc                giro_data
- COMMON         0x008002e2       0xaf ./dev/src/hal/accelerometer.o
-                0x008002e2                calibratingA
-                0x008002e4                conf
-                0x0080034b                sonarAlt
-                0x0080034d                imu
-                0x0080036d                magHold
-                0x0080036f                rawADC
-                0x00800375                AltHold
-                0x00800379                previousTime
-                0x0080037b                headFreeModeHold
-                0x0080037d                global_conf
-                0x0080038d                currentTime
- COMMON         0x00800391       0x12 ./dev/src/hal/gyro.o
-                0x00800391                gyroZero
-                0x00800399                calibratingG
-                0x0080039b                Gyro_Accum
-                0x008003a1                calibratingB
- COMMON         0x008003a3        0xc ./dev/src/hal/kalman.o
-                0x008003a3                rate
-                0x008003a7                q_bias
-                0x008003ab                angle
- COMMON         0x008003af        0x4 ./dev/src/hal/timer.o
-                0x008003af                ms_timer
-                0x008003b3                PROVIDE (__bss_end, .)
-                0x00001df8                __data_load_start = LOADADDR (.data)
-                0x00001e6e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00000000008002ca        0x6 ./dev/src/quad/main.o
+                0x00000000008002ca                giro_data
+ COMMON         0x00000000008002d0       0xaf ./dev/src/hal/accelerometer.o
+                0x00000000008002d0                calibratingA
+                0x00000000008002d2                conf
+                0x0000000000800339                sonarAlt
+                0x000000000080033b                imu
+                0x000000000080035b                magHold
+                0x000000000080035d                rawADC
+                0x0000000000800363                AltHold
+                0x0000000000800367                previousTime
+                0x0000000000800369                headFreeModeHold
+                0x000000000080036b                global_conf
+                0x000000000080037b                currentTime
+ COMMON         0x000000000080037f       0x12 ./dev/src/hal/gyro.o
+                0x000000000080037f                gyroZero
+                0x0000000000800387                calibratingG
+                0x0000000000800389                Gyro_Accum
+                0x000000000080038f                calibratingB
+ COMMON         0x0000000000800391        0xc ./dev/src/hal/kalman.o
+                0x0000000000800391                rate
+                0x0000000000800395                q_bias
+                0x0000000000800399                angle
+ COMMON         0x000000000080039d        0x4 ./dev/src/hal/timer.o
+                0x000000000080039d                ms_timer
+                0x00000000008003a1                PROVIDE (__bss_end, .)
+                0x00000000000023f6                __data_load_start = LOADADDR (.data)
+                0x0000000000002458                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008003b3        0x0
-                0x008003b3                PROVIDE (__noinit_start, .)
+.noinit         0x00000000008003a1        0x0
+                0x00000000008003a1                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x008003b3                PROVIDE (__noinit_end, .)
-                0x008003b3                _end = .
-                0x008003b3                PROVIDE (__heap_start, .)
+                0x00000000008003a1                PROVIDE (__noinit_end, .)
+                0x00000000008003a1                _end = .
+                0x00000000008003a1                PROVIDE (__heap_start, .)
 
-.eeprom         0x00810000        0x0
+.eeprom         0x0000000000810000        0x0
  *(.eeprom*)
-                0x00810000                __eeprom_end = .
+                0x0000000000810000                __eeprom_end = .
 
 .fuse
  *(.fuse)
@@ -885,60 +836,31 @@ END GROUP
 .signature
  *(.signature*)
 
-.user_signatures
- *(.user_signatures*)
-
-.stab           0x00000000     0x38a0
+.stab           0x0000000000000000     0x1f80
  *(.stab)
- .stab          0x00000000      0x6e4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
- .stab          0x000006e4       0x78 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3.o)
-                                 0x84 (tamanho de relaxar)
- .stab          0x0000075c      0x4bc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(addsf3x.o)
-                                0x4c8 (tamanho de relaxar)
- .stab          0x00000c18       0x48 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3.o)
-                                 0x54 (tamanho de relaxar)
- .stab          0x00000c60      0x510 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(divsf3x.o)
-                                0x51c (tamanho de relaxar)
- .stab          0x00001170       0x78 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_inf.o)
-                                 0x84 (tamanho de relaxar)
- .stab          0x000011e8       0x54 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_nan.o)
-                                 0x60 (tamanho de relaxar)
- .stab          0x0000123c       0x84 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscA.o)
-                                 0x90 (tamanho de relaxar)
- .stab          0x000012c0       0x84 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_pscB.o)
-                                 0x90 (tamanho de relaxar)
- .stab          0x00001344       0xfc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_round.o)
-                                0x108 (tamanho de relaxar)
- .stab          0x00001440      0x1d4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_split3.o)
-                                0x1e0 (tamanho de relaxar)
- .stab          0x00001614       0x90 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(fp_zero.o)
-                                 0x9c (tamanho de relaxar)
- .stab          0x000016a4       0x48 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3.o)
-                                 0x54 (tamanho de relaxar)
- .stab          0x000016ec      0x4d4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libm.a(mulsf3x.o)
-                                0x4e0 (tamanho de relaxar)
- .stab          0x00001bc0       0x6c /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strcpy.o)
-                                 0x78 (tamanho de relaxar)
- .stab          0x00001c2c      0x1b0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(itoa.o)
-                                0x1bc (tamanho de relaxar)
- .stab          0x00001ddc      0x540 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
-                                0x54c (tamanho de relaxar)
- .stab          0x0000231c      0xba0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
-                                0xd80 (tamanho de relaxar)
- .stab          0x00002ebc       0x9c /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen_P.o)
-                                 0xa8 (tamanho de relaxar)
- .stab          0x00002f58       0x9c /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strnlen.o)
-                                 0xa8 (tamanho de relaxar)
- .stab          0x00002ff4       0xd8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(strrev.o)
-                                 0xe4 (tamanho de relaxar)
- .stab          0x000030cc      0x354 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
-                                0x534 (tamanho de relaxar)
- .stab          0x00003420      0x480 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                                0x48c (tamanho de relaxar)
+ .stab          0x0000000000000000      0x6e4 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
+ .stab          0x00000000000006e4       0x6c /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strcpy.o)
+                                         0x78 (size before relaxing)
+ .stab          0x0000000000000750      0x1b0 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(itoa.o)
+                                        0x1bc (size before relaxing)
+ .stab          0x0000000000000900      0x3d8 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
+                                        0x3e4 (size before relaxing)
+ .stab          0x0000000000000cd8      0xa44 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+                                        0xc24 (size before relaxing)
+ .stab          0x000000000000171c       0x9c /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen_P.o)
+                                         0xa8 (size before relaxing)
+ .stab          0x00000000000017b8       0x9c /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strnlen.o)
+                                         0xa8 (size before relaxing)
+ .stab          0x0000000000001854       0xd8 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(strrev.o)
+                                         0xe4 (size before relaxing)
+ .stab          0x000000000000192c      0x1d4 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
+                                        0x3b4 (size before relaxing)
+ .stab          0x0000000000001b00      0x480 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                                        0x48c (size before relaxing)
 
-.stabstr        0x00000000     0x12a4
+.stabstr        0x0000000000000000      0xb97
  *(.stabstr)
- .stabstr       0x00000000     0x12a4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/crtm2560.o
+ .stabstr       0x0000000000000000      0xb97 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/crtm2560.o
 
 .stab.excl
  *(.stab.excl)
@@ -952,25 +874,32 @@ END GROUP
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x00000000       0x11
+.comment        0x0000000000000000       0x22
  *(.comment)
- .comment       0x00000000       0x11 ./dev/src/servo/servo.o
-                                 0x12 (tamanho de relaxar)
- .comment       0x00000000       0x12 ./dev/src/quad/main.o
- .comment       0x00000000       0x12 ./dev/src/motor/motor.o
- .comment       0x00000000       0x12 ./dev/src/hal/accelerometer.o
- .comment       0x00000000       0x12 ./dev/src/hal/gyro.o
- .comment       0x00000000       0x12 ./dev/src/hal/i2c.o
- .comment       0x00000000       0x12 ./dev/src/hal/input.o
- .comment       0x00000000       0x12 ./dev/src/hal/kalman.o
- .comment       0x00000000       0x12 ./dev/src/hal/pwm.o
- .comment       0x00000000       0x12 ./dev/src/hal/time.o
- .comment       0x00000000       0x12 ./dev/src/hal/timer.o
- .comment       0x00000000       0x12 ./dev/src/hal/uart.o
- .comment       0x00000000       0x12 ./dev/src/hal/wiring.o
- .comment       0x00000000       0x12 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(sprintf.o)
- .comment       0x00000000       0x12 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .comment       0x00000000       0x12 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr6/libc.a(fputc.o)
+ .comment       0x0000000000000000       0x11 ./dev/src/servo/servo.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000000       0x12 ./dev/src/quad/main.o
+ .comment       0x0000000000000000       0x12 ./dev/src/motor/motor.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/accelerometer.o
+ .comment       0x0000000000000011       0x11 ./dev/src/hal/gyro.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/i2c.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/input.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/kalman.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/pwm.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/time.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/timer.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/uart.o
+ .comment       0x0000000000000000       0x12 ./dev/src/hal/wiring.o
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_addsub_sf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_mul_sf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_div_sf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_thenan_sf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_pack_sf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/avr6/libgcc.a(_unpack_sf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(sprintf.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .comment       0x0000000000000000       0x12 /usr/lib/gcc/avr/4.7.0/../../../avr/lib/avr6/libc.a(fputc.o)
 
 .debug
  *(.debug)
@@ -1011,14 +940,5 @@ END GROUP
 
 .debug_macinfo
  *(.debug_macinfo)
-
-.debug_pubtypes
- *(.debug_pubtypes)
-
-.debug_ranges
- *(.debug_ranges)
-
-.debug_macro
- *(.debug_macro)
 OUTPUT(quadcopter.elf elf32-avr)
 LOAD linker stubs
