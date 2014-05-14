@@ -17,24 +17,16 @@ uint16_t value = 1000;
 int main(void)
 {
 	uartInit(UBRR_VAL);
-	init_pwm();
+	init_motor(MOTOR_D5);
+	init_motor(MOTOR_D6);
+	init_motor(MOTOR_D7);
+	init_motor(MOTOR_D8);
+
 	sei();
 
 	while(1)
 	{
-		if(value < 2000){
-
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-			set_pwm(MOTOR_D5,value);
-
-			value++;
-			_delay_ms(1);
-		}
-		else{
-			value =1000;
-		}
+		set_throtle(MOTOR_D5,)
 
 	}
 	return 0;
