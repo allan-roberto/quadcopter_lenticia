@@ -6,6 +6,7 @@
  */
 
 #include <accelerometer.h>
+#include <uart.h>
 #include <i2c.h>
 
 uint8_t rawADC[6];
@@ -34,21 +35,22 @@ global_conf_t global_conf;
 #define _8G			(float)(0.00099 * 9.8)
 #define _16G		(float)(0.00198 * 9.8)
 
-#define GRAV_FACTOR _2G
+#define GRAV_FACTOR _4G
 
 
 
 void init_accelerometer(void) {
-  _delay_ms(10);
+
+  uint8_t control;
+  TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   //default range 2G: 1G = 4096 unit.
   // register: ctrl_reg0  -- value: set bit ee_w to 1 to enable writing
-  i2c_writeReg(BMA180_ADDRESS,0x0D,1<<4);
+  i2c_writeReg(BMA180_ADDRESS,0x0D,0x10);
   _delay_ms(10);
-  uint8_t control = i2c_readReg(BMA180_ADDRESS, 0x20);
+  control = i2c_readReg(BMA180_ADDRESS, 0x20);
   control = control & 0x0F;        // save tcs register
   // register: bw_tcs reg: bits 4-7 to set bw -- value: set low pass filter to 20Hz
   control = control | (0x01 << 4);
-  //control = control | (0x00 << 4); // set low pass filter to 10Hz (bits value = 0000xxxx)
   i2c_writeReg(BMA180_ADDRESS, 0x20, control);
   _delay_ms(10);
   control = i2c_readReg(BMA180_ADDRESS, 0x30);
@@ -56,11 +58,10 @@ void init_accelerometer(void) {
   control = control | 0x00;        // set mode_config to 0
   i2c_writeReg(BMA180_ADDRESS, 0x30, control);
   _delay_ms(10);
-  //control = i2c_readReg(BMA180_ADDRESS, 0x35);
-  //control = control & 0xF1;        // save offset_x and smp_skip register
-  //control = control | (0x05 << 1); // set range to 8G
-  //i2c_writeReg(BMA180_ADDRESS, 0x35, control);
-  //_delay_ms(10);
+  control = i2c_readReg(BMA180_ADDRESS, 0x35);
+  control = control & 0xF1;        // save offset_x and smp_skip register
+  control = control | (0x04 << 1); // set range to 8G
+  i2c_writeReg(BMA180_ADDRESS, 0x35, control);
 }
 
 void accelerometer_get_data(float *X, float *Y, float *Z ) {
@@ -69,11 +70,8 @@ void accelerometer_get_data(float *X, float *Y, float *Z ) {
   ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
                    ((rawADC[3] << 8) | rawADC[2])>>2,
                    ((rawADC[5] << 8) | rawADC[4])>>2);
-  ACC_Common();
+  //ACC_Common();
 
-  //imu.accADC[ROLL] = ~(imu.accADC[ROLL]-1);
-  //imu.accADC[PITCH] = ~(imu.accADC[PITCH]-1);
-  //imu.accADC[YAW] = ~(imu.accADC[YAW]-1);
 
   *X = (imu.accADC[ROLL]) * GRAV_FACTOR;
   *Y = (imu.accADC[PITCH]) * GRAV_FACTOR;
