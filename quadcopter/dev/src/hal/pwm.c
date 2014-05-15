@@ -5,6 +5,11 @@
 
 #include <avr/io.h>
 #include <pwm.h>
+#include <uart.h>
+
+#define UART 2
+extern char buffer[40];
+
 
 
 void init_pwm(void)
@@ -27,12 +32,13 @@ void init_pwm(void)
 	 * 	MOTOR_D6 --> PH3 - OC4A (PWM Output A for Timer4)
 	 */
 	DDRH = 0x38;
-	TCCR4A = ((1<<WGM41) | (1<<COM4A1) | (1<<COM4B1) | (1<<COM4C1));
-	TCCR4B = ((1<<WGM43) | (1<<CS40)); //No pre-scaler
-	ICR4 = 17776;
 	OCR4A = 0;
 	OCR4B = 0;
 	OCR4C = 0;
+	TCCR4A = ((1<<WGM41) | (1<<COM4A1) | (1<<COM4B1) | (1<<COM4C1));
+	TCCR4B = ((1<<WGM43) | (1<<CS40)); //No pre-scaler
+	ICR4 = 17776;
+
 
 	/*
 	 * THis value will  generate a 450Hz pwm frequency
@@ -70,6 +76,9 @@ bool set_pwm(uint8_t output,uint16_t period){
 	bool ret_err = 0;
 	if((output < SERVO_D10) || (output > D46)){
 		ret_err = 1;
+	    sprintf(buffer, "Error set_pwm output: %d",output);
+	    uart_puts (UART,buffer);
+	    uart_puts (UART,"\n\r");
 		return ret_err;
 	}
 	/*
@@ -81,23 +90,22 @@ bool set_pwm(uint8_t output,uint16_t period){
 			//this is due a low resolution timer
 			if((period < 30) || (period > 60)){
 				ret_err = 1;
+			    sprintf(buffer, "Error set_pwm output: %d, period : %d",output, period);
+			    uart_puts (UART,buffer);
+			    uart_puts (UART,"\n\r");
 				return ret_err;
 			}
 
 			value = period;
-
-		}else { //Other outputs
-			if((period < 1000) || (period > 2000)){
-				ret_err = 1;
-				return ret_err;
-			}
-			value = period * 8;
 		}
 
 	}else{
 
 		value = period;
 	}
+    sprintf(buffer, "set_pwm output: %d, value : %d",output, value);
+    uart_puts (UART,buffer);
+    uart_puts (UART,"\n\r");
 
 	switch(output)
 	{
