@@ -29,7 +29,7 @@ global_conf_t global_conf;
 
 #define _1G 		(float)(0.00013 * 9.8)
 #define _1_5G		(float)(0.00019 * 9.8)
-#define _2G			(float)(0.00025)
+#define _2G			(float)(0.00025 * 9.8)
 #define _3G			(float)(0.00038 * 9.8)
 #define _4G			(float)(0.00050 * 9.8)
 #define _8G			(float)(0.00099 * 9.8)
