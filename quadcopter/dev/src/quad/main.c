@@ -8,14 +8,13 @@
 #include <avr/interrupt.h>
 #include <lib_xcopter.h>
 #include <stdint.h>
-#include <uart.h>
 #include <util/delay.h>
 
 
 char buffer[40] =  "some characters";
 int16_t giro_data[3];
 uint16_t i = 0;
-#define UART 2
+
 int main(void)
 {
 	i2c_init();
@@ -24,6 +23,10 @@ int main(void)
 	uart_puts (UART, "\r\n");
 	sei();
 	init_gyro();
+	init_kalman();
+	while(1){
+
+	}
 
 	for(i=0;i<10000;i++){
 
