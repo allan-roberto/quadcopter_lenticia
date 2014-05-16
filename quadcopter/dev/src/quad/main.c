@@ -15,19 +15,21 @@
 char buffer[40] =  "some characters";
 int16_t giro_data[3];
 uint16_t i = 0;
+#define UART 2
 int main(void)
 {
-	uartInit(UBRR_VAL);
-	init_gyro();
+	i2c_init();
+	uartInit(UART,UBRR_VAL);
+	uart_puts (UART, buffer);
+	uart_puts (UART, "\r\n");
 	sei();
-	sprintf(buffer, "Gyroscope");
-	uart_puts (buffer);
-	uart_puts ("\n\r");
-	for(i=0;i<1000;i++){
+	init_gyro();
+
+	for(i=0;i<10000;i++){
 
 		gyro_get_data(&giro_data[0],&giro_data[1],&giro_data[2]);
-		sprintf(buffer, " %d %d\r\n",giro_data[0],i);
-		uart_puts (buffer);
+		sprintf(buffer, " %d %d %d\r\n",giro_data[0],giro_data[1],giro_data[2]);
+		uart_puts (UART, buffer);
 		_delay_ms(55);
 		_delay_us(290);
 	}
