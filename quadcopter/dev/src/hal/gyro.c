@@ -10,9 +10,10 @@
 int constrain(int  x, int  a, int  b);
 imu_t imu;
 uint16_t calibratingB ;  // baro calibration = get new ground pressure value
-uint16_t calibratingG;
+uint16_t calibratingG = 0;
 int16_t gyroZero[4];
 int16_t Gyro_Accum[3];
+float angle[3] = {0.0,0.0,0.0};
 
 // ************************************************************************************************************
 // I2C Gy  roscope ITG3200
@@ -57,7 +58,7 @@ void gyro_get_temp (int16_t *temp) {
 
 }
 
-void gyro_get_data (int16_t *X, int16_t *Y, int16_t *Z )  {
+void gyro_get_raw_data(int16_t *X, int16_t *Y, int16_t *Z )  {
   TWBR = ((F_CPU / 400000L) - 16) / 2; // change the I2C clock rate to 400kHz
   i2c_getSixRawADC(ITG3200_ADDRESS,0X1D);
 
@@ -65,11 +66,35 @@ void gyro_get_data (int16_t *X, int16_t *Y, int16_t *Z )  {
   GYRO_ORIENTATION( ((rawADC[0]<<8) | rawADC[1])>>2 , // range: +/- 8192; +/- 2000 deg/sec
                     ((rawADC[2]<<8) | rawADC[3])>>2 ,
                     ((rawADC[4]<<8) | rawADC[5])>>2 );
-  GYRO_Common();
+  //GYRO_Common();
 
   *X = imu.gyroADC[ROLL];
   *Y = imu.gyroADC[PITCH];
   *Z = imu.gyroADC[YAW];
+
+}
+
+void gyro_get_data_ (void)  {
+  TWBR = ((F_CPU / 400000L) - 16) / 2; // change the I2C clock rate to 400kHz
+  i2c_getSixRawADC(ITG3200_ADDRESS,0X1D);
+  GYRO_ORIENTATION( ((rawADC[0]<<8) | rawADC[1])>>2 , // range: +/- 8192; +/- 2000 deg/sec
+                    ((rawADC[2]<<8) | rawADC[3])>>2 ,
+                    ((rawADC[4]<<8) | rawADC[5])>>2 );
+  //GYRO_Common();
+
+}
+void gyro_get_angle (float *roll, float *pitch, float *yaw )  {
+
+	if(calibratingG == 0){
+
+		angle[ROLL] 	= angle[ROLL] 	+ (DELTA_T_GYRO_LSB * imu.gyroADC[ROLL]);
+		angle[PITCH] 	= angle[PITCH] 	+ (DELTA_T_GYRO_LSB * imu.gyroADC[PITCH]);
+		angle[YAW]  	= angle[YAW] 	+ (DELTA_T_GYRO_LSB * imu.gyroADC[YAW]);
+	}
+
+	*roll = angle[ROLL];
+	*pitch = angle[PITCH];
+	*yaw = angle[YAW];
 
 }
 
@@ -78,7 +103,7 @@ void gyro_get_data (int16_t *X, int16_t *Y, int16_t *Z )  {
 // GYRO common part
 // ****************
 void GYRO_Common() {
-  static int16_t previousGyroADC[3] = {0,0,0};
+  //static int16_t previousGyroADC[3] = {0,0,0};
   static int32_t g[3];
   uint8_t axis;
 
@@ -146,9 +171,9 @@ void GYRO_Common() {
   for (axis = 0; axis < 3; axis++) {
     imu.gyroADC[axis]  -= gyroZero[axis];
     //anti gyro glitch, limit the variation between two consecutive readings
-    imu.gyroADC[axis] = constrain(imu.gyroADC[axis],previousGyroADC[axis]-800,previousGyroADC[axis]+800);
+    //imu.gyroADC[axis] = constrain(imu.gyroADC[axis],previousGyroADC[axis]-800,previousGyroADC[axis]+800);
 #endif
-    previousGyroADC[axis] = imu.gyroADC[axis];
+    //previousGyroADC[axis] = imu.gyroADC[axis];
   }
 
   #if defined(SENSORS_TILT_45DEG_LEFT)
@@ -173,3 +198,4 @@ int constrain(int  x, int  a, int  b) {
       else
           return x;
   }
+

@@ -10,6 +10,7 @@
 
 #include <input.h>
 #include <time.h>
+#include <timer.h>
 #include <uart.h>
 #include <gyro.h>
 #include <binary.h>

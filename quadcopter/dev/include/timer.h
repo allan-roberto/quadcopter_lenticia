@@ -14,5 +14,6 @@
 
 void timerInit(void);
 uint32_t getMsTimer();
+void init_kalman_timer(void);
 
 #endif

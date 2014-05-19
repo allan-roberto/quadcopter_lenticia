@@ -7,10 +7,35 @@
 #include <uart.h>
 
 char input_uart = 0;
+unsigned int low;
+unsigned int high;
 
 // USART-Init
 void uartInit(unsigned int uart_id, unsigned int ubrr)
 {
+
+	switch (ubrr)
+    {
+      case 9600ul:
+        low = 207; high = 0;
+        break;
+      case 19200ul:
+    	  low = 103; high = 0;
+    	 break;
+      case 38400ul:
+    	  low = 51; high = 0;
+    	 break;
+      case 57600ul:
+    	  low = 34; high = 0;
+        break;
+      case 115200ul:
+    	  low = 16; high = 0;
+        break;
+      case 230400ul:
+    	  low = 8; high = 0;
+        break;
+    }
+
 	switch(uart_id){
 	case 0:
 		/* Enable receiver and transmitter */
@@ -19,8 +44,9 @@ void uartInit(unsigned int uart_id, unsigned int ubrr)
 		/* Set frame format: 8N1*/
 		UCSR0C = 0x06;
 
-		UBRR0H = (unsigned char)(ubrr>>8);
-		UBRR0L = (unsigned char)ubrr;
+
+		UBRR0H = (unsigned char)(high>>8);
+		UBRR0L = (unsigned char)low;
 
 
 		break;
@@ -31,8 +57,8 @@ void uartInit(unsigned int uart_id, unsigned int ubrr)
 		/* Set frame format: 8N1*/
 		UCSR1C = 0x06;
 
-		UBRR1H = (unsigned char)(ubrr>>8);
-		UBRR1L = (unsigned char)ubrr;
+		UBRR1H = (unsigned char)(high>>8);
+		UBRR1L = (unsigned char)low;
 
 			break;
 	case 2:
@@ -42,8 +68,8 @@ void uartInit(unsigned int uart_id, unsigned int ubrr)
 		/* Set frame format: 8N1*/
 		UCSR2C = 0x06;
 
-		UBRR2H = (unsigned char)(ubrr>>8);
-		UBRR2L = (unsigned char)ubrr;
+		UBRR2H = (unsigned char)(high>>8);
+		UBRR2L = (unsigned char)low;
 
 			break;
 	case 3:
@@ -53,11 +79,12 @@ void uartInit(unsigned int uart_id, unsigned int ubrr)
 		/* Set frame format: 8N1*/
 		UCSR3C = 0x06;
 
-		UBRR3H = (unsigned char)(ubrr>>8);
-		UBRR3L = (unsigned char)ubrr;
+		UBRR3H = (unsigned char)(high>>8);
+		UBRR3L = (unsigned char)low;
 
 			break;
 	}
+
 
 }
 

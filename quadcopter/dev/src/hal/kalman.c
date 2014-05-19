@@ -40,9 +40,9 @@
 /***************************************************************************/
 
 #include <math.h>
-#include <avr/interrupt.h>
-#include <lib_xcopter.h>
-#include <avr/io.h>    // Needed to use interrupts
+#include <kalman.h>
+#include <uart.h>
+extern char buffer[40];
 
 /*
  * The state is updated with gyro rate measurement every 20ms
@@ -219,32 +219,8 @@ void kalmanUpdate(const float incAngle)
 	 */
 	angle	+= K_0 * angle_err;
 	q_bias	+= K_1 * angle_err;
+
+	sprintf(buffer, "angle: %d, q_bias: %d \r\n",angle, q_bias);
+	uart_puts(UART_NUM,buffer);
 }
 
-void init_kalman(void){
-
-#if 1 //16,372ms
-	TCNT0  = 0x00;
-	TCCR0A = 1 << WGM01;	// CTC Mode
-	TCCR0B = (1<<CS02) | (1<<CS00);
-	OCR0A = 255;
-	TIMSK0  |= 1<<OCIE0A;
-	sei();				// enable interrupts
-#endif
-
-}
-
-#if 1
-SIGNAL (TIMER0_COMPA_vect)
-{
-
-	uart_putc (UART, 10);
-
-}
-#else
-SIGNAL (TIMER2_COMPA_vect)
-{
-
-	uart_putc (UART, 10);
-}
-#endif

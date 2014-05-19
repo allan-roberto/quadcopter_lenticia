@@ -19,4 +19,3 @@ uint16_t read_timer(void){
 	timer_value = TCNT1;
 	return timer_value;
 }
-
