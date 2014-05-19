@@ -40,7 +40,9 @@
 /***************************************************************************/
 
 #include <math.h>
-//#include "eyebot.h"
+#include <kalman.h>
+#include <uart.h>
+extern char buffer[40];
 
 /*
  * The state is updated with gyro rate measurement every 20ms
@@ -217,5 +219,8 @@ void kalmanUpdate(const float incAngle)
 	 */
 	angle	+= K_0 * angle_err;
 	q_bias	+= K_1 * angle_err;
+
+	sprintf(buffer, "angle: %d, q_bias: %d \r\n",angle, q_bias);
+	uart_puts(UART_NUM,buffer);
 }
 

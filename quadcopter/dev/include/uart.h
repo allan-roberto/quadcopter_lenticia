@@ -10,7 +10,7 @@
 #include <avr/iom2560.h>
 #include <stdlib.h>
 
-
+#define UART_NUM 2
 
 //USART
 #define BAUD 19200UL          // Baudrate

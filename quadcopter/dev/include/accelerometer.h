@@ -20,7 +20,7 @@
 #define ACC_1G 255
 #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  =  Z;}
 
-void init_accelerometer(void);
+void accelerometer_get_angle(float *X, float *Y, float *Z );
 void accelerometer_get_data(float *X, float *Y, float *Z );
 void ACC_Common();
 

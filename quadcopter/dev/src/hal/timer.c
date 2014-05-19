@@ -9,27 +9,18 @@ volatile uint32_t ms_timer;
 
 void timerInit(void)
 {
-	TCNT2  = 0x00;			// TIMER vorladen
-	TCCR2A = 1<<WGM21;		// CTC Mode
-		
-	TCCR2B = (1<<CS22) | (1<<CS20); //prescaler auf 128 setzen
-	OCR2A = OCR2A_VAL; 			//Wert f�r Vergleichregister setzen (kleiner bedeutet schneller)
-	TIMSK2  |= 1<<OCIE2A;		// TIMER2 Output Compare Match A Interrupt an
-	
-	sei();				// enable interrupts
-
-	
+	TCNT2  = 0x00;
+	TCCR2A = 1<<WGM21;
+	TCCR2B = (1<<CS22) | (1<<CS20);
+	OCR2A = OCR2A_VAL;
+	TIMSK2  |= 1<<OCIE2A;
+	sei();
 	
 }
 
 SIGNAL (TIMER2_COMPA_vect)
 {
-
-//	hier koennen weitere Befehle ergaenzt werden, die jede Millisekunde ausgefuehrt werden sollen
-
-	ms_timer++;  // Die "Systemzeit" inkrementieren
-
-
+	ms_timer++;
 }
 
 uint32_t getMsTimer() {
@@ -39,3 +30,18 @@ uint32_t getMsTimer() {
 	sei(); // interrupts wieder an
 	return ret;
 }
+
+void init_kalman_timer(void){
+
+ //16,372ms -->255
+	TCNT0  = 0x00;
+	TCCR0A = 1 << WGM01;	// CTC Mode
+	TCCR0B = (1<<CS02) | (1<<CS00);
+	OCR0A = 156; //10ms
+	TIMSK0  |= 1<<OCIE0A;
+
+}
+
+
+
+

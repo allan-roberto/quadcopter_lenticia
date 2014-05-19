@@ -12,6 +12,7 @@
 #include <util/delay.h>
 #include "types.h"
 
+#define DELTA_T_GYRO_LSB	(0.01 * 14.375)
 
 
 #define ITG3200_LPF_42HZ
@@ -55,5 +56,7 @@
 void init_gyro();
 void gyro_get_data (int16_t *X, int16_t *Y, int16_t *Z );
 void gyro_get_temp (int16_t *temp);
+void gyro_get_angle (float *roll, float *pitch, float *yaw );
+void gyro_get_data_ (void);
 
 #endif /* GYRO_H_ */

@@ -8,6 +8,7 @@
 #include <accelerometer.h>
 #include <uart.h>
 #include <i2c.h>
+#include <math.h>
 
 uint8_t rawADC[6];
 
@@ -22,18 +23,18 @@ int16_t  errorAltitudeI = 0;
 
 conf_t conf;
 imu_t imu;
-uint16_t calibratingA = 1;  // the calibration is done in the main loop. Calibrating decreases at each cycle down to 0, then we enter in a normal mode.
+uint16_t calibratingA = 512;  // the calibration is done in the main loop. Calibrating decreases at each cycle down to 0, then we enter in a normal mode.
 uint32_t currentTime;
 uint16_t previousTime;
 global_conf_t global_conf;
 
-#define _1G 		(float)(0.00013 * 9.8)
-#define _1_5G		(float)(0.00019 * 9.8)
+#define _1G 		(float)(0.00013)
+#define _1_5G		(float)(0.00019)
 #define _2G			(float)(0.00025)
-#define _3G			(float)(0.00038 * 9.8)
-#define _4G			(float)(0.00050 * 9.8)
-#define _8G			(float)(0.00099 * 9.8)
-#define _16G		(float)(0.00198 * 9.8)
+#define _3G			(float)(0.00038)
+#define _4G			(float)(0.00050)
+#define _8G			(float)(0.00099)
+#define _16G		(float)(0.00198)
 
 #define GRAV_FACTOR _4G
 
@@ -64,18 +65,16 @@ void init_accelerometer(void) {
   i2c_writeReg(BMA180_ADDRESS, 0x35, control);
 }
 
-void accelerometer_get_data(float *X, float *Y, float *Z ) {
+void accelerometer_get_raw_data(uint16_t *X, uint16_t *Y, uint16_t *Z ) {
   TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   i2c_getSixRawADC(BMA180_ADDRESS,0x02);
   ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
                    ((rawADC[3] << 8) | rawADC[2])>>2,
                    ((rawADC[5] << 8) | rawADC[4])>>2);
-  //ACC_Common();
 
-
-  *X = (imu.accADC[ROLL]) * GRAV_FACTOR;
-  *Y = (imu.accADC[PITCH]) * GRAV_FACTOR;
-  *Z = (imu.accADC[YAW]) * GRAV_FACTOR;
+  *X = (imu.accADC[ROLL]);
+  *Y = (imu.accADC[PITCH]);
+  *Z = (imu.accADC[YAW]);
 
 }
 
@@ -110,7 +109,21 @@ void ACC_Common() {
   imu.accADC[PITCH] -=  global_conf.accZero[PITCH];
   imu.accADC[YAW]   -=  global_conf.accZero[YAW] ;
 
+}
 
+void accelerometer_get_angle(float *X, float *Y, float *Z ) {
+	float tmp;
+  TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
+  i2c_getSixRawADC(BMA180_ADDRESS,0x02);
+  ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
+                   ((rawADC[3] << 8) | rawADC[2])>>2,
+                   ((rawADC[5] << 8) | rawADC[4])>>2);
+
+  tmp = (float)(imu.accADC[ROLL]/imu.accADC[PITCH]) * GRAV_FACTOR;
+  *X = atan(tmp);
+  //*X = tmp;
+  //tmp = imu.accADC[ROLL];
+  //*X = tmp;
 
 
 }
