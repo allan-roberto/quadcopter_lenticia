@@ -10,10 +10,10 @@
 #include <avr/iom2560.h>
 #include <stdlib.h>
 
-#define UART_NUM 2
+#define UART_NUM 0
 
 //USART
-#define BAUD 19200UL          // Baudrate
+#define BAUD 115200UL          // Baudrate
 
 
 #ifndef F_CPU
@@ -27,7 +27,7 @@
 #define BAUD_ERROR ((BAUD_REAL*1000)/BAUD)
 
 #if ((BAUD_ERROR<990) || (BAUD_ERROR>1010))
-  #error "UARTConfig - Error greater than 1% "
+  //#error "UARTConfig - Error greater than 1% "
 #endif
 
 

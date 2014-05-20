@@ -25,7 +25,7 @@ uint16_t accel_data[3] 	= {0, 0, 0};
 
 int main(void)
 {
-	uartInit(UART_NUM,UBRR_VAL);
+	uartInit(UART_NUM,230400ul);
 	i2c_init();
 	init_gyro();
 	init_accelerometer();
@@ -56,7 +56,11 @@ SIGNAL (TIMER0_COMPA_vect)
 													accel_data[2],
 													giro_data [0],
 													giro_data [1],
-													giro_data [02]);
+													giro_data [2]);
+#endif
+
+#if 0
+		sprintf(buffer, " %d \r\n",	accel_data[0]);
 #endif
 
 #if 0
