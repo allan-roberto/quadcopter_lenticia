@@ -25,7 +25,7 @@ uint16_t accel_data[3] 	= {0, 0, 0};
 
 int main(void)
 {
-	uartInit(UART_NUM,230400ul);
+	uartInit(UART_NUM,230400);
 	i2c_init();
 	init_gyro();
 	init_accelerometer();

@@ -1,0 +1,134 @@
+
+clc
+clear all
+
+tempsimul = 1000;
+
+accel_x_colum = 1;
+accel_y_colum = 2;
+accel_z_colum = 3;
+gyro_x_colum  = 4;
+gyro_y_colum  = 5;
+gyro_z_colum  = 6;
+
+accel_x_offset = 20;
+accel_y_offset = 40;
+accel_z_offset = 70;
+
+conversion_factor = 0.0005;
+
+accel_g_x = zeros(tempsimul,1);
+accel_g_y = zeros(tempsimul,1);
+accel_g_z = zeros(tempsimul,1);
+
+gyro_x = zeros(tempsimul,1);
+gyro_y = zeros(tempsimul,1);
+gyro_z = zeros(tempsimul,1);
+
+angle_xz = zeros(tempsimul,1);
+angle_yz = zeros(tempsimul,1);
+
+%gyro_accel_raw = load('./accel_gyro_3_axis_1K.m');
+%gyro_accel_raw = load('./gyro_accel_3_axis_1k.m');
+gyro_accel_raw = load('./../gyro_accel_3_axis_1k_3.m');
+%gyro_accel_raw = load('./../45_degrees_700_samples.m');
+%gyro_accel_raw = load('./../minus_45_degrees_1300_samples.m');
+%gyro_accel_raw = load('./../from_mnus_90_to_90.m');
+
+
+
+
+for i=1:tempsimul
+  temp = (gyro_accel_raw(i,[accel_x_colum]) - accel_z_offset) * conversion_factor;
+  #if(temp > 1 )
+  #  accel_g_x(i) = 1;
+  #elseif (temp < -1 )
+  #  accel_g_x(i) = -1;
+  #else
+    accel_g_x(i) = temp;
+  #endif  
+  
+  temp = (gyro_accel_raw(i,[accel_y_colum]) - accel_y_offset) * conversion_factor;(gyro_accel_raw(i,[accel_x_colum]) - accel_z_offset) * conversion_factor;
+  #if(temp > 1 )
+  #  accel_g_y(i) = 1;
+ # elseif (temp < -1 )
+  #  accel_g_y(i) = -1;
+  #else
+    accel_g_y(i) = temp;
+ # endif    
+  
+  temp = (gyro_accel_raw(i,[accel_z_colum]) - accel_z_offset) * conversion_factor;
+  #if(temp > 1 )
+  #  accel_g_z(i) = 1;
+  #elseif (temp < -1 )
+  #  accel_g_z(i) = -1;
+  #else
+    accel_g_z(i) = temp;
+  #endif  
+  
+   
+  gyro_x(i) = (gyro_accel_raw(i,[gyro_x_colum]));
+  gyro_y(i) = (gyro_accel_raw(i,[gyro_y_colum]));
+  gyro_z(i) = (gyro_accel_raw(i,[gyro_z_colum]));
+  
+end
+
+for i=1:tempsimul
+  angle_xz(i) = atan2d(accel_g_x(i),accel_g_z(i));
+  angle_yz(i) = atan2d(accel_g_y(i),accel_g_z(i));
+end
+
+x_updated = zeros(2,tempsimul);
+x_predicted = zeros(2,tempsimul);
+
+z = angle_xz;
+u = gyro_y;
+
+
+x_predicted([1],1) = 0;
+x_updated([2],1) = angle_xz(1); %initial angle
+
+p_updated = zeros(2,2);
+p_predicted = zeros(2,2);
+
+delta_time = 0.01;
+
+A = [1 -delta_time ; 0   1 ];
+   
+B = [delta_time ; 0];
+    
+H = [1 0];
+
+R = 10;
+
+Q = [0.1 0 ; 0 0.1];
+
+
+
+for i=2:tempsimul
+  t(i)=i;
+  #####################################################################################
+  %Time Update (“Predict”) 
+  % Project the state ahead
+  x_predicted(:,i)  = A * x_updated(:,i-1) +  B * u(i-1);   #u(i) == giro_rw_data(i)
+  % Project the error covariance ahead
+  p_predicted  = A * p_updated +  A' + Q;  
+  #####################################################################################
+  
+  
+  #####################################################################################
+  %Measurement Update (“Correct” 
+  %Compute the Kalman gain
+  kalman_gain  = p_predicted*H' * inv(H*p_predicted*H' + R);
+  
+  %Update estimate with measurement zk
+  x_updated(:,i)    = x_predicted(:,i) + kalman_gain*(z(i) - H * x_predicted(:,i));
+ 
+  %Update the error covariance
+  p_updated  = (eye(2,2) - kalman_gain * H) * p_predicted; 
+  #####################################################################################
+end
+
+%plot(t,x_predicted(1,:),'b',t,z,'r',t,gyro_x,'g',t,gyro_y,'r',t,100*accel_g_x,'d',t,100*accel_g_z,'p')
+plot(t,x_predicted(1,:),'b',t,z,'r',t,u,'g')
+%plot(t,z,'r')

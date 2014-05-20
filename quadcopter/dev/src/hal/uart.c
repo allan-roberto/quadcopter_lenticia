@@ -11,7 +11,7 @@ unsigned int low;
 unsigned int high;
 
 // USART-Init
-void uartInit(unsigned int uart_id, unsigned int ubrr)
+void uartInit(unsigned long int uart_id, unsigned long int ubrr)
 {
 
 	switch (ubrr)

@@ -10,7 +10,7 @@
 #include <avr/iom2560.h>
 #include <stdlib.h>
 
-#define UART_NUM 0
+#define UART_NUM 2
 
 //USART
 #define BAUD 115200UL          // Baudrate
@@ -31,7 +31,7 @@
 #endif
 
 
-void uartInit(unsigned int uart_id, unsigned int ubrr);
+void uartInit(unsigned long int uart_id, unsigned long int ubrr);
 
 int uart_putc(unsigned int uart_id, unsigned char c);
 
