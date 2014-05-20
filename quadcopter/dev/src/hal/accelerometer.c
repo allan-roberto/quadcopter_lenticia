@@ -111,7 +111,7 @@ void ACC_Common() {
 
 }
 
-void accelerometer_get_angle(float *X, float *Y, float *Z ) {
+void accelerometer_get_acceleration(float *X, float *Y, float *Z ) {
 	float tmp;
   TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   i2c_getSixRawADC(BMA180_ADDRESS,0x02);
@@ -119,11 +119,24 @@ void accelerometer_get_angle(float *X, float *Y, float *Z ) {
                    ((rawADC[3] << 8) | rawADC[2])>>2,
                    ((rawADC[5] << 8) | rawADC[4])>>2);
 
-  tmp = (float)(imu.accADC[ROLL]/imu.accADC[PITCH]) * GRAV_FACTOR;
-  *X = atan(tmp);
-  //*X = tmp;
-  //tmp = imu.accADC[ROLL];
-  //*X = tmp;
+  *X = (float)(imu.accADC[ROLL]) * GRAV_FACTOR;
+  *Y = (float)(imu.accADC[PITCH]) * GRAV_FACTOR;
+  *Z = (float)(imu.accADC[YAW]) * GRAV_FACTOR;
+
+
+}
+
+void accelerometer_get_angles(float *roll, float *pitch, float *yaw ) {
+	float tmp;
+  TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
+  i2c_getSixRawADC(BMA180_ADDRESS,0x02);
+  ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
+                   ((rawADC[3] << 8) | rawADC[2])>>2,
+                   ((rawADC[5] << 8) | rawADC[4])>>2);
+
+  *roll 	= atan2f(imu.accADC[ROLL] ,imu.accADC[YAW]) 	* 57,32;
+  *pitch 	= atan2f(imu.accADC[PITCH],imu.accADC[YAW]) 	* -57,32;
+  *yaw 		= atan2f(imu.accADC[ROLL] ,imu.accADC[PITCH])	* 57,32;
 
 
 }

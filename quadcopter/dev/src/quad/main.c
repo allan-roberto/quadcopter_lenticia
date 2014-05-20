@@ -12,7 +12,7 @@
 #include <kalman.h>
 
 
-char buffer[40] =  "some characters";
+char buffer[100] =  "some characters";
 
 uint16_t i = 0;
 //extern gyroZero[3];
@@ -21,6 +21,7 @@ uint16_t i = 0;
 
 uint16_t giro_data[3] 	= {0, 0, 0};
 uint16_t accel_data[3] 	= {0, 0, 0};
+float angle_[3] 	= {0.0, 0.0, 0.0};
 
 
 int main(void)
@@ -41,32 +42,50 @@ int main(void)
 SIGNAL (TIMER0_COMPA_vect)
 {
 
+#if 1
 		gyro_get_raw_data(&giro_data[0],&giro_data[1],&giro_data[2]);
-		accelerometer_get_raw_data(&accel_data[0],&accel_data[1],&accel_data[2]);
+		accelerometer_get_angles(&angle_[ROLL], &angle_[PITCH], &angle_[YAW]);
+#endif
 
 #if 0
 		sprintf(buffer, " %d %d %d %d %d %d \r\n",	accel_data[0], giro_data[0],
 													accel_data[1], giro_data[1],
 													accel_data[2], giro_data[02]);
+		uart_puts(UART_NUM,buffer);
 #endif
 
 #if 1
-		sprintf(buffer, " %d %d %d %d %d %d \r\n",	accel_data[0],
-													accel_data[1],
-													accel_data[2],
+		/*
+		 * angle[row],
+		 * angle[pitch],
+		 * angle[yaw],
+		 * gyro_raw[row],
+		 * gyro_raw[pitch],
+		 * gyro_raw[yaw]
+		 */
+		sprintf(buffer, " %3.2f %3.2f %3.2f %d %d %d \r\n",	angle_[0],
+													angle_[1],
+													angle_[2],
 													giro_data [0],
 													giro_data [1],
 													giro_data [2]);
+		uart_puts(UART_NUM,buffer);
 #endif
 
 #if 0
 		sprintf(buffer, " %d \r\n",	accel_data[0]);
+		uart_puts(UART_NUM,buffer);
 #endif
 
 #if 0
 		sprintf(buffer, " %d\r\n", giro_data[0]);
-#endif
 		uart_puts(UART_NUM,buffer);
+#endif
+
+
+		//stateUpdate(giro_data[1]);
+
+		//kalmanUpdate(angle_);
 
 
 }

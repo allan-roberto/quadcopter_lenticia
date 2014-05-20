@@ -49,7 +49,7 @@ extern char buffer[40];
  * change this value if you update at a different rate.
  */
 
-static const float dt = 0.02;
+static const float dt = 0.01;
 
 /*
  * The covariance matrix.This is updated at every time step to
@@ -82,7 +82,7 @@ static const float R_angle = 0.001 ;
  * In this case, it indicates how much we trust the inclinometer
  * relative to the gyros.
  */
-static const float Q_angle = 0.001;
+static const float Q_angle = 0.01;
 static const float Q_gyro  = 0.0015;
 
 
@@ -220,7 +220,7 @@ void kalmanUpdate(const float incAngle)
 	angle	+= K_0 * angle_err;
 	q_bias	+= K_1 * angle_err;
 
-	sprintf(buffer, "angle: %d, q_bias: %d \r\n",angle, q_bias);
+	sprintf(buffer, "angle: %3.2f, q_bias: %3.2f \r\n",angle, q_bias);
 	uart_puts(UART_NUM,buffer);
 }
 
