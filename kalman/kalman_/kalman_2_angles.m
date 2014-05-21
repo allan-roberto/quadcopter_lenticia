@@ -32,7 +32,7 @@ angle_yz = zeros(tempsimul,1);
 %gyro_accel_raw = load('./gyro_accel_3_axis_1k.m');
 %gyro_accel_raw = load('./../gyro_accel_3_axis_1k_3.m');
 %gyro_accel_raw = load('./../45_degrees_700_samples.m');
-gyro_accel_raw = load('./../samples/pitch_shaking_10ms_1000_samples_3.m');
+gyro_accel_raw = load('./../samples/pitch_shaking_10ms_1000_samples_1.m');
 %gyro_accel_raw = load('./../from_mnus_90_to_90.m');
 
 
@@ -54,12 +54,15 @@ x_updated = zeros(4,tempsimul);
 x_predicted = zeros(4,tempsimul);
 z = zeros(2,tempsimul);
 u = zeros(2,tempsimul);
+k = zeros(4,tempsimul);
 
 z([1],:) = angle_xz';
 z([2],:) = angle_yz';
 
 u([1],:) = gyro_y;
 u([2],:) = gyro_x;
+
+
 
 
 x_predicted([1],1) = 0;
@@ -83,7 +86,7 @@ B = [delta_time    0;
 H = [ 1   0   0   0
       0   0   1   0];
 
-R = 200;
+R = 10;
 
 Q = [ 1   0   0   1;
       0   1   0   0;
@@ -98,6 +101,7 @@ for i=2:tempsimul
   %Time Update (“Predict”) 
   % Project the state ahead
   x_predicted(:,i)  = A * x_updated(:,i-1) +  B * u(:,i-1);   #u(i) == giro_rw_data(i)
+  k(:,i) = k(:,i-1) + B * u(:,i-1);
   % Project the error covariance ahead
   p_predicted  = A * p_updated +  A' + Q;  
   #####################################################################################
@@ -117,6 +121,8 @@ for i=2:tempsimul
 end
 
 %plot(t,x_predicted(1,:),'b',t,z,'r',t,gyro_x,'g',t,gyro_y,'r',t,100*accel_g_x,'d',t,100*accel_g_z,'p')
-plot(t,x_updated(1,:),'b',t,z(1,:),'g',t,0.05 * u(1,:),'r');
-axis ([0, 1000, -90, 90], "square") ;
+plot(t,x_updated(1,:),'b',t,z(1,:),'g',t,k([3],:),'k',@plot,@plot,@semilogy);
+axis ([0, tempsimul, -180, 180], "square") ;
+
+
 %plot(t,z,'r')
