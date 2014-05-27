@@ -2,7 +2,8 @@
 clc
 clear all
 
-tempsimul = 1000;
+tempsimul = 1680;
+plot_gragh_num = 0;
 
 accel_x_colum = 1;
 accel_y_colum = 2;
@@ -32,8 +33,8 @@ angle_xy = zeros(tempsimul,1);
 %gyro_accel_raw = load('./accel_gyro_3_axis_1K.m');
 %gyro_accel_raw = load('./gyro_accel_3_axis_1k.m');
 %gyro_accel_raw = load('./../gyro_accel_3_axis_1k_3.m');
-%gyro_accel_raw = load('./../45_degrees_700_samples.m');
-gyro_accel_raw = load('./../samples/teste.m');
+%gyro_accel_raw = load('./../gyro_accel_3_axis_1k_2.m');
+gyro_accel_raw = load('/home/tpv/Documents/menos_45_graus.dat');
 %gyro_accel_raw = load('./../from_mnus_90_to_90.m');
 
 
@@ -72,8 +73,21 @@ x_updated([1],2) = 165; %initial angle
 x_updated([2],2) = 27; %initial angle
 x_updated([3],2) = 57; %initial angle
 
-p_updated = zeros(6,6);
-p_predicted = zeros(6,6);
+
+p_updated = [   5000 0   0   0   0   0;
+                0   5000 0   0   0   0;
+                0   0   5000 0   0   0;
+                0   0   0   5000 0   0;
+                0   0   0   0   5000 0;
+                0   0   0   0   0   5000;];
+      
+%p_predicted = zeros(6,6);
+p_predicted = [   5000 0   0   0   0   0;
+                0   5000 0   0   0   0;
+                0   0   5000 0   0   0;
+                0   0   0   5000 0   0;
+                0   0   0   0   5000 0;
+                0   0   0   0   0   5000;];
 
 delta_time = 0.01;
 
@@ -95,19 +109,21 @@ H = [ 1   0   0   0   0   0;
       0   0   1   0   0   0;
       0   0   0   0   1   0];
 
-R = 5;
+R = [ 0.3    0     0;
+      0     0.001    0;
+      0     0     10];
 
-Q = [0.5  0   0   0   0   0;
-      0  0.5  0   0   0   0;
-      0   0  0.5  0   0   0;
-      0   0   0  0.5  0   0;
-      0   0   0   0  0.5  0;
-      0   0   0   0   0  0.5];
+Q = [ 0.0046744   0           0       0       0       0;
+      0           0.0038972   0       0       0       0;
+      0           0           0.57588 0       0       0;
+      0           0           0       0.19262 0       0;
+      0           0           0       0       0.20574 0;
+      0           0           0       0       0       0.61612];
 
-
-
+gyro(i) = 0;
 for i=2:tempsimul
   t(i)=i;
+  gyro(i) = gyro(i-1) + (u([plot_gragh_num+1],i) * delta_time);
   #####################################################################################
   %Time Update (“Predict”) 
   % Project the state ahead
@@ -130,7 +146,19 @@ for i=2:tempsimul
   #####################################################################################
 end
 
-plot(t,x_updated(1,:),'b',t,0.05*u([1],:),'r',t,z([1],:),'g');
-%plot(t,x_updated(3,:),'b',t,0.05*u([2],:),'r',t,z([2],:),'g');
-%plot(t,x_updated(5,:),'b',t,0.05*u([3],:),'r',t,z([3],:),'g');
-axis ([0, 1000, -180, 180], "square") ;
+%plot(t,x_updated(plot_gragh_num,:),'b',t,z(plot_gragh_num,:),'k',t,gyro,'g',t,x_updated(plot_gragh_num+1,:),'r');
+plot(t,x_updated(((plot_gragh_num*2)+1),:),'rp',t,z((plot_gragh_num + 1),:),'k',t,gyro,'g');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
