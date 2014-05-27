@@ -127,7 +127,7 @@ typedef struct {
   int16_t heading;             // variometer in cm/s
 } att_t;
 
-typedef struct {
+typedef struct{
   uint8_t OK_TO_ARM :1 ;
   uint8_t ARMED :1 ;
   uint8_t I2C_INIT_DONE :1 ; // For i2c gps we have to now when i2c init is done, so we can update parameters to the i2cgps from eeprom (at startup it is done in setup())
@@ -146,7 +146,7 @@ typedef struct {
   uint8_t SMALL_ANGLES_25 :1 ;
   uint8_t CALIBRATE_MAG :1 ;
   uint8_t VARIO_MODE :1;
-} flags_struct_t;
+}flags_struct_t;
 
 typedef struct {
   uint8_t currentSet;

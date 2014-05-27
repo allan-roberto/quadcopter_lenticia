@@ -10,7 +10,7 @@
 #include <i2c.h>
 #include <math.h>
 
-uint8_t rawADC[6];
+
 
 uint16_t cycleTime = 0;     // this is the number in micro second to achieve a full loop, it can differ a little and is taken into account in the PID loop
 
@@ -21,12 +21,14 @@ int16_t  sonarAlt;
 int16_t  BaroPID = 0;
 int16_t  errorAltitudeI = 0;
 
-conf_t conf;
-imu_t imu;
+
 uint16_t calibratingA = 512;  // the calibration is done in the main loop. Calibrating decreases at each cycle down to 0, then we enter in a normal mode.
-uint32_t currentTime;
+extern uint32_t currentTime;
 uint16_t previousTime;
-global_conf_t global_conf;
+extern conf_t conf;
+extern imu_t imu;
+extern global_conf_t global_conf;
+extern uint8_t rawADC[6];
 
 #define _1G 		(float)(0.00013)
 #define _1_5G		(float)(0.00019)
@@ -37,8 +39,6 @@ global_conf_t global_conf;
 #define _16G		(float)(0.00198)
 
 #define GRAV_FACTOR _4G
-
-
 
 void init_accelerometer(void) {
 
@@ -78,6 +78,16 @@ void accelerometer_get_raw_data(uint16_t *X, uint16_t *Y, uint16_t *Z ) {
 
 }
 
+void accelerometer_get_data(void) {
+  TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
+  i2c_getSixRawADC(BMA180_ADDRESS,0x02);
+  ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
+                   ((rawADC[3] << 8) | rawADC[2])>>2,
+                   ((rawADC[5] << 8) | rawADC[4])>>2);
+  ACC_Common();
+
+
+}
 // ****************
 // ACC common part
 // ****************

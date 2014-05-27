@@ -10,27 +10,33 @@
 #include <stdint.h>
 #include <util/delay.h>
 #include <kalman.h>
+#include <imu/imu.h>
 
 
-char buffer[100] =  "some characters";
+char buffer[150] =  "some characters";
 
 uint16_t i = 0;
 //extern gyroZero[3];
 #define ANGLE 1
 
 
-uint16_t giro_data[3] 	= {0, 0, 0};
-uint16_t accel_data[3] 	= {0, 0, 0};
-float angle_[3] 	= {0.0, 0.0, 0.0};
+float rate[3] 	= {0.0, 0.0, 0.0};
+float angle[3] 	= {0.0, 0.0, 0.0};
+
+imu_t imu;
+global_conf_t global_conf;
+conf_t conf;
+uint8_t rawADC[6];
+uint32_t currentTime;
 
 
 int main(void)
 {
 	uartInit(UART_NUM,230400);
 	i2c_init();
-	init_gyro();
-	init_accelerometer();
+	init_imu();
 	init_kalman_timer();
+
 	sei();
 	while(1){
 
@@ -43,14 +49,31 @@ SIGNAL (TIMER0_COMPA_vect)
 {
 
 #if 1
-		gyro_get_raw_data(&giro_data[0],&giro_data[1],&giro_data[2]);
-		accelerometer_get_angles(&angle_[ROLL], &angle_[PITCH], &angle_[YAW]);
+	imu_get_rates(rate);
+	imu_get_angles(angle);
+
 #endif
 
 #if 0
 		sprintf(buffer, " %d %d %d %d %d %d \r\n",	accel_data[0], giro_data[0],
 													accel_data[1], giro_data[1],
 													accel_data[2], giro_data[02]);
+		uart_puts(UART_NUM,buffer);
+#endif
+
+#if 0
+		magnetometer_get_raw_data(&mag_data[0],&mag_data[1],&mag_data[2]);
+		sprintf(buffer, " %2.3f %2.3f %2.3f \r\n",	(float)mag_data[0]* 0.00256,
+													(float)mag_data[1]* 0.00256,
+													(float)mag_data[2]* 0.00256);
+		uart_puts(UART_NUM,buffer);
+#endif
+
+#if 0
+		Mag_getADC();
+		sprintf(buffer, " %2.3f %2.3f %2.3f \r\n",	(float)imu.magADC[ROLL] 	* 0.00256,
+													(float)imu.magADC[PITCH] 	* 0.00256,
+													(float)imu.magADC[YAW] 		* 0.00256);
 		uart_puts(UART_NUM,buffer);
 #endif
 
@@ -63,12 +86,12 @@ SIGNAL (TIMER0_COMPA_vect)
 		 * gyro_raw[pitch],
 		 * gyro_raw[yaw]
 		 */
-		sprintf(buffer, " %3.2f %3.2f %3.2f %d %d %d \r\n",	angle_[0],
-													angle_[1],
-													angle_[2],
-													giro_data [0],
-													giro_data [1],
-													giro_data [2]);
+		sprintf(buffer, " %2.2f %2.2f %2.2f %2.2f %2.2f %2.2f \r\n",	angle[ROLL],
+													angle[PITCH],
+													angle[YAW],
+													rate[ROLL],
+													rate[PITCH],
+													rate[YAW]);
 		uart_puts(UART_NUM,buffer);
 #endif
 

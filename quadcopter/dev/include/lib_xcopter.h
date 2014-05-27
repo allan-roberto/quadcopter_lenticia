@@ -19,6 +19,7 @@
 #include <wiring.h>
 #include <pwm.h>
 #include <accelerometer.h>
+#include <magnetometer.h>
 
 
 //#endif /* LIB_XCOPTER_H_ */

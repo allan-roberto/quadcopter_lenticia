@@ -71,7 +71,7 @@ B = [delta_time ; 0];
     
 H = [1 0];
 
-R = 1;
+R = 100;
 
 Q = [1 0 ; 0 1];
 
@@ -84,7 +84,7 @@ for i=2:tempsimul
   % Project the state ahead
   x_predicted(:,i)  = A * x_updated(:,i-1) +  B * u(i-1);   #u(i) == giro_rw_data(i)
   % Project the error covariance ahead
-  p_predicted  = A * p_updated +  A' + Q;  
+  p_predicted  = A * p_updated * A' + Q;  
   #####################################################################################
   
   

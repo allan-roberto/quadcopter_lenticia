@@ -10,10 +10,10 @@
 int constrain(int  x, int  a, int  b);
 imu_t imu;
 uint16_t calibratingB ;  // baro calibration = get new ground pressure value
-uint16_t calibratingG = 0;
+uint16_t calibratingG = 512;
 int16_t gyroZero[4];
 int16_t Gyro_Accum[3];
-float angle[3] = {0.0,0.0,0.0};
+
 
 // ************************************************************************************************************
 // I2C Gy  roscope ITG3200
@@ -74,17 +74,17 @@ void gyro_get_raw_data(int16_t *X, int16_t *Y, int16_t *Z )  {
 
 }
 
-void gyro_get_data_ (void)  {
+void gyro_get_data (void)  {
   TWBR = ((F_CPU / 400000L) - 16) / 2; // change the I2C clock rate to 400kHz
   i2c_getSixRawADC(ITG3200_ADDRESS,0X1D);
   GYRO_ORIENTATION( ((rawADC[0]<<8) | rawADC[1])>>2 , // range: +/- 8192; +/- 2000 deg/sec
                     ((rawADC[2]<<8) | rawADC[3])>>2 ,
                     ((rawADC[4]<<8) | rawADC[5])>>2 );
-  //GYRO_Common();
+  GYRO_Common();
 
 }
 void gyro_get_angle (float *roll, float *pitch, float *yaw )  {
-
+	float angle[3] = {0.0,0.0,0.0};
 	if(calibratingG == 0){
 
 		angle[ROLL] 	= angle[ROLL] 	+ (DELTA_T_GYRO_LSB * imu.gyroADC[ROLL]);
@@ -108,7 +108,7 @@ void GYRO_Common() {
   uint8_t axis;
 
 
-  if (calibratingG>0) {
+  if (calibratingG > 0) {
     for (axis = 0; axis < 3; axis++) {
       // Reset g[axis] at start of calibration
       if (calibratingG == 512) {
@@ -128,7 +128,6 @@ void GYRO_Common() {
       imu.gyroADC[axis]=0;
       gyroZero[axis]=0;
       if (calibratingG == 1) {
-
     	gyro_get_temp(&gyroZero[3]);
     	//gyroZero[3] = imu.GyroTemp;
     	Gyro_Accum[0] = 0;

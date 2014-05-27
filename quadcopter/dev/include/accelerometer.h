@@ -10,7 +10,7 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include <util/delay.h>
-#include <stdlib.h> // enthaelt itoa, ltoa
+#include <stdlib.h>
 #include "types.h"
 
 
@@ -18,11 +18,11 @@
 
 #define BMA180_ADDRESS 0x40
 #define ACC_1G 255
-#define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  =  Z;}
+#define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = Y; imu.accADC[PITCH]  = -X; imu.accADC[YAW]  =  Z;}
 
 void init_accelerometer(void);
 void accelerometer_get_angles(float *X, float *Y, float *Z );
-void accelerometer_get_data(float *X, float *Y, float *Z );
+void accelerometer_get_data(void);
 void accelerometer_get_acceleration(float *X, float *Y, float *Z );
 void ACC_Common();
 

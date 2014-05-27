@@ -27,12 +27,13 @@ gyro_z = zeros(tempsimul,1);
 
 angle_xz = zeros(tempsimul,1);
 angle_yz = zeros(tempsimul,1);
+angle_xy = zeros(tempsimul,1);
 
 %gyro_accel_raw = load('./accel_gyro_3_axis_1K.m');
 %gyro_accel_raw = load('./gyro_accel_3_axis_1k.m');
 %gyro_accel_raw = load('./../gyro_accel_3_axis_1k_3.m');
 %gyro_accel_raw = load('./../45_degrees_700_samples.m');
-gyro_accel_raw = load('./../samples/pitch_shaking_10ms_1000_samples_1.m');
+gyro_accel_raw = load('./../samples/teste.m');
 %gyro_accel_raw = load('./../from_mnus_90_to_90.m');
 
 
@@ -50,48 +51,58 @@ for i=1:tempsimul
   angle_xy(i) = gyro_accel_raw(i,[accel_z_colum]);
 end
 
-x_updated = zeros(4,tempsimul);
-x_predicted = zeros(4,tempsimul);
-z = zeros(2,tempsimul);
-u = zeros(2,tempsimul);
-k = zeros(4,tempsimul);
+x_updated = zeros(6,tempsimul);
+x_predicted = zeros(6,tempsimul);
+z = zeros(3,tempsimul);
+u = zeros(3,tempsimul);
 
 z([1],:) = angle_xz';
 z([2],:) = angle_yz';
+z([3],:) = angle_xy';
 
-u([1],:) = gyro_y;
-u([2],:) = gyro_x;
-
-
+u([1],:) = gyro_x;
+u([2],:) = gyro_y;
+u([3],:) = gyro_z;
 
 
 x_predicted([1],1) = 0;
-x_updated([2],1) = angle_xz(1); %initial angle
+x_predicted([2],1) = 0;
+x_predicted([3],1) = 0;
+x_updated([1],2) = 165; %initial angle
+x_updated([2],2) = 27; %initial angle
+x_updated([3],2) = 57; %initial angle
 
-p_updated = zeros(4,4);
-p_predicted = zeros(4,4);
+p_updated = zeros(6,6);
+p_predicted = zeros(6,6);
 
 delta_time = 0.01;
 
-A = [ 1 -delta_time   0       0; 
-      0       1       0       0;
-      0       0       1 -delta_time;
-      0       0       0       1];
+A = [ 1 -delta_time   0       0         0       0;
+      0       1       0       0         0       0;
+      0       0       1 -delta_time     0       0;
+      0       0       0       1         0       0;
+      0       0       0       0         1 -delta_time;
+      0       0       0       0         0       1];
    
-B = [delta_time    0;
-       0           0;
-       0      delta_time;
-       0           0];
+B = [delta_time    0        0;
+       0           0        0;
+       0      delta_time    0;
+       0           0        0;
+       0           0   delta_time;
+       0           0        0];
     
-H = [ 1   0   0   0
-      0   0   1   0];
+H = [ 1   0   0   0   0   0;
+      0   0   1   0   0   0;
+      0   0   0   0   1   0];
 
-R = 10;
+R = 5;
 
-Q = [ 1   0   0   1;
-      0   1   0   0;
-      0   0   1   1;
-      0   0   0   1];
+Q = [0.5  0   0   0   0   0;
+      0  0.5  0   0   0   0;
+      0   0  0.5  0   0   0;
+      0   0   0  0.5  0   0;
+      0   0   0   0  0.5  0;
+      0   0   0   0   0  0.5];
 
 
 
@@ -101,9 +112,8 @@ for i=2:tempsimul
   %Time Update (“Predict”) 
   % Project the state ahead
   x_predicted(:,i)  = A * x_updated(:,i-1) +  B * u(:,i-1);   #u(i) == giro_rw_data(i)
-  k(:,i) = k(:,i-1) + B * u(:,i-1);
   % Project the error covariance ahead
-  p_predicted  = A * p_updated +  A' + Q;  
+  p_predicted  = A * p_updated * A' + Q;  
   #####################################################################################
   
   
@@ -113,16 +123,14 @@ for i=2:tempsimul
   kalman_gain  = p_predicted*H' * inv(H*p_predicted*H' + R);
   
   %Update estimate with measurement zk
-  x_updated(:,i)    = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i));
+  x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i));
  
   %Update the error covariance
-  p_updated  = (eye(4,4) - kalman_gain * H) * p_predicted; 
+  p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted; 
   #####################################################################################
 end
 
-%plot(t,x_predicted(1,:),'b',t,z,'r',t,gyro_x,'g',t,gyro_y,'r',t,100*accel_g_x,'d',t,100*accel_g_z,'p')
-plot(t,x_updated(1,:),'b',t,z(1,:),'g',t,k([3],:),'k',@plot,@plot,@semilogy);
-axis ([0, tempsimul, -180, 180], "square") ;
-
-
-%plot(t,z,'r')
+plot(t,x_updated(1,:),'b',t,0.05*u([1],:),'r',t,z([1],:),'g');
+%plot(t,x_updated(3,:),'b',t,0.05*u([2],:),'r',t,z([2],:),'g');
+%plot(t,x_updated(5,:),'b',t,0.05*u([3],:),'r',t,z([3],:),'g');
+axis ([0, 1000, -180, 180], "square") ;
