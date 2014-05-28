@@ -122,7 +122,7 @@ void ACC_Common() {
 }
 
 void accelerometer_get_acceleration(float *X, float *Y, float *Z ) {
-	float tmp;
+
   TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   i2c_getSixRawADC(BMA180_ADDRESS,0x02);
   ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,
@@ -137,7 +137,7 @@ void accelerometer_get_acceleration(float *X, float *Y, float *Z ) {
 }
 
 void accelerometer_get_angles(float *roll, float *pitch, float *yaw ) {
-	float tmp;
+
   TWBR = ((F_CPU / 400000L) - 16) / 2;  // Optional line.  Sensor is good for it in the spec.
   i2c_getSixRawADC(BMA180_ADDRESS,0x02);
   ACC_ORIENTATION( ((rawADC[1] << 8) | rawADC[0])>>2,

@@ -8,7 +8,8 @@
 #ifndef KALMAN_H_
 #define KALMAN_H_
 
-void kalmanUpdate(const float incAngle);
-void stateUpdate(const float q_m);
+
+void stateUpdate(float rate[]);
+void kalmanUpdate(float angle[]);
 
 #endif /* KALMAN_H_ */

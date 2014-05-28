@@ -5,76 +5,71 @@
  *      Author: root
  */
 
-
-/***************************************************************************/
-/* kalman.c                                                                */
-/* 1-D Kalman filter Algorithm, using an inclinometer and gyro             */
-/* Author: Rich Chi Ooi                                                    */
-/* Version: 1.0                                                            */
-/* Date:30.05.2003                                                         */
-/* Adapted from Trammel Hudson(hudson@rotomotion.com)                      */
-/* -------------------------------                                         */
-/* Compilation  procedure:                                                 */
-/*       Linux                                                             */
-/*      gcc68 -c  XXXXXX.c (to create object file)                         */
-/*      gcc68 -o  XXXXXX.hex XXXXXX.o ppwa.o                               */
-/*Upload data :								   */
-/*	ul filename.txt				      		           */
-/***************************************************************************/
-/* In this version:                                                        */
-/***************************************************************************/
-/* This is a free software; you can redistribute it and/or modify          */
-/* it under the terms of the GNU General Public License as published       */
-/* by the Free Software Foundation; either version 2 of the License,       */
-/* or (at your option) any later version.                                  */
-/*                                                                         */
-/* this code is distributed in the hope that it will be useful,            */
-/* but WITHOUT ANY WARRANTY; without even the implied warranty of          */
-/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           */
-/* GNU General Public License for more details.                            */
-/*                                                                         */
-/* You should have received a copy of the GNU General Public License       */
-/* along with Autopilot; if not, write to the Free Software                */
-/* Foundation, Inc., 59 Temple Place, Suite 330, Boston,                   */
-/* MA  02111-1307  USA                                                     */
-/***************************************************************************/
-
 #include <math.h>
 #include <kalman.h>
 #include <uart.h>
-extern char buffer[40];
+
+
+#define TETA 		0
+#define TETA_BIAS 	1
+#define GAMA 		2
+#define GAMA_BIAS 	3
+#define PHI 		4
+#define PHI_BIAS 	5
+
+#define OMEGA_TETA	0
+#define OMEGA_GAMA	1
+#define OMEGA_PHI	2
+
+
+
+extern char buffer[150];
 
 /*
- * The state is updated with gyro rate measurement every 20ms
+ * The state is updated with gyro rate measurement every 10ms
  * change this value if you update at a different rate.
  */
-
-static const float dt = 0.01;
+#define dt 0.01
 
 /*
  * The covariance matrix.This is updated at every time step to
  * determine how well the sensors are tracking the actual state.
  */
-static float P[2][2] = {{ 1, 0 },
-	                { 0, 1 }};
+static float p_predicted[6][6] = {	{ 100, 0, 0, 0, 0, 0 },
+	                				{ 0, 100, 0, 0, 0, 0 },
+	                				{ 0, 0, 100, 0, 0, 0 },
+	                				{ 0, 0, 0, 100, 0, 0 },
+	                				{ 0, 0, 0, 0, 100, 0 },
+	                				{ 0, 0, 0, 0, 0, 100 }};
 
+static float p_updated[6][6]   = {	{ 100, 0, 0, 0, 0, 0 },
+	                				{ 0, 100, 0, 0, 0, 0 },
+	                				{ 0, 0, 100, 0, 0, 0 },
+	                				{ 0, 0, 0, 100, 0, 0 },
+	                				{ 0, 0, 0, 0, 100, 0 },
+	                				{ 0, 0, 0, 0, 0, 100 }};
+
+static float I[6][6] = {{ 1, 0, 0, 0, 0, 0 },
+	                	{ 0, 1, 0, 0, 0, 0 },
+	                	{ 0, 0, 1, 0, 0, 0 },
+	                	{ 0, 0, 0, 1, 0, 0 },
+	                	{ 0, 0, 0, 0, 1, 0 },
+	                	{ 0, 0, 0, 0, 0, 1 }};
 /*
- * Our two states, the angle and the gyro bias.As a byproduct of computing
+ * Our two states(x_predicted), the angle and the gyro bias.As a byproduct of computing
  * the angle, we also have an unbiased angular rate available.These are
  * read-only to the user of the module.
  */
-float angle;
-float q_bias;
-float rate;
-
-
+float x_predicted[6];
+float x_updated[6];
+//float p_predicted[6][6];
+//float p_updated[6][6];
 /*
  * The R represents the measurement covariance noise.R=E[vvT]
- * In this case,it is a 1x1 matrix that says that we expect
- * 0.1 rad jitter from the inclinometer.
- * for a 1x1 matrix in this case v = 0.1
  */
-static const float R_angle = 0.001 ;
+static float R[3][3] = {{ 5000, 0, 0},
+	                	{ 0, 5000, 0},
+	                	{ 0, 0, 5000}};
 
 
 /*
@@ -82,8 +77,12 @@ static const float R_angle = 0.001 ;
  * In this case, it indicates how much we trust the inclinometer
  * relative to the gyros.
  */
-static const float Q_angle = 0.01;
-static const float Q_gyro  = 0.0015;
+ static float Q[6][6] ={{0.0046, 0,  	 0,    	 0,   	 0,   	 0},
+		 	 	 	 	{0,    	 0.0038, 0,      0,      0,      0},
+		 	 	 	 	{0,    	 0,  	 0.5758, 0,      0,      0},
+		 	 	 	 	{0,    	 0,    	 0,      0.1926, 0,      0},
+		 	 	 	 	{0,    	 0,    	 0,    	 0,      0.2057, 0},
+		 	 	 	 	{0,      0,    	 0,   	 0,      0,      0.6161}};
 
 
 /*
@@ -93,51 +92,103 @@ static const float Q_gyro  = 0.0015;
  *
  * The pitch gyro measurement should be scaled into real units, but
  * does not need any bias removal.  The filter will track the bias.
- *
- *	  A = [ 0 -1 ]
- *	      [ 0  0 ]
  */
-void stateUpdate(const float q_m){
 
-	float q;
-	float Pdot[4];
+ static float A[6][6] = {{  1, 	 	-dt,      0,       0,     0,       0 },
+       	  	  	  	  	 {  0,       1,       0,       0,     0,       0 },
+       	  	  	  	  	 {  0,       0,       1, 	  -dt,    0,       0 },
+       	  	  	  	  	 {  0,       0,       0,       1,     0,       0 },
+       	  	  	  	  	 {  0,       0,       0,       0,     1, 	  -dt},
+       	  	  	  	  	 {  0,       0,       0,       0,     0,       1 }};
 
-	/* Unbias our gyro */
-	q = q_m - q_bias;
+ static float AT[6][6] = {{  1, 	  0,       0,       0,     0,       0 },
+       	  	  	  	  	  { -dt,      1,       0,       0,     0,       0 },
+       	  	  	  	  	  {  0,       0,       1, 	    0,     0,       0 },
+       	  	  	  	  	  {  0,       0,      -dt,      1,     0,       0 },
+       	  	  	  	  	  {  0,       0,       0,       0,     1, 	   0 },
+       	  	  	  	  	  {  0,       0,       0,       0,    -dt,      1 }};
+
+ static float B[6][3]= {{dt,  0,  0 },
+ 	                	{ 0,  0,  0 },
+ 	                	{ 0,  dt, 0 },
+ 	                	{ 0,  0,  0 },
+ 	                	{ 0,  0,  dt},
+ 	                	{ 0,  0,  0 }};
+
+ static float kalman_gain[6][3]= {	{ 0,  0,  0 },
+ 	                				{ 0,  0,  0 },
+ 	                				{ 0,  0,  0 },
+ 	                				{ 0,  0,  0 },
+ 	                				{ 0,  0,  0 },
+ 	                				{ 0,  0,  0 }};
+
+ static float H[3][6] ={{1, 	 0,  	 0,    	 0,   	 0,   	 0},
+		 	 	 	 	{0,    	 0, 	 1,      0,      0,      0},
+		 	 	 	 	{0,    	 0,  	 0, 	 0,      1,      0}};
+
+ static float HT[6][3] ={{1, 	 0,  	 0},
+		 	 	 	 	 {0,   	 0,   	 0},
+		 	 	 	 	 {0, 	 1, 	 0},
+		 	 	 	 	 {0,     0,      0},
+		 	 	 	 	 {0, 	 0,  	 1},
+ 	 	 	 	 	 	 {0,     0,      0}};
+
+void stateUpdate(float rate[]){
+	uint8_t lin = 0, col = 0, k = 0;
+
+	float u[3] = {1,1,1}; //Atualizar essa vari'avel com o gyro
+	float tmp[6][6];
+	//u[0] = rate[0];
+	//u[1] = rate[1];
+	//u[2] = rate[2];
 
 	/*
-	 * Compute the derivative of the covariance matrix
-	 * (equation 22-1)
-	 *	Pdot = A*P + P*A' + Q
-	 *
+	 * %Time Update (“Predict”)
+	 * % Project the state ahead
+	 * x_predicted(:,i)  = A * x_updated(:,i-1) +  B * u(:,i-1);   #u(i) == giro_rw_data(i)
 	 */
-	Pdot[0] = Q_angle - P[0][1] - P[1][0];	/* 0,0 */
-	Pdot[1] = - P[1][1];		        /* 0,1 */
-	Pdot[2] = - P[1][1];	         	/* 1,0 */
-	Pdot[3] = Q_gyro;			/* 1,1 */
 
-	/* Store our unbias gyro estimate */
-	rate = q;
+	x_predicted[TETA] 		= A[0][0] * x_updated[TETA] 	+ A[0][1] * x_updated[TETA_BIAS] + B[0][0]*u[OMEGA_TETA];
+	x_predicted[TETA_BIAS] 	= A[1][1] * x_updated[TETA_BIAS];
+	x_predicted[GAMA] 		= A[2][2] * x_updated[GAMA] 	+ A[2][3] * x_updated[GAMA_BIAS] + B[2][1]*u[OMEGA_GAMA];
+	x_predicted[GAMA_BIAS] 	= A[3][3] * x_updated[GAMA_BIAS];
+	x_predicted[PHI] 		= A[4][4] * x_updated[PHI]  	+ A[4][5] * x_updated[PHI_BIAS]  + B[4][2]*u[OMEGA_PHI];
+	x_predicted[PHI_BIAS] 	= A[5][5] * x_updated[PHI_BIAS];
 
 	/*
-	 * Update our angle estimate
-	 * angle += angle_dot * dt
-	 *       += (gyro - gyro_bias) * dt
-	 *       += q * dt
+	 *  % Project the error covariance ahead
+	 *  p_predicted  = A * p_updated * A' + Q;
 	 */
-	angle += q * dt;
+	//A*p_update
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			for(k=0;k<6;k++)
+				tmp[lin][col] += A[lin][k] * p_updated[k][lin];
+		}
+	}
+	//A*p_update*A'
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			for(k=0;k<6;k++)
+				p_predicted[lin][col] += tmp[lin][k] * AT[k][lin];
+		}
+	}
+	//p_predicted  = A * p_updated * A' + Q;
 
-	/* Update the covariance matrix */
-	P[0][0] += Pdot[0] * dt;
-	P[0][1] += Pdot[1] * dt;
-	P[1][0] += Pdot[2] * dt;
-	P[1][1] += Pdot[3] * dt;
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			p_predicted[lin][col] = tmp[lin][col] + Q[lin][col];
+		}
+	}
+
+
+
 }
 
 
 /*
  * kalman_update is called by a user of the module when a new
- * inclinoometer measurement is available.
+ * inclinometer measurement is available.
  *
  * This does not need to be called every time step, but can be if
  * the accelerometer data are available at the same rate as the
@@ -149,78 +200,122 @@ void stateUpdate(const float q_m){
  * estimate and the angle measurement has no relation to the gyro
  * bias.
  */
-void kalmanUpdate(const float incAngle)
+void kalmanUpdate(float angle[])
 {
-	/* Compute our measured angle and the error in our estimate */
-	float angle_m = incAngle;
-	float angle_err = angle_m - angle;
-
+	/**********************************************************************/
 	/*
-	 * h_0 shows how the state measurement directly relates to
-	 * the state estimate.
- 	 *
-	 *      H = [h_0 h_1]
-	 *
-	 * The h_1 shows that the state measurement does not relate
-	 * to the gyro bias estimate.  We don't actually use this, so
-	 * we comment it out.
+	 *   %Measurement Update (“Correct”
+	 *   %Compute the Kalman gain
+	 *   kalman_gain  = p_predicted*H' * inv(H*p_predicted*H' + R);
 	 */
-	float h_0 = 1;
-	/* const float		h_1 = 0; */
 
+	float z[3] = {1,1,1}; //Atualizar essa vari'avel com o accel
+	//z[0] = angle[0];
+	//z[1] = angle[1];
+	//z[2] = angle[2];
+
+	float tmp[3][6];
+	float tmp2[3][3];
+	float tmp3[6][3];
+	float tmp4[3];
+	float tmp5[6];
+	float tmp6[6][6];
+	uint8_t lin = 0,col = 0,k = 0;
+
+	//H*p_predicted
+	for(lin = 0 ; lin < 3 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			for(k=0;k<6;k++)
+			tmp[lin][col] += H[lin][k] * p_predicted[k][col];
+		}
+	}
+
+	//H*p_predicted*H'
+	for(lin = 0 ; lin < 3 ; lin++){
+		for(col = 0 ; col < 3 ; col++){
+			for(k=0;k<6;k++)
+			tmp2[lin][col] += tmp[lin][k] * HT[k][col];
+		}
+	}
+
+	//(H*p_predicted*H' + R)
+	for(lin = 0 ; lin < 3 ; lin++){
+		for(col = 0 ; col < 3 ; col++){
+			tmp2[lin][col] = tmp2[lin][col] + R[lin][col];
+		}
+	}
+	//inv(H*p_predicted*H' + R)
+	tmp2[0][0] = 1/(tmp2[0][0]);
+	tmp2[1][1] = 1/(tmp2[1][1]);
+	tmp2[2][2] = 1/(tmp2[2][2]);
+
+	//p_predicted*H'
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 3 ; col++){
+			for(k=0;k<6;k++)
+			tmp3[lin][col] += p_predicted[lin][k] * HT[k][col];
+		}
+	}
+	//p_predicted*H' * inv(H*p_predicted*H' + R)
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 3 ; col++){
+			for(k=0;k<3;k++)
+			kalman_gain[lin][col] += tmp3[lin][k] * tmp2[k][col];
+		}
+	}
+	/**********************************************************************/
 	/*
-	 * Precompute PH' as the term is used twice
-	 * Note that H[0,1] = h_1 is zero, so that term is not not computed
+	 *   %Update estimate with measurement zk
+	 *   x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i));
 	 */
-	const float PHt_0 = h_0*P[0][0]; /* + h_1*P[0][1] = 0*/
-	const float PHt_1 = h_0*P[1][0]; /* + h_1*P[1][1] = 0*/
+	//H*p_predicted
+	for(lin = 0 ; lin < 3 ; lin++){
+			for(k=0;k<6;k++)
+			tmp4[lin] += H[lin][k] * x_predicted[k];
+	}
+	//z(:,i) - H * x_predicted
+	for(lin = 0 ; lin < 3 ; lin++){
+			tmp4[lin] = z[lin] - tmp4[lin];
+	}
+	//kalman_gain*(z(:,i) - H * x_predicted(:,i)
 
+	for(lin = 0 ; lin < 6 ; lin++){
+			for(k=0;k<3;k++)
+			tmp5[lin] += kalman_gain[lin][k] * tmp4[k];
+	}
+	//x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i))
+	for(lin = 0 ; lin < 6 ; lin++){
+		x_updated[lin] = x_predicted[lin] + tmp5[lin];
+	}
+
+	/**********************************************************************/
 	/*
-	 * Compute the error estimate:
-	 * (equation 21-1)
-	 *
-	 *	E = H P H' + R
+	 *   %Update the error covariance
+	 *   p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted;
 	 */
-	float E = R_angle +(h_0 * PHt_0);
+	//kalman_gain * H
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			for(k=0;k<3;k++)
+			tmp6[lin][col] += kalman_gain[lin][k] * H[k][col];
+		}
+	}
 
-	/*
-	 * Compute the Kalman filter gains:
-	 * (equation 21-2)
-	 *
-	 *	K = P H' inv(E)
-       	 */
-	float K_0 = PHt_0 / E;
-	float K_1 = PHt_1 / E;
+	//(eye(6,6) - kalman_gain * H)
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			tmp6[lin][col] = I[lin][k] - tmp6[k][col];
+		}
+	}
+	//p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted
+	for(lin = 0 ; lin < 6 ; lin++){
+		for(col = 0 ; col < 6 ; col++){
+			for(k=0;k<6;k++)
+				p_updated[lin][col] += tmp6[lin][k] * p_predicted[k][col];
+		}
+	}
 
-	/*
-	 * Update covariance matrix:
-	 * (equation 21-3)
-	 *
-	 *	P = P - K H P
-         * Let
-	 *      Y = H P
-	 */
-	float Y_0 = PHt_0;  /*h_0 * P[0][0]*/
-	float Y_1 = h_0 * P[0][1];
-
-	P[0][0] -= K_0 * Y_0;
-	P[0][1] -= K_0 * Y_1;
-	P[1][0] -= K_1 * Y_0;
-	P[1][1] -= K_1 * Y_1;
-
-	/*
-	 * Update our state estimate:
-	 *
-	 *	Xnew = X + K * error
-	 *
-	 * err is a measurement of the difference in the measured state
-	 * and the estimate state.  In our case, it is just the difference
-	 * between the inclinometer measured angle and the estimated angle.
-	 */
-	angle	+= K_0 * angle_err;
-	q_bias	+= K_1 * angle_err;
-
-	sprintf(buffer, "angle: %3.2f, q_bias: %3.2f \r\n",angle, q_bias);
+	sprintf(buffer, " %3.2f %3.2f %3.2f \r\n",x_updated[0], x_updated[2],x_updated[4]);
 	uart_puts(UART_NUM,buffer);
 }
 

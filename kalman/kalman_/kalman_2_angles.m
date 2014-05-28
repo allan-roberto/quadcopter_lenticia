@@ -2,7 +2,7 @@
 clc
 clear all
 
-tempsimul = 1680;
+tempsimul = 1300;
 plot_gragh_num = 0;
 
 accel_x_colum = 1;
@@ -34,7 +34,7 @@ angle_xy = zeros(tempsimul,1);
 %gyro_accel_raw = load('./gyro_accel_3_axis_1k.m');
 %gyro_accel_raw = load('./../gyro_accel_3_axis_1k_3.m');
 %gyro_accel_raw = load('./../gyro_accel_3_axis_1k_2.m');
-gyro_accel_raw = load('/home/tpv/Documents/menos_45_graus.dat');
+gyro_accel_raw = load('./../gyro_accel_3_axis_1k_2.m');
 %gyro_accel_raw = load('./../from_mnus_90_to_90.m');
 
 
@@ -82,7 +82,7 @@ p_updated = [   5000 0   0   0   0   0;
                 0   0   0   0   0   5000;];
       
 %p_predicted = zeros(6,6);
-p_predicted = [   5000 0   0   0   0   0;
+p_predicted = [ 5000 0   0   0   0   0;
                 0   5000 0   0   0   0;
                 0   0   5000 0   0   0;
                 0   0   0   5000 0   0;

@@ -77,7 +77,7 @@ SIGNAL (TIMER0_COMPA_vect)
 		uart_puts(UART_NUM,buffer);
 #endif
 
-#if 1
+#if 0
 		/*
 		 * angle[row],
 		 * angle[pitch],
@@ -106,9 +106,8 @@ SIGNAL (TIMER0_COMPA_vect)
 #endif
 
 
-		//stateUpdate(giro_data[1]);
-
-		//kalmanUpdate(angle_);
+		stateUpdate(rate);
+		kalmanUpdate(angle);
 
 
 }
