@@ -10,6 +10,7 @@
 #include <uart.h>
 
 
+
 #define TETA 		0
 #define TETA_BIAS 	1
 #define GAMA 		2
@@ -23,33 +24,33 @@
 
 
 
-extern char buffer[150];
+extern char buffer[200];
 
 /*
  * The state is updated with gyro rate measurement every 10ms
  * change this value if you update at a different rate.
  */
-#define dt 0.01
+#define dt 0.1
 
 /*
  * The covariance matrix.This is updated at every time step to
  * determine how well the sensors are tracking the actual state.
  */
-static float p_predicted[6][6] = {	{ 100, 0, 0, 0, 0, 0 },
-	                				{ 0, 100, 0, 0, 0, 0 },
-	                				{ 0, 0, 100, 0, 0, 0 },
-	                				{ 0, 0, 0, 100, 0, 0 },
-	                				{ 0, 0, 0, 0, 100, 0 },
-	                				{ 0, 0, 0, 0, 0, 100 }};
+double p_predicted[6][6] = {{ 10.0,  0.0,    0.0,    0.0,    0.0,    0.0 },
+							{ 0.0, 	 10.0,   0.0,    0.0,    0.0,    0.0 },
+							{ 0.0, 	 0.0, 	 10.0,   0.0,    0.0,    0.0 },
+							{ 0.0, 	 0.0,    0.0,    10.0,   0.0,    0.0 },
+							{ 0.0, 	 0.0,    0.0,    0.0,    10.0,   0.0 },
+							{ 0.0, 	 0.0,    0.0,    0.0,    0.0,    10.0}};
 
-static float p_updated[6][6]   = {	{ 100, 0, 0, 0, 0, 0 },
-	                				{ 0, 100, 0, 0, 0, 0 },
-	                				{ 0, 0, 100, 0, 0, 0 },
-	                				{ 0, 0, 0, 100, 0, 0 },
-	                				{ 0, 0, 0, 0, 100, 0 },
-	                				{ 0, 0, 0, 0, 0, 100 }};
+ double p_updated[6][6]   = {	{ 10.0, 0, 0, 0, 0, 0 },
+	                				{ 0, 10.0, 0, 0, 0, 0 },
+	                				{ 0, 0, 10.0, 0, 0, 0 },
+	                				{ 0, 0, 0, 10.0, 0, 0 },
+	                				{ 0, 0, 0, 0, 10.0, 0 },
+	                				{ 0, 0, 0, 0, 0, 10.0 }};
 
-static float I[6][6] = {{ 1, 0, 0, 0, 0, 0 },
+ double I[6][6] = {{ 1, 0, 0, 0, 0, 0 },
 	                	{ 0, 1, 0, 0, 0, 0 },
 	                	{ 0, 0, 1, 0, 0, 0 },
 	                	{ 0, 0, 0, 1, 0, 0 },
@@ -60,16 +61,16 @@ static float I[6][6] = {{ 1, 0, 0, 0, 0, 0 },
  * the angle, we also have an unbiased angular rate available.These are
  * read-only to the user of the module.
  */
-float x_predicted[6];
-float x_updated[6];
-//float p_predicted[6][6];
-//float p_updated[6][6];
+double x_predicted[6];
+double x_updated[6];
+//double p_predicted[6][6];
+//double p_updated[6][6];
 /*
  * The R represents the measurement covariance noise.R=E[vvT]
  */
-static float R[3][3] = {{ 5000, 0, 0},
-	                	{ 0, 5000, 0},
-	                	{ 0, 0, 5000}};
+ double R[3][3] = {{ 1, 0, 0},
+	                	{ 0, 1, 0},
+	                	{ 0, 0, 1}};
 
 
 /*
@@ -77,8 +78,8 @@ static float R[3][3] = {{ 5000, 0, 0},
  * In this case, it indicates how much we trust the inclinometer
  * relative to the gyros.
  */
- static float Q[6][6] ={{0.0046, 0,  	 0,    	 0,   	 0,   	 0},
-		 	 	 	 	{0,    	 0.0038, 0,      0,      0,      0},
+  double Q[6][6] ={{0.1, 0,  	 0,    	 0,   	 0,   	 0},
+		 	 	 	 	{0,    	 0.1, 0,      0,      0,      0},
 		 	 	 	 	{0,    	 0,  	 0.5758, 0,      0,      0},
 		 	 	 	 	{0,    	 0,    	 0,      0.1926, 0,      0},
 		 	 	 	 	{0,    	 0,    	 0,    	 0,      0.2057, 0},
@@ -94,54 +95,64 @@ static float R[3][3] = {{ 5000, 0, 0},
  * does not need any bias removal.  The filter will track the bias.
  */
 
- static float A[6][6] = {{  1, 	 	-dt,      0,       0,     0,       0 },
+ double A[6][6] = {{  1, 	 	-dt,      0,       0,     0,       0 },
        	  	  	  	  	 {  0,       1,       0,       0,     0,       0 },
        	  	  	  	  	 {  0,       0,       1, 	  -dt,    0,       0 },
        	  	  	  	  	 {  0,       0,       0,       1,     0,       0 },
        	  	  	  	  	 {  0,       0,       0,       0,     1, 	  -dt},
        	  	  	  	  	 {  0,       0,       0,       0,     0,       1 }};
 
- static float AT[6][6] = {{  1, 	  0,       0,       0,     0,       0 },
+  double AT[6][6] = {{  1, 	  0,       0,       0,     0,       0 },
        	  	  	  	  	  { -dt,      1,       0,       0,     0,       0 },
        	  	  	  	  	  {  0,       0,       1, 	    0,     0,       0 },
        	  	  	  	  	  {  0,       0,      -dt,      1,     0,       0 },
        	  	  	  	  	  {  0,       0,       0,       0,     1, 	   0 },
        	  	  	  	  	  {  0,       0,       0,       0,    -dt,      1 }};
 
- static float B[6][3]= {{dt,  0,  0 },
+  double B[6][3]= {{dt,  0,  0 },
  	                	{ 0,  0,  0 },
  	                	{ 0,  dt, 0 },
  	                	{ 0,  0,  0 },
  	                	{ 0,  0,  dt},
  	                	{ 0,  0,  0 }};
 
- static float kalman_gain[6][3]= {	{ 0,  0,  0 },
+  double kalman_gain[6][3]= {	{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 }};
 
- static float H[3][6] ={{1, 	 0,  	 0,    	 0,   	 0,   	 0},
+  double H[3][6] ={{1, 	 0,  	 0,    	 0,   	 0,   	 0},
 		 	 	 	 	{0,    	 0, 	 1,      0,      0,      0},
 		 	 	 	 	{0,    	 0,  	 0, 	 0,      1,      0}};
 
- static float HT[6][3] ={{1, 	 0,  	 0},
+  double HT[6][3] ={{1, 	 0,  	 0},
 		 	 	 	 	 {0,   	 0,   	 0},
 		 	 	 	 	 {0, 	 1, 	 0},
 		 	 	 	 	 {0,     0,      0},
 		 	 	 	 	 {0, 	 0,  	 1},
  	 	 	 	 	 	 {0,     0,      0}};
 
-void stateUpdate(float rate[]){
+void stateUpdate(double rate[]){
 	uint8_t lin = 0, col = 0, k = 0;
 
-	float u[3] = {1,1,1}; //Atualizar essa vari'avel com o gyro
-	float tmp[6][6];
-	//u[0] = rate[0];
-	//u[1] = rate[1];
-	//u[2] = rate[2];
+	double u[3] = {1,1,1}; //Atualizar essa vari'avel com o gyro
+	double tmp[6][6];
+	u[0] = rate[0];
+	u[1] = rate[1];
+	u[2] = rate[2];
+	//sprintf(buffer, "%2.2f ",u[0]); uart_puts(UART_NUM,buffer);
+	//sprintf(buffer, "%2.2f ",u[1]); uart_puts(UART_NUM,buffer);
+	//sprintf(buffer, "%2.2f ",u[2]); uart_puts(UART_NUM,buffer);
 
+
+	print_matrix(x_predicted,6,1,"x_predicted");
+	print_matrix(p_predicted,6,6,"p_predicted");
+	print_matrix(x_updated,6,1,"x_updated");
+	print_matrix(Q,6,1,"Q");
+
+	return;
 	/*
 	 * %Time Update (“Predict”)
 	 * % Project the state ahead
@@ -166,6 +177,19 @@ void stateUpdate(float rate[]){
 				tmp[lin][col] += A[lin][k] * p_updated[k][lin];
 		}
 	}
+
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
+
 	//A*p_update*A'
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
@@ -200,7 +224,7 @@ void stateUpdate(float rate[]){
  * estimate and the angle measurement has no relation to the gyro
  * bias.
  */
-void kalmanUpdate(float angle[])
+void kalmanUpdate(double angle[])
 {
 	/**********************************************************************/
 	/*
@@ -209,18 +233,25 @@ void kalmanUpdate(float angle[])
 	 *   kalman_gain  = p_predicted*H' * inv(H*p_predicted*H' + R);
 	 */
 
-	float z[3] = {1,1,1}; //Atualizar essa vari'avel com o accel
-	//z[0] = angle[0];
-	//z[1] = angle[1];
-	//z[2] = angle[2];
+	double z[3] = {1,1,1}; //Atualizar essa vari'avel com o accel
+	z[0] = angle[0];
+	z[1] = angle[1];
+	z[2] = angle[2];
 
-	float tmp[3][6];
-	float tmp2[3][3];
-	float tmp3[6][3];
-	float tmp4[3];
-	float tmp5[6];
-	float tmp6[6][6];
+	//sprintf(buffer, "%2.2f ",z[0]); uart_puts(UART_NUM,buffer);
+	//sprintf(buffer, "%2.2f ",z[1]); uart_puts(UART_NUM,buffer);
+	//sprintf(buffer, "%2.2f ",z[2]); uart_puts(UART_NUM,buffer);
+	double tmp[3][6];
+	double tmp2[3][3];
+	double tmp3[6][3];
+	double tmp4[3];
+	double tmp5[6];
+	double tmp6[6][6];
 	uint8_t lin = 0,col = 0,k = 0;
+	print_matrix(I,6,6,"I");
+	print_matrix(H,3,6,"H");
+	print_matrix(p_predicted,6,6,"p_predicted");
+	return;
 
 	//H*p_predicted
 	for(lin = 0 ; lin < 3 ; lin++){
@@ -315,7 +346,21 @@ void kalmanUpdate(float angle[])
 		}
 	}
 
-	sprintf(buffer, " %3.2f %3.2f %3.2f \r\n",x_updated[0], x_updated[2],x_updated[4]);
-	uart_puts(UART_NUM,buffer);
+	//sprintf(buffer, " %2.2f %2.2f %2.2f \r\n",x_updated[0], x_updated[2],x_updated[4]);
+	//uart_puts(UART_NUM,buffer);
+}
+
+void print_matrix(double* A, int m, int n, char *string){
+    // A = input matrix (m x n)
+    int i,j;
+    uart_puts(UART_NUM,string);
+    sprintf(buffer, "\r\n"); uart_puts(UART_NUM,buffer);
+    for (i=0; i<m; i++){
+        for (j=0;j<n;j++){
+        	sprintf(buffer,"%3.2f ",A[i][j]); uart_puts(UART_NUM,buffer);
+        	sprintf(buffer, "\t"); uart_puts(UART_NUM,buffer);
+        }
+        sprintf(buffer, "\r\n"); uart_puts(UART_NUM,buffer);
+    }
 }
 

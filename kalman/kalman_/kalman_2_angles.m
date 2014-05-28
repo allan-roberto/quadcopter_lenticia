@@ -2,7 +2,7 @@
 clc
 clear all
 
-tempsimul = 1300;
+tempsimul = 1000;
 plot_gragh_num = 0;
 
 accel_x_colum = 1;
@@ -74,20 +74,20 @@ x_updated([2],2) = 27; %initial angle
 x_updated([3],2) = 57; %initial angle
 
 
-p_updated = [   5000 0   0   0   0   0;
-                0   5000 0   0   0   0;
-                0   0   5000 0   0   0;
-                0   0   0   5000 0   0;
-                0   0   0   0   5000 0;
-                0   0   0   0   0   5000;];
+p_updated = [   0   0   0   0   0   0;
+                0   0   0   0   0   0;
+                0   0   0   0   0   0;
+                0   0   0   0   0   0;
+                0   0   0   0   0   0;
+                0   0   0   0   0   0;];
       
 %p_predicted = zeros(6,6);
-p_predicted = [ 5000 0   0   0   0   0;
-                0   5000 0   0   0   0;
-                0   0   5000 0   0   0;
-                0   0   0   5000 0   0;
-                0   0   0   0   5000 0;
-                0   0   0   0   0   5000;];
+p_predicted = [ 0 0   0   0   0   0;
+                0   0 0   0   0   0;
+                0   0   0 0   0   0;
+                0   0   0   0 0   0;
+                0   0   0   0   0 0;
+                0   0   0   0   0   0;];
 
 delta_time = 0.01;
 
@@ -142,7 +142,7 @@ for i=2:tempsimul
   x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i));
  
   %Update the error covariance
-  p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted; 
+  p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted;
   #####################################################################################
 end
 

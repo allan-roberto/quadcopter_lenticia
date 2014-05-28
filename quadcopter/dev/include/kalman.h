@@ -9,7 +9,8 @@
 #define KALMAN_H_
 
 
-void stateUpdate(float rate[]);
-void kalmanUpdate(float angle[]);
+void stateUpdate(double rate[]);
+void kalmanUpdate(double angle[]);
+void print_matrix(double * A, int m, int n, char *string);
 
 #endif /* KALMAN_H_ */

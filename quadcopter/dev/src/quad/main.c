@@ -13,15 +13,15 @@
 #include <imu/imu.h>
 
 
-char buffer[150] =  "some characters";
+char buffer[200] =  "some characters";
 
 uint16_t i = 0;
 //extern gyroZero[3];
 #define ANGLE 1
 
 
-float rate[3] 	= {0.0, 0.0, 0.0};
-float angle[3] 	= {0.0, 0.0, 0.0};
+double rate[3] 	= {0.0, 0.0, 0.0};
+double angle[3] 	= {0.0, 0.0, 0.0};
 
 imu_t imu;
 global_conf_t global_conf;
@@ -47,6 +47,9 @@ int main(void)
 
 SIGNAL (TIMER0_COMPA_vect)
 {
+	static long int control = 0;
+	if(++control < 10 ) return;
+	control = 0;
 
 #if 1
 	imu_get_rates(rate);
