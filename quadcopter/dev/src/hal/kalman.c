@@ -8,6 +8,7 @@
 #include <math.h>
 #include <kalman.h>
 #include <uart.h>
+#include <stdio.h>
 
 
 
@@ -22,6 +23,9 @@
 #define OMEGA_GAMA	1
 #define OMEGA_PHI	2
 
+#define PRINT_ENABLE 1
+#define PRINT_DISABLE 1
+
 
 
 extern char buffer[200];
@@ -30,18 +34,18 @@ extern char buffer[200];
  * The state is updated with gyro rate measurement every 10ms
  * change this value if you update at a different rate.
  */
-#define dt 0.1
+#define dt 0.01
 
 /*
  * The covariance matrix.This is updated at every time step to
  * determine how well the sensors are tracking the actual state.
  */
-double p_predicted[6][6] = {{ 10.0,  0.0,    0.0,    0.0,    0.0,    0.0 },
-							{ 0.0, 	 10.0,   0.0,    0.0,    0.0,    0.0 },
-							{ 0.0, 	 0.0, 	 10.0,   0.0,    0.0,    0.0 },
-							{ 0.0, 	 0.0,    0.0,    10.0,   0.0,    0.0 },
-							{ 0.0, 	 0.0,    0.0,    0.0,    10.0,   0.0 },
-							{ 0.0, 	 0.0,    0.0,    0.0,    0.0,    10.0}};
+double p_predicted[6][6] = {{ 10.0,  0.0,    0.0,    0.0,    0.0,    0.0, },
+							{ 0.0, 	 10.0,   0.0,    0.0,    0.0,    0.0, },
+							{ 0.0, 	 0.0, 	 10.0,   0.0,    0.0,    0.0, },
+							{ 0.0, 	 0.0,    0.0,    10.0,   0.0,    0.0, },
+							{ 0.0, 	 0.0,    0.0,    0.0,    10.0,   0.0, },
+							{ 0.0, 	 0.0,    0.0,    0.0,    0.0,    10.0,}};
 
  double p_updated[6][6]   = {	{ 10.0, 0, 0, 0, 0, 0 },
 	                				{ 0, 10.0, 0, 0, 0, 0 },
@@ -61,8 +65,8 @@ double p_predicted[6][6] = {{ 10.0,  0.0,    0.0,    0.0,    0.0,    0.0 },
  * the angle, we also have an unbiased angular rate available.These are
  * read-only to the user of the module.
  */
-double x_predicted[6];
-double x_updated[6];
+double x_predicted[6] = { 0, 0, 0, 0, 0, 0 };
+double x_updated[6] = { 0, 0, 0, 0, 0, 0 };
 //double p_predicted[6][6];
 //double p_updated[6][6];
 /*
@@ -102,11 +106,11 @@ double x_updated[6];
        	  	  	  	  	 {  0,       0,       0,       0,     1, 	  -dt},
        	  	  	  	  	 {  0,       0,       0,       0,     0,       1 }};
 
-  double AT[6][6] = {{  1, 	  0,       0,       0,     0,       0 },
+  double AT[6][6] = 	 {{  1, 	  0,       0,       0,     0,       0 },
        	  	  	  	  	  { -dt,      1,       0,       0,     0,       0 },
        	  	  	  	  	  {  0,       0,       1, 	    0,     0,       0 },
        	  	  	  	  	  {  0,       0,      -dt,      1,     0,       0 },
-       	  	  	  	  	  {  0,       0,       0,       0,     1, 	   0 },
+       	  	  	  	  	  {  0,       0,       0,       0,     1, 	   	0 },
        	  	  	  	  	  {  0,       0,       0,       0,    -dt,      1 }};
 
   double B[6][3]= {{dt,  0,  0 },
@@ -116,18 +120,18 @@ double x_updated[6];
  	                	{ 0,  0,  dt},
  	                	{ 0,  0,  0 }};
 
-  double kalman_gain[6][3]= {	{ 0,  0,  0 },
+  double kalman_gain[6][3]= 	{	{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 },
  	                				{ 0,  0,  0 }};
 
-  double H[3][6] ={{1, 	 0,  	 0,    	 0,   	 0,   	 0},
+  double H[3][6] =		{{1, 	 0,  	 0,    	 0,   	 0,   	 0},
 		 	 	 	 	{0,    	 0, 	 1,      0,      0,      0},
 		 	 	 	 	{0,    	 0,  	 0, 	 0,      1,      0}};
 
-  double HT[6][3] ={{1, 	 0,  	 0},
+  double HT[6][3] =		{{1, 	 0,  	 0},
 		 	 	 	 	 {0,   	 0,   	 0},
 		 	 	 	 	 {0, 	 1, 	 0},
 		 	 	 	 	 {0,     0,      0},
@@ -139,20 +143,19 @@ void stateUpdate(double rate[]){
 
 	double u[3] = {1,1,1}; //Atualizar essa vari'avel com o gyro
 	double tmp[6][6];
+	init_matrix(tmp,6,6);
 	u[0] = rate[0];
 	u[1] = rate[1];
 	u[2] = rate[2];
-	//sprintf(buffer, "%2.2f ",u[0]); uart_puts(UART_NUM,buffer);
-	//sprintf(buffer, "%2.2f ",u[1]); uart_puts(UART_NUM,buffer);
-	//sprintf(buffer, "%2.2f ",u[2]); uart_puts(UART_NUM,buffer);
 
 
-	print_matrix(x_predicted,6,1,"x_predicted");
-	print_matrix(p_predicted,6,6,"p_predicted");
-	print_matrix(x_updated,6,1,"x_updated");
-	print_matrix(Q,6,1,"Q");
+	//print_matrix(tmp,6,6,"tmp",PRINT_ENABLE);
+	//print_matrix(x_predicted,6,1,"x_predicted");
+	//print_matrix(p_predicted,6,6,"p_predicted");
+	//print_matrix(x_updated,6,1,"x_updated");
+	//print_matrix(Q,6,1,"Q");
 
-	return;
+	//return;
 	/*
 	 * %Time Update (“Predict”)
 	 * % Project the state ahead
@@ -170,13 +173,14 @@ void stateUpdate(double rate[]){
 	 *  % Project the error covariance ahead
 	 *  p_predicted  = A * p_updated * A' + Q;
 	 */
-	//A*p_update
+	/*A*p_update
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			for(k=0;k<6;k++)
 				tmp[lin][col] += A[lin][k] * p_updated[k][lin];
 		}
-	}
+	}*/
+	mult_matrix(&tmp,A,p_updated,6,6,6,6,PRINT_DISABLE);
 
 	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
 	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
@@ -190,20 +194,22 @@ void stateUpdate(double rate[]){
 	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
 	//tmp[0][0] = p_updated[0][0] +  A[0][1] * p_updated[1][0];
 
-	//A*p_update*A'
+	/*A*p_update*A'
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			for(k=0;k<6;k++)
 				p_predicted[lin][col] += tmp[lin][k] * AT[k][lin];
 		}
-	}
-	//p_predicted  = A * p_updated * A' + Q;
+	}*/
+	mult_matrix(p_predicted,tmp,AT,6,6,6,6,PRINT_DISABLE);
 
+	/*p_predicted  = A * p_updated * A' + Q;
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			p_predicted[lin][col] = tmp[lin][col] + Q[lin][col];
 		}
-	}
+	}*/
+	mult_matrix(p_predicted,tmp,Q,6,6,6,6,PRINT_DISABLE);
 
 
 
@@ -238,129 +244,204 @@ void kalmanUpdate(double angle[])
 	z[1] = angle[1];
 	z[2] = angle[2];
 
-	//sprintf(buffer, "%2.2f ",z[0]); uart_puts(UART_NUM,buffer);
-	//sprintf(buffer, "%2.2f ",z[1]); uart_puts(UART_NUM,buffer);
-	//sprintf(buffer, "%2.2f ",z[2]); uart_puts(UART_NUM,buffer);
 	double tmp[3][6];
 	double tmp2[3][3];
 	double tmp3[6][3];
 	double tmp4[3];
 	double tmp5[6];
 	double tmp6[6][6];
-	uint8_t lin = 0,col = 0,k = 0;
-	print_matrix(I,6,6,"I");
-	print_matrix(H,3,6,"H");
-	print_matrix(p_predicted,6,6,"p_predicted");
-	return;
 
-	//H*p_predicted
+	init_matrix(tmp,3,6);
+	init_matrix(tmp2,3,3);
+	init_matrix(tmp3,6,3);
+	init_matrix(tmp4,3,1);
+	init_matrix(tmp5,6,1);
+	init_matrix(tmp6,6,6);
+
+
+	//uint8_t lin = 0,col = 0,k = 0;
+
+	/* H*p_predicted
 	for(lin = 0 ; lin < 3 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			for(k=0;k<6;k++)
 			tmp[lin][col] += H[lin][k] * p_predicted[k][col];
 		}
-	}
+	}*/
+	mult_matrix(&tmp,H,p_predicted,3,6,6,6,PRINT_DISABLE);
 
-	//H*p_predicted*H'
+
+
+	/*H*p_predicted*H'
 	for(lin = 0 ; lin < 3 ; lin++){
 		for(col = 0 ; col < 3 ; col++){
 			for(k=0;k<6;k++)
 			tmp2[lin][col] += tmp[lin][k] * HT[k][col];
 		}
-	}
+	}*/
+	mult_matrix(tmp2,tmp,HT,3,6,6,3,PRINT_DISABLE);
 
-	//(H*p_predicted*H' + R)
+
+
+	/*(H*p_predicted*H' + R)
 	for(lin = 0 ; lin < 3 ; lin++){
 		for(col = 0 ; col < 3 ; col++){
 			tmp2[lin][col] = tmp2[lin][col] + R[lin][col];
 		}
-	}
+	}*/
+	sum_matrix(tmp2,tmp2,R,3,3,PRINT_DISABLE);
+	//return;
+
 	//inv(H*p_predicted*H' + R)
 	tmp2[0][0] = 1/(tmp2[0][0]);
 	tmp2[1][1] = 1/(tmp2[1][1]);
 	tmp2[2][2] = 1/(tmp2[2][2]);
 
-	//p_predicted*H'
+	/*p_predicted*H'
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 3 ; col++){
 			for(k=0;k<6;k++)
 			tmp3[lin][col] += p_predicted[lin][k] * HT[k][col];
 		}
-	}
-	//p_predicted*H' * inv(H*p_predicted*H' + R)
+	}*/
+
+	mult_matrix(tmp3,p_predicted,HT,6,6,6,3,PRINT_DISABLE);
+
+
+	/*p_predicted*H' * inv(H*p_predicted*H' + R)
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 3 ; col++){
 			for(k=0;k<3;k++)
 			kalman_gain[lin][col] += tmp3[lin][k] * tmp2[k][col];
 		}
-	}
+	}*/
+	mult_matrix(kalman_gain,tmp3,tmp2,6,3,3,3,PRINT_DISABLE);
+
 	/**********************************************************************/
 	/*
 	 *   %Update estimate with measurement zk
 	 *   x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i));
 	 */
-	//H*p_predicted
+	/*H*p_predicted
 	for(lin = 0 ; lin < 3 ; lin++){
 			for(k=0;k<6;k++)
 			tmp4[lin] += H[lin][k] * x_predicted[k];
-	}
-	//z(:,i) - H * x_predicted
-	for(lin = 0 ; lin < 3 ; lin++){
-			tmp4[lin] = z[lin] - tmp4[lin];
-	}
-	//kalman_gain*(z(:,i) - H * x_predicted(:,i)
+	}*/
+	mult_matrix(tmp4,H,x_predicted,3,6,6,1,PRINT_DISABLE);
 
+	//z(:,i) - H * x_predicted
+	//for(lin = 0 ; lin < 3 ; lin++){
+	//		tmp4[lin] = z[lin] - tmp4[lin];
+	//}
+	subtract_matrix(tmp4,z,tmp4,3,1,PRINT_DISABLE);
+	/*kalman_gain*(z(:,i) - H * x_predicted(:,i)
 	for(lin = 0 ; lin < 6 ; lin++){
 			for(k=0;k<3;k++)
 			tmp5[lin] += kalman_gain[lin][k] * tmp4[k];
-	}
-	//x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i))
+	}*/
+	mult_matrix(tmp5,kalman_gain,tmp4,6,3,3,1,PRINT_DISABLE);
+
+	/*x_updated(:,i) = x_predicted(:,i) + kalman_gain*(z(:,i) - H * x_predicted(:,i))
 	for(lin = 0 ; lin < 6 ; lin++){
 		x_updated[lin] = x_predicted[lin] + tmp5[lin];
-	}
+	}*/
+	sum_matrix(x_updated,x_predicted,tmp5,6,1,PRINT_DISABLE);
 
 	/**********************************************************************/
 	/*
 	 *   %Update the error covariance
 	 *   p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted;
 	 */
-	//kalman_gain * H
+	/*kalman_gain * H
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			for(k=0;k<3;k++)
 			tmp6[lin][col] += kalman_gain[lin][k] * H[k][col];
 		}
-	}
+	}*/
+	mult_matrix(tmp6,kalman_gain,H,6,3,3,6,PRINT_DISABLE);
 
-	//(eye(6,6) - kalman_gain * H)
+	/*(eye(6,6) - kalman_gain * H)
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			tmp6[lin][col] = I[lin][k] - tmp6[k][col];
 		}
-	}
-	//p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted
+	}*/
+	subtract_matrix(tmp6,I,tmp6,6,6,PRINT_DISABLE);
+
+	/*p_updated  = (eye(6,6) - kalman_gain * H) * p_predicted
 	for(lin = 0 ; lin < 6 ; lin++){
 		for(col = 0 ; col < 6 ; col++){
 			for(k=0;k<6;k++)
 				p_updated[lin][col] += tmp6[lin][k] * p_predicted[k][col];
 		}
-	}
+	}*/
+	mult_matrix(p_updated,tmp6,p_predicted,6,6,6,6,PRINT_DISABLE);
 
-	//sprintf(buffer, " %2.2f %2.2f %2.2f \r\n",x_updated[0], x_updated[2],x_updated[4]);
-	//uart_puts(UART_NUM,buffer);
+	sprintf(buffer, " %2.2f %2.2f %2.2f \r\n",x_updated[0], x_updated[2],x_updated[4]);
+	uart_puts(UART_NUM,buffer);
 }
 
-void print_matrix(double* A, int m, int n, char *string){
+void print_matrix(double *A, int m, int n, char *string, int print){
     // A = input matrix (m x n)
+	if(!print) return;
     int i,j;
     uart_puts(UART_NUM,string);
     sprintf(buffer, "\r\n"); uart_puts(UART_NUM,buffer);
     for (i=0; i<m; i++){
         for (j=0;j<n;j++){
-        	sprintf(buffer,"%3.2f ",A[i][j]); uart_puts(UART_NUM,buffer);
-        	sprintf(buffer, "\t"); uart_puts(UART_NUM,buffer);
-        }
+        		sprintf(buffer,"%3.2f ",A[(i*n)+j]); uart_puts(UART_NUM,buffer);
+        		sprintf(buffer, "\t"); uart_puts(UART_NUM,buffer);
+          }
         sprintf(buffer, "\r\n"); uart_puts(UART_NUM,buffer);
     }
 }
 
+void mult_matrix(double *prod, double *MAT1, double *MAT2,int mat1_linha,int mat1_coluna,int mat2_linha, int mat2_coluna,int print_enable){
+	int lin,col,k;
+	print_matrix(MAT1,mat1_linha,mat1_coluna,"MAT1",print_enable);
+	print_matrix(MAT2,mat2_linha,mat2_coluna,"MAT2",print_enable);
+	for(lin = 0 ; lin < mat1_linha ; lin++){
+		for(col = 0 ; col < mat2_coluna ; col++){
+			for(k=0;k<mat1_coluna;k++){
+				prod[(lin*mat1_coluna) + col] += MAT1[(lin*mat1_coluna) + k] * MAT2[(col*mat2_linha) + k];
+			}
+
+		}
+	}
+	print_matrix(prod,mat1_linha,mat2_coluna,"prod",print_enable);
+}
+void sum_matrix(double *sum, double *MAT1, double *MAT2,int mat_linha,int mat_coluna,int print_enable){
+	int lin,col;
+	print_matrix(MAT1,mat_linha,mat_coluna,"MAT1",print_enable);
+	print_matrix(MAT2,mat_linha,mat_coluna,"MAT2",print_enable);
+	for(lin = 0 ; lin < mat_linha ; lin++){
+		for(col = 0 ; col < mat_coluna ; col++){
+
+				sum[(lin*mat_coluna) + col] = MAT1[(lin*mat_coluna) + col] + MAT2[(lin*mat_coluna) + col];
+		}
+	}
+	print_matrix(sum,mat_linha,mat_coluna,"sum",print_enable);
+}
+
+void subtract_matrix(double *sub, double *MAT1, double *MAT2,int mat_linha,int mat_coluna,int print_enable){
+	int lin,col;
+	print_matrix(MAT1,mat_linha,mat_coluna,"MAT1",print_enable);
+	print_matrix(MAT2,mat_linha,mat_coluna,"MAT2",print_enable);
+	for(lin = 0 ; lin < mat_linha ; lin++){
+		for(col = 0 ; col < mat_coluna ; col++){
+
+			sub[(lin*mat_coluna) + col] = MAT1[(lin*mat_coluna) + col] - MAT2[(lin*mat_coluna) + col];
+		}
+	}
+	print_matrix(sub,mat_linha,mat_coluna,"sub",print_enable);
+}
+void init_matrix(double *A, int m, int n){
+
+    int i,j;
+    for (i=0; i<m; i++){
+        for (j=0;j<n;j++){
+        		A[(i*n)+j] = 0;
+          }
+    }
+}

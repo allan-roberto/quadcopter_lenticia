@@ -47,9 +47,9 @@ int main(void)
 
 SIGNAL (TIMER0_COMPA_vect)
 {
-	static long int control = 0;
-	if(++control < 10 ) return;
-	control = 0;
+	//static long int control = 0;
+	//if(++control < 10 ) return;
+	//control = 0;
 
 #if 1
 	imu_get_rates(rate);
