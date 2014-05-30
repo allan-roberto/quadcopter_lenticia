@@ -9,7 +9,7 @@
 
 extern imu_t imu;
 
-void imu_get_angles(float angles[]){
+void imu_get_angles(double angles[]){
 
 
 	magnetometer_get_data();
@@ -24,7 +24,7 @@ void imu_get_angles(float angles[]){
 
 
 }
-void imu_get_rates(float rate[]){
+void imu_get_rates(double rate[]){
 	gyro_get_data();
 	rate[0] = (float)imu.gyroADC[ROLL];
 	rate[1] = (float)imu.gyroADC[PITCH];

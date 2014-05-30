@@ -108,8 +108,9 @@ SIGNAL (TIMER0_COMPA_vect)
 		uart_puts(UART_NUM,buffer);
 #endif
 
-
+		sprintf(buffer," %3.2f %3.2f %3.2f \r\n",rate[0],rate[1],rate[2]); uart_puts(UART_NUM,buffer);
 		stateUpdate(rate);
+		sprintf(buffer," %3.2f %3.2f %3.2f \r\n",angle[0],angle[1],angle[2]); uart_puts(UART_NUM,buffer);
 		kalmanUpdate(angle);
 
 
