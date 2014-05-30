@@ -37,7 +37,8 @@ void init_kalman_timer(void){
 	TCNT0  = 0x00;
 	TCCR0A = 1 << WGM01;	// CTC Mode
 	TCCR0B = (1<<CS02) | (1<<CS00);
-	OCR0A = 156; //10ms
+	//OCR0A = 156; //10ms
+	OCR0A = 80; //10ms
 	TIMSK0  |= 1<<OCIE0A;
 
 }

@@ -20,8 +20,8 @@ uint16_t i = 0;
 #define ANGLE 1
 
 
-double rate[3] 	= {0.0, 0.0, 0.0};
-double angle[3] 	= {0.0, 0.0, 0.0};
+fix16_t rate[3] 	= {0.0, 0.0, 0.0};
+fix16_t angle[3] 	= {0.0, 0.0, 0.0};
 
 imu_t imu;
 global_conf_t global_conf;
@@ -35,6 +35,7 @@ int main(void)
 	uartInit(UART_NUM,230400);
 	i2c_init();
 	init_imu();
+	init_kalman_matrices();
 	init_kalman_timer();
 
 	sei();

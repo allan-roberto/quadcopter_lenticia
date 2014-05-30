@@ -29,9 +29,16 @@
 							</tool>
 							<tool id="de.innot.avreclipse.tool.compiler.winavr.app.release.269937304" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.app.release">
 								<option id="de.innot.avreclipse.compiler.option.debug.level.1410681061" name="Generate Debugging Info" superClass="de.innot.avreclipse.compiler.option.debug.level" value="de.innot.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
-								<option id="de.innot.avreclipse.compiler.option.optimize.523403922" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize" value="de.innot.avreclipse.compiler.optimize.none" valueType="enumerated"/>
+								<option id="de.innot.avreclipse.compiler.option.optimize.523403922" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize" value="de.innot.avreclipse.compiler.optimize.two" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.incpath.479277920" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/dev/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/libfixmath}&quot;"/>
+								</option>
+								<option id="de.innot.avreclipse.compiler.option.allwarn.1646069858" name="All Warnings (-Wall)" superClass="de.innot.avreclipse.compiler.option.allwarn" value="true" valueType="boolean"/>
+								<option id="de.innot.avreclipse.compiler.option.def.1568123530" name="Define Syms (-D)" superClass="de.innot.avreclipse.compiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="FIXMATH_NO_CACHE"/>
+									<listOptionValue builtIn="false" value="FIXMATH_OPTIMIZE_8BIT"/>
+									<listOptionValue builtIn="false" value="FIXMATH_NO_64BIT"/>
 								</option>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.707839007" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
