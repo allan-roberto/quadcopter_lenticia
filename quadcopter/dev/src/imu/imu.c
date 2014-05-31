@@ -6,29 +6,30 @@
  */
 
 #include <imu/imu.h>
+#include <fix16.h>
 
 extern imu_t imu;
 
-void imu_get_angles(double angles[]){
+void imu_get_angles(float angles[]){
 
 
 	magnetometer_get_data();
 	accelerometer_get_data();
 
-	angles[0] 	= atan2f((float)imu.accADC[ROLL] ,(float)imu.accADC[YAW]);
-	angles[1] 	= atan2f((float)imu.accADC[PITCH],(float)imu.accADC[YAW]);
-	angles[2]	= atan2f((float)imu.magADC[PITCH] ,(float)imu.magADC[ROLL]);
-	angles[0] = angles[0] * 57,32;
-	angles[1] = angles[1] * 57,32;
-	angles[2] = angles[2] * 57,32;
+	angles[0] 	= fix16_atan2((fix16_t)imu.accADC[ROLL] ,(fix16_t)imu.accADC[YAW]);
+	angles[1] 	= fix16_atan2((fix16_t)imu.accADC[PITCH],(fix16_t)imu.accADC[YAW]);
+	angles[2]	= fix16_atan2((fix16_t)imu.magADC[PITCH] ,(fix16_t)imu.magADC[ROLL]);
+	angles[0] = fix16_rad_to_deg(angles[0]);
+	angles[1] = fix16_rad_to_deg(angles[1]);
+	angles[2] = fix16_rad_to_deg(angles[2]);
 
 
 }
-void imu_get_rates(double rate[]){
+void imu_get_rates(float rate[]){
 	gyro_get_data();
-	rate[0] = (float)imu.gyroADC[ROLL];
-	rate[1] = (float)imu.gyroADC[PITCH];
-	rate[2] = (float)imu.gyroADC[YAW];
+	rate[0] = (fix16_t)imu.gyroADC[ROLL];
+	rate[1] = (fix16_t)imu.gyroADC[PITCH];
+	rate[2] = (fix16_t)imu.gyroADC[YAW];
 }
 void init_imu(void){
 
