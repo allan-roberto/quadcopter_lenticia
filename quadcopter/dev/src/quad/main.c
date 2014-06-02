@@ -19,7 +19,6 @@ uint16_t i = 0;
 //extern gyroZero[3];
 #define ANGLE 1
 
-
 fix16_t rate[3] 	= {0.0, 0.0, 0.0};
 fix16_t angle[3] 	= {0.0, 0.0, 0.0};
 
@@ -38,6 +37,29 @@ int main(void)
 	init_kalman_matrices();
 	init_kalman_timer();
 
+#if 0
+	x_updated[0] = fix16_from_dbl(500);
+	x_updated[1] = fix16_from_dbl(-377);
+	x_updated[2] = fix16_from_dbl(200);
+	x_updated[3] = fix16_from_dbl(4440);
+	x_updated[4] = fix16_from_dbl(0);
+	x_updated[5] = fix16_from_dbl(0.01);
+
+	A[0][0] = fix16_from_dbl(1);
+	A[0][1] = fix16_from_dbl(-0.01);
+	A[1][1] = fix16_from_dbl(1);
+	A[2][2] = fix16_from_dbl(1);
+	A[2][3] = fix16_from_dbl(-0.01);
+	A[3][3] = fix16_from_dbl(1);
+	A[4][4] = fix16_from_dbl(1);
+	A[4][5] = fix16_from_dbl(-0.01);
+	A[5][5] = fix16_from_dbl(1);
+
+	mult_matrix((fix16_t *)tmp1,(fix16_t *)A,(fix16_t *)x_updated,6,6,6,1,1);
+#endif
+
+
+
 	sei();
 	while(1){
 
@@ -48,70 +70,15 @@ int main(void)
 
 SIGNAL (TIMER0_COMPA_vect)
 {
-	//static long int control = 0;
-	//if(++control < 10 ) return;
-	//control = 0;
 
-#if 1
 	imu_get_rates(rate);
 	imu_get_angles(angle);
-
+	stateUpdate(rate);
+	kalmanUpdate(angle);
+#ifdef DEBUG_KALMAN_MATRICES_STATE
+	print_matrices();
 #endif
 
-#if 0
-		sprintf(buffer, " %d %d %d %d %d %d \r\n",	accel_data[0], giro_data[0],
-													accel_data[1], giro_data[1],
-													accel_data[2], giro_data[02]);
-		uart_puts(UART_NUM,buffer);
-#endif
-
-#if 0
-		magnetometer_get_raw_data(&mag_data[0],&mag_data[1],&mag_data[2]);
-		sprintf(buffer, " %2.3f %2.3f %2.3f \r\n",	(float)mag_data[0]* 0.00256,
-													(float)mag_data[1]* 0.00256,
-													(float)mag_data[2]* 0.00256);
-		uart_puts(UART_NUM,buffer);
-#endif
-
-#if 0
-		Mag_getADC();
-		sprintf(buffer, " %2.3f %2.3f %2.3f \r\n",	(float)imu.magADC[ROLL] 	* 0.00256,
-													(float)imu.magADC[PITCH] 	* 0.00256,
-													(float)imu.magADC[YAW] 		* 0.00256);
-		uart_puts(UART_NUM,buffer);
-#endif
-
-#if 0
-		/*
-		 * angle[row],
-		 * angle[pitch],
-		 * angle[yaw],
-		 * gyro_raw[row],
-		 * gyro_raw[pitch],
-		 * gyro_raw[yaw]
-		 */
-		sprintf(buffer, " %2.2f %2.2f %2.2f %2.2f %2.2f %2.2f \r\n",	angle[ROLL],
-													angle[PITCH],
-													angle[YAW],
-													rate[ROLL],
-													rate[PITCH],
-													rate[YAW]);
-		uart_puts(UART_NUM,buffer);
-#endif
-
-#if 0
-		sprintf(buffer, " %d \r\n",	accel_data[0]);
-		uart_puts(UART_NUM,buffer);
-#endif
-
-#if 0
-		sprintf(buffer, " %d\r\n", giro_data[0]);
-		uart_puts(UART_NUM,buffer);
-#endif
-
-
-		stateUpdate(rate);
-		kalmanUpdate(angle);
 
 
 }
