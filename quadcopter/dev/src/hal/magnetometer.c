@@ -19,7 +19,7 @@
 
 static float   magGain[3] = {1.0,1.0,1.0};  // gain for each axis, populated at sensor init
 static uint8_t magInit = 0;
-flags_struct_t f;
+extern flags_struct_t f;
 extern uint8_t rawADC[6];
 extern uint32_t currentTime;
 extern conf_t conf;

@@ -466,12 +466,6 @@
 /*****************                                                                 ***************/
 /*************************************************************************************************/
 
-  /******                Serial com speed    *********************************/
-    /* This is the speed of the serial interfaces */
-    #define SERIAL0_COM_SPEED 115200
-    #define SERIAL1_COM_SPEED 115200
-    #define SERIAL2_COM_SPEED 115200
-    #define SERIAL3_COM_SPEED 115200
 
     /* interleaving delay in micro seconds between 2 readings WMP/NK in a WMP+NK config
        if the ACC calibration time is very long (20 or 30s), try to increase this delay up to 4000
@@ -695,7 +689,7 @@
     //#define MAG_DECLINATION  3.96f              //For Budapest Hungary.
     #define MAG_DECLINATION  0.0f   //(**)
 
-    #define GPS_LEAD_FILTER                      // Adds a forward predictive filterig to compensate gps lag. Code based on Jason Short's lead filter implementation
+    //#define GPS_LEAD_FILTER                      // Adds a forward predictive filterig to compensate gps lag. Code based on Jason Short's lead filter implementation
 
     //#define GPS_FILTERING                        // add a 5 element moving average filter to GPS coordinates, helps eliminate gps noise but adds latency comment out to disable
     #define GPS_WP_RADIUS              200       // if we are within this distance to a waypoint then we consider it reached (distance is in cm)

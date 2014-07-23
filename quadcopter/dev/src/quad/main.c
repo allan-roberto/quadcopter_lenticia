@@ -27,15 +27,23 @@ global_conf_t global_conf;
 conf_t conf;
 uint8_t rawADC[6];
 uint32_t currentTime;
+flags_struct_t f;
 
 
 int main(void)
 {
-	uartInit(UART_NUM,230400);
+	uartInit(0,SERIAL0_COM_SPEED);
+	uartInit(1,SERIAL1_COM_SPEED);
+	uartInit(2,SERIAL2_COM_SPEED);
+	uartInit(3,SERIAL3_COM_SPEED);
+
 	i2c_init();
 	init_imu();
 	init_kalman_matrices();
 	init_kalman_timer();
+
+
+	//GPS_SerialInit();
 
 #if 0
 	x_updated[0] = fix16_from_dbl(500);
@@ -75,6 +83,7 @@ SIGNAL (TIMER0_COMPA_vect)
 	imu_get_angles(angle);
 	stateUpdate(rate);
 	kalmanUpdate(angle);
+	//GPS_NewData();
 #ifdef DEBUG_KALMAN_MATRICES_STATE
 	print_matrices();
 #endif

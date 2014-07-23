@@ -11,9 +11,10 @@
 
 #define MOTOR_MAX_VALUE 2000
 #define MOTOR_MIN_VALUE 1000
+#define INIT_ALL_MOTORS
 
-bool init_motor(uint8_t index);
-bool set_throtle(uint8_t motor_id,uint16_t value);
+int init_motor(uint8_t index);
+int set_throtle(uint8_t motor_id,uint16_t value);
 
 
 #endif /* MOTOR_H_ */

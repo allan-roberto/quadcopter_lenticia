@@ -10,7 +10,16 @@
 #include <avr/iom2560.h>
 #include <stdlib.h>
 
-#define UART_NUM 2
+
+
+/******                Serial com speed    *********************************/
+/* This is the speed of the serial interfaces */
+#define SERIAL0_COM_SPEED 115200
+#define SERIAL1_COM_SPEED 115200
+#define SERIAL2_COM_SPEED 115200
+#define SERIAL3_COM_SPEED 115200
+
+#define UART_NUM 0
 
 //USART
 #define BAUD 115200UL          // Baudrate
@@ -46,5 +55,28 @@ unsigned char uart_getc(unsigned int uart_id);
 #define uart_data_waiting() (UCSR0A & (1<<RXC0))
 
 
+
+
+
+#define UART_NUMBER 4
+
+#define RX_BUFFER_SIZE 256 // 256 RX buffer is needed for GPS communication (64 or 128 was too short)
+
+#define TX_BUFFER_SIZE 128
+
+//void    SerialOpen(uint8_t port, uint32_t baud);
+uint8_t SerialRead(uint8_t port);
+void    SerialWrite(uint8_t port,uint8_t c);
+uint8_t SerialAvailable(uint8_t port);
+void    SerialEnd(uint8_t port);
+uint8_t SerialPeek(uint8_t port);
+uint8_t    SerialTXfree(uint8_t port);
+uint8_t SerialUsedTXBuff(uint8_t port);
+void    SerialSerialize(uint8_t port,uint8_t a);
+void    UartSendData(uint8_t port);
+static volatile uint8_t serialHeadRX[UART_NUMBER],serialTailRX[UART_NUMBER];
+static uint8_t serialBufferRX[RX_BUFFER_SIZE][UART_NUMBER];
+static volatile uint8_t serialHeadTX[UART_NUMBER],serialTailTX[UART_NUMBER];
+static uint8_t serialBufferTX[TX_BUFFER_SIZE][UART_NUMBER];
 
 #endif

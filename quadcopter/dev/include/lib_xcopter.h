@@ -20,6 +20,7 @@
 #include <pwm.h>
 #include <accelerometer.h>
 #include <magnetometer.h>
+#include <gps.h>
 
 
 //#endif /* LIB_XCOPTER_H_ */
