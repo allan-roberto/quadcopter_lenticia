@@ -15,7 +15,7 @@
 #include <util/delay.h>
 
 #define UART 2
-extern char buffer[40];
+//extern char buffer[40];
 
 // **********************
 // GPS common variables
@@ -285,7 +285,7 @@ static int16_t nav_takeoff_bearing;
     while(str && (b = pgm_read_byte(str++))) {
       SerialWrite(GPS_SERIAL, b);
       #if defined(UBLOX)
-        delay(5);
+        _delay_ms(5);
       #endif
     }
   }
@@ -294,10 +294,6 @@ static int16_t nav_takeoff_bearing;
   void GPS_SerialInit(void) {
 	  uartInit(GPS_SERIAL,GPS_BAUD);
     _delay_ms(1000);
-    sprintf(buffer, "GPS_SerialInit");
-    uart_puts (UART_NUM,buffer);
-    uart_puts (UART_NUM,"\n\r");
-
     #if defined(INIT_MTK_GPS)                              // MTK GPS setup
       for(uint8_t i=0;i<5;i++){
         uartInit(GPS_SERIAL,init_speed[i]);                // switch UART speed for sending SET BAUDRATE command
@@ -313,20 +309,19 @@ static int16_t nav_takeoff_bearing;
         #if (GPS_BAUD==115200)
           SerialGpsPrint(PSTR("$PMTK251,115200*1F\r\n"));    // 115200 baud
         #endif
-        while(!SerialTXfree(GPS_SERIAL)) delay(80);
+        while(!SerialTXfree(GPS_SERIAL)) _delay_ms(80);
       }
       // at this point we have GPS working at selected (via #define GPS_BAUD) baudrate
       // So now we have to set the desired mode and update rate (which depends on the NMEA or MTK_BINARYxx settings)
       uartInit(GPS_SERIAL,GPS_BAUD);
 
       SerialGpsPrint(MTK_NAVTHRES_OFF);
-        while(!SerialTXfree(GPS_SERIAL)) delay(80);
+        while(!SerialTXfree(GPS_SERIAL)) _delay_ms(80);
       SerialGpsPrint(SBAS_ON);
-        while(!SerialTXfree(GPS_SERIAL)) delay(80);
+        while(!SerialTXfree(GPS_SERIAL)) _delay_ms(80);
       SerialGpsPrint(WAAS_ON);
-        while(!SerialTXfree(GPS_SERIAL)) delay(80);
+        while(!SerialTXfree(GPS_SERIAL)) _delay_ms(80);
       SerialGpsPrint(SBAS_TEST_MODE);
-        while(!SerialTXfree(GPS_SERIAL)) delay(80);
       SerialGpsPrint(MTK_OUTPUT_5HZ);           // 5 Hz update rate
 
       #if defined(NMEA)
@@ -341,9 +336,6 @@ static int16_t nav_takeoff_bearing;
 
 void GPS_NewData(void) {
   uint8_t axis;
-  sprintf(buffer, "GPS_NewData");
-  uart_puts (UART_NUM,buffer);
-  uart_puts (UART_NUM,"\n\r");
   #if defined(GPS_SERIAL) || defined(GPS_FROM_OSD)
     #if defined(GPS_SERIAL)
 
@@ -351,6 +343,8 @@ void GPS_NewData(void) {
     while (c--) {
     //while (SerialAvailable(GPS_SERIAL)) {
       if (GPS_newFrame(SerialRead(GPS_SERIAL))) {
+      LED3_ON;
+
     #elif defined(GPS_FROM_OSD)
     {
       if(GPS_update & 2) {  // Once second bit of GPS_update is set, indicate new GPS datas is readed from OSD - all in right format.
@@ -450,10 +444,14 @@ void GPS_NewData(void) {
             }
           } //end of gps calcs
         }
-      }
+      }else{
+    		LED3_OFF;
+    	}
     }
   #endif
 }
+
+
 
 void GPS_reset_home_position(void) {
   if (f.GPS_FIX && GPS_numSat >= 5) {

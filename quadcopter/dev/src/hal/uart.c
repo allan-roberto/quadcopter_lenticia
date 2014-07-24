@@ -5,6 +5,7 @@
 
 
 #include <uart.h>
+#include <def.h>
 
 char input_uart = 0;
 unsigned int low;
@@ -32,7 +33,7 @@ void uartEnd(uint8_t uart_id) {
   }
 }
 
-int uart_putc(unsigned int uart_id, unsigned char c)
+/*int uart_putc(unsigned int uart_id, unsigned char c)
 {
 	switch(uart_id){
 	case 0:
@@ -55,19 +56,18 @@ int uart_putc(unsigned int uart_id, unsigned char c)
 
 
 	return 0;
-}
+}*/
 
 void uart_puts (unsigned int uart_id, char *s)
 {
 	while (*s)
 	{
-		uart_putc(uart_id, *s);
-		//SerialWrite(uart_id, *s);
+		SerialWrite(uart_id, *s);
 		s++;
 	}
 }
 
-void uart_puts_pgm (unsigned int uart_id, const char* PROGMEM  str)
+/*void uart_puts_pgm (unsigned int uart_id, const char* PROGMEM  str)
 {
 
 	while (1)
@@ -78,18 +78,18 @@ void uart_puts_pgm (unsigned int uart_id, const char* PROGMEM  str)
 			return;
 		str++;
 	}
-}
+}*/
 
-void uart_puti (unsigned int uart_id, int16_t i)
+/*void uart_puti (unsigned int uart_id, int16_t i)
 {
 
 	char buffer[10];
 	itoa(i, buffer, 10);
 	uart_puts(uart_id, buffer);
-}
+}*/
 
 
-unsigned char uart_getc(unsigned int uart_id)
+/*unsigned char uart_getc(unsigned int uart_id)
 {
 	switch(uart_id){
 	case 0:
@@ -110,8 +110,9 @@ unsigned char uart_getc(unsigned int uart_id)
 			break;
 	}
 return 0;
-}
+}*/
 
+/*
 ISR (USART0_RX_vect)
 {
 	char ReceivedByte ;
@@ -143,32 +144,13 @@ ISR (USART3_RX_vect)
 	//UDR0 = ReceivedByte ; // Echo back the received byte back to the computer
 	input_uart = ReceivedByte;
 
-}
-
-
-/*ISR(USART0_TX_vect)
-{
-	uart_puts(0, "Tx Interrupt\n\r");
-}
-
-ISR(USART1_TX_vect)
-{
-	uart_puts(1, "Tx Interrupt\n\r");
-}
-ISR(USART2_TX_vect)
-{
-	uart_puts(2, "Tx Interrupt\n\r");
-}
-ISR(USART3_TX_vect)
-{
-	uart_puts(3, "Tx Interrupt\n\r");
 }*/
 
 
-  //ISR(USART0_RX_vect)  { store_uart_in_buf(UDR0, 0); }
-  //ISR(USART1_RX_vect)  { store_uart_in_buf(UDR1, 1); }
-  //ISR(USART2_RX_vect)  { store_uart_in_buf(UDR2, 2); }
-  //ISR(USART3_RX_vect)  { store_uart_in_buf(UDR3, 3); }
+ISR(USART0_RX_vect)  { store_uart_in_buf(UDR0, 0);}
+ISR(USART1_RX_vect)  { store_uart_in_buf(UDR1, 1); }
+ISR(USART2_RX_vect)  { LED2_ON; store_uart_in_buf(UDR2, 2); LED2_OFF; }
+ISR(USART3_RX_vect)  { store_uart_in_buf(UDR3, 3); }
 
 
 
@@ -210,14 +192,16 @@ uint8_t SerialAvailable(uint8_t port) {
 }
 
 ISR(USART0_UDRE_vect) { // Serial 0 on a MEGA
+
 	uint8_t t = serialTailTX[0];
 	if (serialHeadTX[0] != t) {
 		if (++t >= TX_BUFFER_SIZE) t = 0;
-		while(!(UCSR0A & (1 << UDRE0)));
+		//while(!(UCSR0A & (1 << UDRE0)));
 		UDR0 = serialBufferTX[t][0];  // Transmit next byte in the ring
 		serialTailTX[0] = t;
 	}
 	if (t == serialHeadTX[0]) UCSR0B &= ~(1<<UDRIE0); // Check if all data is transmitted . if yes disable transmitter UDRE interrupt
+
 }
 
 
@@ -225,7 +209,7 @@ ISR(USART1_UDRE_vect) { // Serial 1 on a MEGA or on a PROMICRO
 	uint8_t t = serialTailTX[1];
 	if (serialHeadTX[1] != t) {
 		if (++t >= TX_BUFFER_SIZE) t = 0;
-		while(!(UCSR1A & (1 << UDRE1)));
+		//while(!(UCSR1A & (1 << UDRE1)));
 		UDR1 = serialBufferTX[t][1];  // Transmit next byte in the ring
 		serialTailTX[1] = t;
 	}
@@ -236,7 +220,7 @@ ISR(USART2_UDRE_vect) { // Serial 2 on a MEGA
 	uint8_t t = serialTailTX[2];
 	if (serialHeadTX[2] != t) {
 		if (++t >= TX_BUFFER_SIZE) t = 0;
-		while(!(UCSR2A & (1 << UDRE2)));
+		//while(!(UCSR2A & (1 << UDRE2)));
 		UDR2 = serialBufferTX[t][2];
 		serialTailTX[2] = t;
 	}
@@ -246,7 +230,7 @@ ISR(USART3_UDRE_vect) { // Serial 3 on a MEGA
 	uint8_t t = serialTailTX[3];
 	if (serialHeadTX[3] != t) {
 		if (++t >= TX_BUFFER_SIZE) t = 0;
-		while(!(UCSR3A & (1 << UDRE3)));
+		//while(!(UCSR3A & (1 << UDRE3)));
 		UDR3 = serialBufferTX[t][3];
 		serialTailTX[3] = t;
 	}

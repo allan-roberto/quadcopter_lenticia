@@ -42,17 +42,19 @@
 
 void uartInit(unsigned long int uart_id, unsigned long int ubrr);
 
-int uart_putc(unsigned int uart_id, unsigned char c);
+//int uart_putc(unsigned int uart_id, unsigned char c);
 
 void uart_puts(unsigned int uart_id, char *s);
 
-void uart_puts_pgm (unsigned int uart_id, const char* PROGMEM  str);
+//void uart_puts_pgm (unsigned int uart_id, const char* PROGMEM  str);
 
-void uart_puti (unsigned int uart_id, int16_t i);
+//void uart_puti (unsigned int uart_id, int16_t i);
 
-unsigned char uart_getc(unsigned int uart_id);
+//unsigned char uart_getc(unsigned int uart_id);
 
 #define uart_data_waiting() (UCSR0A & (1<<RXC0))
+
+void store_uart_in_buf(uint8_t data, uint8_t portnum);
 
 
 

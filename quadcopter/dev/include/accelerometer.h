@@ -24,6 +24,6 @@ void init_accelerometer(void);
 void accelerometer_get_angles(float *X, float *Y, float *Z );
 void accelerometer_get_data(void);
 void accelerometer_get_acceleration(float *X, float *Y, float *Z );
-void ACC_Common();
+void ACC_Common(void);
 
 #endif /* ACCELEROMETER_H_ */

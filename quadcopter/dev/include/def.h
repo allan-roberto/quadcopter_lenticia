@@ -34,6 +34,20 @@
   #define LEDPIN_TOGGLE              PINB  |= (1<<7); PINC  |= (1<<7);
   #define LEDPIN_ON                  PORTB |= (1<<7); PORTC |= (1<<7);
   #define LEDPIN_OFF                 PORTB &= ~(1<<7);PORTC &= ~(1<<7);
+
+  #define CONFIG_LED_MODE            DDRC  |= (1<<7);DDRC |= (1<<6); DDRC |= (1<<5);PORTC |= (1<<5); PORTC |= (1<<6);PORTC |= (1<<7);
+  #define LED2_TOGGLE                PINC  |= (1<<7);
+  #define LED2_ON                    PORTC &= ~(1<<7);
+  #define LED2_OFF                   PORTC |= (1<<7);
+
+  #define LED3_TOGGLE                PINC  |= (1<<6);
+  #define LED3_ON                    PORTC &= ~(1<<6);
+  #define LED3_OFF                   PORTC |= (1<<6);
+
+  #define LED4_TOGGLE                PINC  |= (1<<5);
+  #define LED4_ON                    PORTC &= ~(1<<5);
+  #define LED4_OFF                   PORTC |= (1<<5);
+
   #define BUZZERPIN_PINMODE          pinMode (32, OUTPUT);
   #if defined PILOTLAMP
     #define    PL_PIN_ON    PORTC |= 1<<5;

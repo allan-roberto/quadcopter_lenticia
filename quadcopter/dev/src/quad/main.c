@@ -13,10 +13,10 @@
 #include <imu/imu.h>
 
 
-char buffer[200] =  "some characters";
-
+char buffer[256] =  "some characters";
+uint8_t kalman_enabled = 0;
+uint8_t gps_enabled = 0;
 uint16_t i = 0;
-//extern gyroZero[3];
 #define ANGLE 1
 
 fix16_t rate[3] 	= {0.0, 0.0, 0.0};
@@ -29,21 +29,32 @@ uint8_t rawADC[6];
 uint32_t currentTime;
 flags_struct_t f;
 
+extern int16_t  GPS_angle[2];
+extern int32_t  GPS_coord[2];
+extern int32_t  GPS_home[2];
+extern int32_t  GPS_hold[2];
+extern uint8_t  GPS_numSat;
+
+extern uint16_t GPS_altitude;                                // GPS altitude      - unit: meter
+extern uint16_t GPS_speed;                                   // GPS speed         - unit: cm/s
+extern uint8_t  GPS_update;                              // a binary toogle to distinct a GPS position update
+extern uint16_t GPS_ground_course;                       //                   - unit: degree*10
+extern uint8_t  GPS_Present;                             // Checksum from Gps serial
+extern uint8_t  GPS_Enable;
+
 
 int main(void)
 {
 	uartInit(0,SERIAL0_COM_SPEED);
-	uartInit(1,SERIAL1_COM_SPEED);
-	uartInit(2,SERIAL2_COM_SPEED);
-	uartInit(3,SERIAL3_COM_SPEED);
-
 	i2c_init();
 	init_imu();
 	init_kalman_matrices();
 	init_kalman_timer();
+	CONFIG_LED_MODE;
 
+	sei();
 
-	//GPS_SerialInit();
+	GPS_SerialInit();
 
 #if 0
 	x_updated[0] = fix16_from_dbl(500);
@@ -68,8 +79,50 @@ int main(void)
 
 
 
-	sei();
+
 	while(1){
+
+
+		if(gps_enabled){
+
+			GPS_NewData();
+
+			sprintf(buffer, "GPS_coord[LAT]:%d \n\r",GPS_coord[LAT]);
+			uart_puts (UART_NUM,buffer);
+
+			sprintf(buffer, "GPS_coord[LON]:%d \n\r",GPS_coord[LON]);
+			uart_puts (UART_NUM,buffer);
+
+			sprintf(buffer, "GPS_altitude: %d \n\r",GPS_altitude);
+			uart_puts (UART_NUM,buffer);
+
+			sprintf(buffer, "GPS_speed: %d \n\r",GPS_speed);
+			uart_puts (UART_NUM,buffer);
+
+			sprintf(buffer, "GPS_ground_course: %d \n\r",GPS_ground_course);
+			uart_puts (UART_NUM,buffer);
+
+			sprintf(buffer, "GPS_numSat: %d \n\r",GPS_numSat);
+			uart_puts (UART_NUM,buffer);
+
+			sprintf(buffer, "GPS_Present: %d \n\r",GPS_Present);
+			uart_puts (UART_NUM,buffer);
+
+
+			gps_enabled = 0;
+		}
+		if(kalman_enabled){
+
+			imu_get_rates(rate);
+			imu_get_angles(angle);
+			stateUpdate(rate);
+			kalmanUpdate(angle);
+			#ifdef DEBUG_KALMAN_MATRICES_STATE
+				print_matrices();
+			#endif
+			kalman_enabled = 0;
+
+		}
 
 	}
 
@@ -78,16 +131,11 @@ int main(void)
 
 SIGNAL (TIMER0_COMPA_vect)
 {
-
-	imu_get_rates(rate);
-	imu_get_angles(angle);
-	stateUpdate(rate);
-	kalmanUpdate(angle);
-	//GPS_NewData();
-#ifdef DEBUG_KALMAN_MATRICES_STATE
-	print_matrices();
-#endif
-
-
+	//kalman_enabled = 1;
+	i++;
+	if(i>100){
+		gps_enabled = 1;
+		i = 0;
+	}
 
 }

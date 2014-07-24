@@ -91,7 +91,7 @@ void accelerometer_get_data(void) {
 // ****************
 // ACC common part
 // ****************
-void ACC_Common() {
+void  ACC_Common(void) {
   static int32_t a[3];
   if (calibratingA>0) {
     for (uint8_t axis = 0; axis < 3; axis++) {

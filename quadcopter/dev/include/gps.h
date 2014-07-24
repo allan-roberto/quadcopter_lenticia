@@ -13,7 +13,7 @@
 
 #define GPS_SERIAL 2
 #define GPS_BAUD   57600
-#define MTK_BINARY19
+//#define MTK_BINARY19
 #define INIT_MTK_GPS
 #define NAV_MODE_NONE 0
 

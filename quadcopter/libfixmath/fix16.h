@@ -1,6 +1,8 @@
 #ifndef __libfixmath_fix16_h__
 #define __libfixmath_fix16_h__
 
+#define FIXMATH_NO_CACHE 1
+
 #ifdef __cplusplus
 extern "C"
 {
